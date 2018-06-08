@@ -1,2 +1,4 @@
 window.computeUsersStatus(users,progress,coirses);
-window.SortUsers(user,orderBy,orderDirecction);// retorna un arreglo ordenado
+window.SortUsers(users,orderBy,orderDirecction);// retorna un arreglo ordenado
+window.filterUsers(users,search);
+window.processCohortData(options);
