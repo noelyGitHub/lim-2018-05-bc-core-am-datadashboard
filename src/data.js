@@ -1,112 +1,43 @@
 //................................XHR
-<<<<<<< HEAD
-
-=======
->>>>>>> 163e464a3f3b94270940f0d7b50bd15d8dd86111
-let xhr=new XMLHttpRequest();// instancio el objeto
+/*let xhr=new XMLHttpRequest();// instancio el objeto
 xhr.open('GET','http://localhost:8080/data/cohorts.json',true);// hago los pedidos a mi servidor GET/POST -> solicitar datos/solicitar y enviar
 xhr.onload =_=> {
     // CORS controles de acceso a servidores cruzados para servidores web
-<<<<<<< HEAD
-    if (xhr.status >= 200 && xhr.status < 400) {// Success!
-=======
-    if (xhr.readyState===4 && xhr.status === 200) {// Success!
->>>>>>> 163e464a3f3b94270940f0d7b50bd15d8dd86111
+    if (xhr.readyState=== 4 && xhr.status === 200) {// Success!
         let data = JSON.parse(xhr.responseText);
         console.log(data);
         console.log("SUCCESFULL");
       }    
 }
-xhr.onerror=_=>console.log("error");
-
-xhr.send();
-
-function llamarAjax(){
-<<<<<<< HEAD
-	let xhrm=new XMLHttpRequest();
-    xhrm.open('GET','...src/mesaje.php',true);
-    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	xhrm.onload=()=>{
-		let mns=xhrm.responseText;
-		document.getElementById('mensaje').innerHTML=mns;
-		console.log("accedio");
-
-	}
-	xhrm.onerror=()=>{
-		console.log("hubo un errror");
-
-	}
-	xhrm.send();
-}
+xhr.onerror=_=>console.log("error");// Error!
+xhr.send();*/
 // ................................FETCH
+fetch('http://localhost:8080/data/cohorts.json').then((response)=>{
+         console.log("SUCCESFULL holaa");
+         if(response.status==200){
+             console.log(response.status);
+             console.log(response.json());
+         } 
+}).catch((error)=>{
+    console.log("Uy! fallaste en algo :(");
 
+});
+//................................FETCH
+const llamadasAjax=[];
+llamadasAjax.push(fetch('http://localhost:8080/data/cohorts.json'));
+llamadasAjax.push(fetch('http://localhost:8080/data/cohorts/lim-2018-03-pre-core-pw/progress.json'));
+llamadasAjax.push(fetch('http://localhost:8080/data/cohorts/lim-2018-03-pre-core-pw/users.json'));
 
+Promise.all(llamadasAjax).then((responses)=>{
+    return responses.map(response=>response.json());
+}).then((jsonResponses)=>{
+    //Código que maneja las múltiples llamdas y sus respuestas en JSON
+}).catch((error)=>{
+    //Código que maneja errores
+});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//....................................................................................................funciones
-var computeUsersStats=(ArrayUsers,ObjectProgress,ArrayCourses)=>{// creara lista usuarios
-    /*users->arreglo de objetos
-    progress->objeto de progreso del usuario para cada curso
-    courses->arreglo de ids de los cursos del cohort de 'coursesIndex'
-    Recorrer el arreglo de usuario y calcular los indcadores
-    devolver un nuevo arreglo usuario
-*/
-    let stats={
-        percent: 0.8,//% de completitudgeneral --> stats
-        excerses:{
-            total:15,// # total de ejercicios autocorregidos en cursos
-            completed:6,// # de ejercicios completados por usuarios
-            percent:0.4 // % de ejercicios autocorregidos completados
-        },
-        reads:{
-            total:15,// # total de lecturas presentes en curso
-            completed:6,// # de lecturas completados por usuarios
-            percent:0.4 // % de lecturas completados
-        },
-        quizzes:{
-            total:15,// # total de quizzes presentes en curso
-            completed:6,// # de quizzes completados por usuarios
-            percent:0.4, // % de quizzes completados
-            scoreSum:350,// suma de puntuaciones de los quizzes
-            scoreAvg:13,// promedio de puntuaciones en quizzes
-        }
-     };
-     usersWithStats=[stats.percent,stats.excerses,stats.reads,stats.quizzes]
-    return usersWithStats;
- };
-/*window.computeUsersStatus(users,progress,coirses);
-=======
+//................................LLAMADA FORMULARIO
+function llamarAjax(){
    
 	let xhrm=new XMLHttpRequest();
     xhrm.open('GET','mensaje.php',true);
@@ -121,7 +52,7 @@ var computeUsersStats=(ArrayUsers,ObjectProgress,ArrayCourses)=>{// creara lista
 	xhrm.onerror=_=>console.log("hubo un errror");	
 	xhrm.send();
 }
-// ................................FETCH
+
 
 
 
@@ -136,8 +67,7 @@ var computeUsersStats=(ArrayUsers,ObjectProgress,ArrayCourses)=>{// creara lista
     devolver un nuevo arreglo usuario 
 
     */
-    
-    let stats={
+       let stats={
         percent: 0.8,//% de completitudgeneral --> stats
         excerses:{
             total:15,// # total de ejercicios autocorregidos en cursos
@@ -199,7 +129,6 @@ var processCohortData=(options)=>{
 
 }
 /*
->>>>>>> 163e464a3f3b94270940f0d7b50bd15d8dd86111
 window.SortUsers(users,orderBy,orderDirecction);// retorna un arreglo ordenado
 w
 window.processCohortData(options);*/
