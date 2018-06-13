@@ -1,22 +1,32 @@
 //................................XHR
-/*let xhr=new XMLHttpRequest();// instancio el objeto
-xhr.open('GET','http://localhost:8080/data/cohorts.json',true);// hago los pedidos a mi servidor GET/POST -> solicitar datos/solicitar y enviar
+let xhr=new XMLHttpRequest();// instancio el objeto
+xhr.open('GET','http://localhost:8080/data/cohorts/lim-2018-03-pre-core-pw/users.json',true);// hago los pedidos a mi servidor GET/POST -> solicitar datos/solicitar y enviar
 xhr.onload =_=> {
     // CORS controles de acceso a servidores cruzados para servidores web
     if (xhr.readyState=== 4 && xhr.status === 200) {// Success!
         let data = JSON.parse(xhr.responseText);
-        console.log(data);
-        console.log("SUCCESFULL");
-      }    
+       //console.log(data); // data en object
+        for(var i in data){
+            if(data[i].name=="Noely"){
+                console.log(data[i]);
+            }
+            
+           //console.log(Object.getOwnPropertyNames(data[i]));
+            //console.log(data.publicAdmission);// me lista las propiedades del object data
+        }
+       
+            
+      }   
 }
 xhr.onerror=_=>console.log("error");// Error!
-xhr.send();*/
+xhr.send();
+/*
 // ................................FETCH
-fetch('http://localhost:8080/data/cohorts.json').then((response)=>{
-         console.log("SUCCESFULL holaa");
+fetch('http://localhost:8080/data/cohorts.json').then((response)=>{      
          if(response.status==200){
              console.log(response.status);
              console.log(response.json());
+             console.log("SUCCESFULL holaa");
          } 
 }).catch((error)=>{
     console.log("Uy! fallaste en algo :(");
@@ -29,35 +39,15 @@ llamadasAjax.push(fetch('http://localhost:8080/data/cohorts/lim-2018-03-pre-core
 llamadasAjax.push(fetch('http://localhost:8080/data/cohorts/lim-2018-03-pre-core-pw/users.json'));
 
 Promise.all(llamadasAjax).then((responses)=>{
-    return responses.map(response=>response.json());
-}).then((jsonResponses)=>{
-    //Código que maneja las múltiples llamdas y sus respuestas en JSON
-}).catch((error)=>{
-    //Código que maneja errores
-});
-
-//................................LLAMADA FORMULARIO
-function llamarAjax(){
+        console.log(responses[0].json());
+        console.log(responses[1].json());
+        console.log(responses[2].json());
+        console.log("provando promises");
    
-	let xhrm=new XMLHttpRequest();
-    xhrm.open('GET','mensaje.php',true);
-    xhrm.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	xhrm.onload=_=>{
-        if(xhrm.readyState === 4 && xhrm.status === 200){
-            console.log("accedio ");
-		    document.getElementById("mensajes").innerHTML=xhrm.responseText;
-        }
-        
-}
-	xhrm.onerror=_=>console.log("hubo un errror");	
-	xhrm.send();
-}
-
-
-
-
-
-
+}).catch((error)=>{
+    console.log("errorss")
+});
+*/
 /*.................................................................................................. */
 var computeUsersStats=(ArrayUsers,ObjectProgress,ArrayCourses)=>{// creara lista usuarios
     /*users->arreglo de objetos
@@ -135,3 +125,19 @@ window.processCohortData(options);*/
 window.computeUsersStats;
 window.sortUsers;
 window.filterUsers;
+
+//................................LLAMADA FORMULARIO
+function llamarAjax(){
+   
+	let xhrm=new XMLHttpRequest();
+    xhrm.open('GET','mensaje.php',true);
+    xhrm.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xhrm.onload=_=>{
+        if(xhrm.readyState === 4 && xhrm.status === 200){
+            console.log("accedio ");
+		    document.getElementById("mensajes").innerHTML=xhrm.responseText;
+        }        
+}
+	xhrm.onerror=_=>console.log("hubo un errror");	
+	xhrm.send();
+}
