@@ -1,0 +1,150 @@
+*{
+    margin: 0;
+    font-family: segoe UI;
+}
+/* Estilos del header */
+header{
+    background: #333;
+    height: 80px;
+    line-height: 70px;
+    width: 100%;
+    text-align: center;
+    position: fixed;
+}
+
+header div {
+    float: left;
+}
+
+/* Menu desplegable*/
+#menu-bar {
+    display: none;
+}
+
+.navMenu{
+    width: 6%;
+}
+
+label {
+    display: block;
+    font-size: 30px;
+    cursor:pointer;
+    color: white;
+    padding: 8px;
+    max-width:100%;
+}
+
+.menu {
+    list-style: none;
+    position: absolute;
+    transform: translate(-100%);
+    transition: all 0.8s;
+    
+    /*width: 25%;
+    background: rgba(5,50,50,0.2);
+    */
+}
+
+.menu ul {
+    background: #333;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #fff;
+}
+
+.menu ul a{
+    text-decoration: none;
+    display: block;
+    padding: 20px;
+    color: white;
+}
+
+.menu ul a:hover {
+     background: rgba(255,255,255,0.3);
+     border-left: white;
+}
+
+#menu-bar:checked ~ .menu {
+    transform: translate(0%);
+    transition: all 0.8s;
+}
+
+.wraperLogo {
+    max-width: 30%;
+    max-height: 100%;
+    text-align: center;
+}
+.wraperLogo img {
+    width: 85px;
+    height: 80px;
+}
+
+.search-header-main{
+    width: 45%;
+    max-height: 100%;
+}
+.search-header-main .content-search{
+    border-radius: 8px;
+    background: white;
+    padding: 1em 1em;
+}
+.content-search input{
+    width: 80%;
+    background: white;
+    border: none;
+    padding:8px 2px;
+    color: #777;
+}
+.content-search img{
+    width: 50px;
+    height: 50px;
+    color: #777;
+    background: #ededed;
+    cursor: pointer;
+    position: absolute;
+    margin: auto;
+}
+ 
+.wrapper {
+    height:100%;
+    padding: 5%;
+    background-image:url(../img/map-LaboratoriaSede.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.headquarters {
+    width: 45%;
+    padding: 15px;
+    margin: 20px;
+    display: inline-block;
+    background: rgba(3,3,3,0.2);
+}
+
+@media(max-width:600px){
+    .headquarters {
+        width: 70%;
+    }
+    .wrapper {
+        height: 100%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

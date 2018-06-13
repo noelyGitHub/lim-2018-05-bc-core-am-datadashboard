@@ -4,10 +4,9 @@ ourRequest.onprogress=function(){
     console.log(ourRequest.statusText);
 }
 ourRequest.onload = function () {
-    console.log(ourRequest.responseText);
-    //console.log(XMLHttpRequest.status);
-}
+    console.log(ourRequest.responseText);}
 ourRequest.send(null);
+
 
 /*window.computeUsersStatus(users,progress,coirses);
 window.SortUsers(users,orderBy,orderDirecction);// retorna un arreglo ordenado
