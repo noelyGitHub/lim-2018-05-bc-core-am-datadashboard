@@ -1,5 +1,5 @@
 let ourRequest=new XMLHttpRequest();
-ourRequest.open('GET','../data/cohorts.json');
+ourRequest.open('GET','../data/cohorts/lim-2018-03-pre-core-pw/users.json');
 ourRequest.onprogress=function(){
     console.log(ourRequest.statusText);
 }
