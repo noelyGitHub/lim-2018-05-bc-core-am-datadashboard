@@ -85,9 +85,8 @@ label {
 }
 
 .search-header-main{
-    width: 50%;
+    width:65%;
     max-height: 100%;
-    margin-left: 10%;
    }
 .search-header-main .content-search{
     border-radius: 8px;
@@ -117,7 +116,7 @@ label {
 }
 .user-profile{
     float: right;
-    margin-right: 7%;
+    margin-right: 4%;
 }
 .user-profile img{
     width: 50px;
@@ -149,7 +148,6 @@ label {
     -webkit-transition: all .8s ease-in-out;
     -o-transition: all .8s ease-in-out;
     transition: all .8s ease-in-out;
-    
 }
 #headquarters:checked ~ .menu {
     transform: translate(0%);
@@ -195,7 +193,7 @@ label {
         width: 50px;
     }
     .search-header-main{
-        width: 70%;
+        width: 60%;
         max-height: 100%;
         margin-left: 0%;
        }
@@ -204,11 +202,23 @@ label {
     }
 }
 @media screen and (max-width:550px){
+    .navMenu{
+        width: 12%;
+    }
+    
     .search-header-main{
-        margin-left: 10%;
+        width: 54%;
        }
+    
     .wraperLogo {
-        display: none;
+        margin:5px;
+        max-width: 40%;
+        max-height: 90%;
+        text-align: center;
+    }
+    
+    .content-search{ 
+        width: 90%;
     }
 }
 
