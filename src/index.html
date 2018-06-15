@@ -1,63 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Data Dashboard</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="../font/fontello.css"/>
   </head>
   <body>
-    <header class="header-main">
-      <div class="wrap-header-main">
-        <div class="icon-nav-header"><img src="https://image.flaticon.com/icons/png/512/56/56763.png" alt><span>MENU</span></div>
-        <div class="logo-laboratoria"><img src="img/Laboratoria_RGB_logo-06.png" alt> </div>
+      <header>
+       <div class="navMenu">
+          <input type="checkbox" id="menu-bar"/>
+          <label class="icon-menu" for="menu-bar"></label>
+          <nav class="menu">
+            <li>
+              <ul><a href="#">BOOTCAMP 2018 I-AM</a></ul>
+              <ul><a href="#">BOOTCAMP 2017 II-AM</a></ul>
+              <ul><a href="#">BOOTCAMP 2017 I-AM</a></ul>
+              <ul><a href="#">BOOTCAMP 2016 II-AM</a></ul>
+            </li>
+          </nav>
+        </div>
+        <div class="wraperLogo">
+        <img src="../img/Laboratoria_CMYK_logo-11.png" id="logo"/>
+        </div>
+
         <div class="search-header-main">
           <span class="content-search">
-            <input type="text" id="search_student" placeholder="BUSCAR">
-            <span>>></span>
+            <input type="text" id="search_student" placeholder="BUSCAR"/>
+              <img src="../img/searchicon.png"/>
           </span>
         </div>
-        <div class="menu-profile-user">
-            <img src="https://cdn1.mindmeister.com/assets/meisterlabs/avatars/default_avatar-b43bffa1218b399de437d643f24d91b05a8e8010e0d7e4fd84ec65aaf4fada26.svg" alt="usuario">
-         </div>         
-      </div> 
-    </header>
-    <nav class="nav-main">
-      <div class="wrap-nav-main">
-        <div class="icon-view-menu"><h3>GENERACIONES <L></h3></div>
-        <div class="item-bootcam">
-          <ul>
-            <li>Bootcam 2018
-              <ul>
-                <li><span>Estudiantes</span></li>
-                <li><span>Cursos</span></li>
-              </ul>
-            </li>
-            <li>Bootcam 2017
-              <ul>
-                  <li><span>Estudiantes</span></li>
-                  <li><span>Cursos</span></li>
-                </ul>
-            </li>
-            <li>Bootcam 2016</li>
-          </ul>
+      </header>
+
+      <div class="wrapper">
+        <div class="headquarters">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat harum, hic explicabo officia vel vitae reiciendis consectetur nesciunt similique quae, et a dolorem ullam illum, voluptates eos, non debitis accusantium?</p>
+        </div>
+        <div class="headquarters">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat harum, hic explicabo officia vel vitae reiciendis consectetur nesciunt similique quae, et a dolorem ullam illum, voluptates eos, non debitis accusantium?</p>
+        </div>
+        <div class="headquarters">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat harum, hic explicabo officia vel vitae reiciendis consectetur nesciunt similique quae, et a dolorem ullam illum, voluptates eos, non debitis accusantium?</p>
+        </div>
+        <div class="headquarters">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat harum, hic explicabo officia vel vitae reiciendis consectetur nesciunt similique quae, et a dolorem ullam illum, voluptates eos, non debitis accusantium?</p>
         </div>
       </div>
-    </nav>
-    <section class="section-main">
-      <div class="wrap-section-main">
-        <div class="section-principal">
-          <h3>Hola mundo Json</h3>
-          <button type="button" onclick="llamarAjax()">Probar AJAX</button>
-          <div id="mensajes"></div>
-        </div>
-      </div>      
-    </section>
-    <footer>
-    </footer>
-
-<!--llamada a los js-->
     <script src="main.js"></script>
     <script src="data.js"></script>
   </body>
