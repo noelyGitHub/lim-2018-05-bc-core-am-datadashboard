@@ -209,6 +209,11 @@ section {
     transition: all .8s ease-in-out;
 }
 
+#menu-bar:checked .menu {
+    transform: translate(0%);
+    transition: all 0.8s;
+}
+
 #cohortOne:checked ~ .menu {
     transform: translate(0%);
     transition: all 0.8s;
