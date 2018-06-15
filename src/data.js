@@ -5,6 +5,7 @@
 const connectJson=(url,callback)=>{
     var xmlhttp=new XMLHttpRequest(); 
     let dateJson;
+    
     xmlhttp.onload=_=>{
             if(xmlhttp.readyState === 4){
                 if(xmlhttp.status !== 200){
@@ -18,16 +19,22 @@ const connectJson=(url,callback)=>{
             }
     };    
     xmlhttp.open('GET',url);
+    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     xmlhttp.send();   
 };
-var getJSON = (urlJSON) => connectJson(urlJSON,(error,json) => {
+getJSON = (urlJSON) => connectJson(urlJSON,(error,json) => {
     if(error){
         return console.error(error);
     }
-    console.log(json);
-   return json;
+    return json;
+         
 });
-getJSON(url1);
+
+//...................................................obtener cohorts
+let cohorts=_=>{
+   return getJSON(url1);
+}
+cohorts();
 //...................................................obtener users 
 let users =_=> {
     return getJSON(url3);
@@ -36,6 +43,23 @@ let users =_=> {
 let progress =_=> {
     return getJSON(url2);
 }
+// ..................................................obtener lista de cohort
+listCohort=_=>{
+    connectJson(url1,(error,json) => {
+        let divList=document.getElementById('cohortOne');
+        for(var q in json){
+            divList.innerHTML+="<ul>"+json[q].id+"</ul>";
+        }
+        console.log(json);
+		
+             
+    });    
+	
+}
+
+
+
+
 //...................................................Obtener courses
 let courses =_ => {
     let cohortDate=getJSON(url1);    
