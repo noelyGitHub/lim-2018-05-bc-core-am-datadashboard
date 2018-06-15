@@ -135,11 +135,9 @@ display: block;
 }
 
 .search-header-main{
-    width:50%;
+    width:65%;
     max-height: 100%;
-    margin-left: 10%;
-}
-
+   }
 .search-header-main .content-search{
     border-radius: 8px;
     background: white;
@@ -173,7 +171,6 @@ display: block;
 .user-profile{
     float: right;
     margin-right: 4%;
-    height: inherit;
 }
 .user-profile img{
     width: 50px;
@@ -210,6 +207,11 @@ section {
     -webkit-transition: all .8s ease-in-out;
     -o-transition: all .8s ease-in-out;
     transition: all .8s ease-in-out;
+}
+
+#menu-bar:checked .menu {
+    transform: translate(0%);
+    transition: all 0.8s;
 }
 
 #cohortOne:checked ~ .menu {
@@ -376,7 +378,6 @@ section {
         float: right;
     }
 }
-
 @media screen and (max-width:550px){
     .navMenu{
         width: 12%;
@@ -384,7 +385,7 @@ section {
     
     .search-header-main{
         width: 54%;
-    }
+       }
     
     .wraperLogo {
         margin:5px;
