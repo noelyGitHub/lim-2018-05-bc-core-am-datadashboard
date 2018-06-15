@@ -35,7 +35,6 @@ label {
     cursor:pointer;
     color: white;
     padding: 8px;
-    max-width:100%;
     max-height:100%;
 }
 
@@ -120,19 +119,13 @@ label {
     background-repeat: no-repeat;
     background-position: center;
     text-align: center;
-    border: 1px solid white;
     height: 80%;
     width:60%;
-    position: absolute;
-    left: 50%;
-    top: 52%;
-    transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
+    margin: auto;
 }
 
 .headquarters {
     display:inline-block;
-    width: 40%;
     padding: 20px;
     margin: 20px;
     background: rgba(3,3,3,0.2);
@@ -143,8 +136,13 @@ label {
     .wrapper {
        width:80%;
     }
+    
     .headquarters {
         width: 100%;
+    }
+    
+    label {
+        width: 50px;
     }
 }
 
