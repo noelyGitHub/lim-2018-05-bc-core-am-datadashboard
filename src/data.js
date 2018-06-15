@@ -29,7 +29,7 @@ var getJSON = (urlJSON) => connectJson(urlJSON,(error,json) => {
 });
 getJSON(url1);
 //...................................................obtener users 
-let users =_=> {
+let users=_=>{
     return getJSON(url3);
 }
 //...................................................Obtener Progress
@@ -37,7 +37,7 @@ let progress =_=> {
     return getJSON(url2);
 }
 //...................................................Obtener courses
-let courses =_ => {
+let courses = _ => {
     let cohortDate=getJSON(url1);    
     let arrayIds=[];
     for(var i in cohortDate){// recorro todo el objeto cohor
@@ -49,7 +49,7 @@ let courses =_ => {
      }
 }
 //..........................................................................................computeUsersstats
-var computeUsersStats = (users,progress,courses) => {// creara lista usuarios
+var computeUsersStats=(users,progress,courses) => {// creara lista usuarios
 
     let stats={
         percent: 0.8,//% de completitudgeneral --> stats
