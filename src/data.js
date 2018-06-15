@@ -1,6 +1,6 @@
-    let url1='http://localhost:8080/data/cohorts.json';
-    let url2='http://localhost:8080/data/cohorts/lim-2018-03-pre-core-pw/progress.json';
-    let url3='http://localhost:8080/data/cohorts/lim-2018-03-pre-core-pw/users.json';
+    let url1='../data/cohorts.json';
+    let url2='../data/cohorts/lim-2018-03-pre-core-pw/progress.json';
+    let url3='../data/cohorts/lim-2018-03-pre-core-pw/users.json';
 
 const connectJson=(url,callback)=>{
     var xmlhttp=new XMLHttpRequest(); 
@@ -48,13 +48,26 @@ listCohort=_=>{
     connectJson(url1,(error,json) => {
         let divList=document.getElementById('cohortOne');
         for(var q in json){
-            divList.innerHTML+="<ul>"+json[q].id+"</ul>";
+            // agregar cuando esta con elementos restringir entrada
+            divList.innerHTML+="<ul id='"+json[q].id+"'onclick=listStudentCohort()>"+json[q].id+"</ul>";
         }
         console.log(json);
-		
-             
-    });    
-	
+     }); 	
+}
+listStudentCohort=()=>{
+    connectJson(url3,(error,json)=>{
+        let viewList=document.getElementById("listUsersCohort");
+        let cohortSede=document.getElementById("cohortSede");
+        for(var q in json){
+            if(json[q].signupCohort=="lim-2018-03-pre-core-pw"){
+                viewList.style.display="block";
+                cohortSede.style.display="none";
+                viewList.innerHTML+="<ul id='"+json[q].name+"'>"+json[q].name+"</ul>";  
+            }else{
+            }
+        }
+        console.log(json);
+    });
 }
 
 
