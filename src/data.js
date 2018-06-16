@@ -1,6 +1,6 @@
-    let url1='http://localhost:8080/data/cohorts.json';
-    let url2='http://localhost:8080/data/cohorts/lim-2018-03-pre-core-pw/progress.json';
-    let url3='http://localhost:8080/data/cohorts/lim-2018-03-pre-core-pw/users.json';
+    let url1='../data/cohorts.json';
+    let url2='..data/cohorts/lim-2018-03-pre-core-pw/progress.json';
+    let url3='../data/cohorts/lim-2018-03-pre-core-pw/users.json';
 
 const connectJson=(url,callback)=>{
     var xmlhttp=new XMLHttpRequest(); 
