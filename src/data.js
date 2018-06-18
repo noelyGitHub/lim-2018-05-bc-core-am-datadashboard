@@ -2,11 +2,11 @@
     let url2='../data/cohorts/lim-2018-03-pre-core-pw/progress.json';
     let url3='../data/cohorts/lim-2018-03-pre-core-pw/users.json';
 
-const connectJson=(url,callback)=>{
-    var xmlhttp=new XMLHttpRequest(); 
+const connectJson = (url,callback) => {
+    let xmlhttp = new XMLHttpRequest(); 
     let dateJson;
     
-    xmlhttp.onload=_=>{
+    xmlhttp.onload =_=> {
             if(xmlhttp.readyState === 4){
                 if(xmlhttp.status !== 200){
                     return callback(new Error(`HTTP error: ${xmlhttp.status}`));
@@ -26,10 +26,8 @@ getJSON = (urlJSON) => connectJson(urlJSON,(error,json) => {
     if(error){
         return console.error(error);
     }
-    return json;
-         
+    return json;        
 });
-
 //...................................................obtener cohorts
 let cohorts=_=>{
    return getJSON(url1);
@@ -46,33 +44,75 @@ let progress =_=> {
 // ..................................................obtener lista de cohort
 listCohort=_=>{
     connectJson(url1,(error,json) => {
-        let divList=document.getElementById('cohortOne');
+        let divList = document.getElementById('cohortOne');
         for(var q in json){
             // agregar cuando esta con elementos restringir entrada
-            divList.innerHTML+="<ul id='"+json[q].id+"'onclick=listStudentCohort()>"+json[q].id+"</ul>";
-        }
+            divList.innerHTML +=
+             "<ul><li class='menuList'><span>" + json[q].id + "</span><ul><li id='" + json[q].id + "' onclick='listStudentCohort(this)'>ESTUADIANTES</li><li>CURSOS</li></ul></li></ul>";
+           // "<div id='content-cohort'> <div >'"+json[q].id+"'</div> <div><ul><li id='"+json[q].id+"'>ESTUDIANTES</li> <li>CURSOS</li></ul> </div> </div>"
+            }
         console.log(json);
      }); 	
 }
-listStudentCohort=()=>{
-    connectJson(url3,(error,json)=>{
-        let viewList=document.getElementById("listUsersCohort");
-        let cohortSede=document.getElementById("cohortSede");
+//....................................................obtener la lista de estudiantes por cohor
+listStudentCohort = (idCohort) => {
+    connectJson( url3 , (error , json) => {
+        let viewList = document.getElementById('listUsersCohort');
+        let cohortSede = document.getElementById('cohortSede');
         for(var q in json){
-            if(json[q].signupCohort=="lim-2018-03-pre-core-pw"){
-                viewList.style.display="block";
-                cohortSede.style.display="none";
-                viewList.innerHTML+="<ul id='"+json[q].name+"'>"+json[q].name+"</ul>";  
+            if(json[q].signupCohort == idCohort.id){
+                viewList.style.display = "block";
+                cohortSede.style.display = "none";
+                viewList.innerHTML += "<li id = '" + json[q].name + "'>" + json[q].name + "</li>";  
             }else{
             }
         }
-        console.log(json);
+        console.log(idCohort);
     });
 }
+//....................................................buscar estudiante por home
+search_home_students =_=> {
+    
+        connectJson(url3,(error , json) => {
+            /*let encontrados=json.filter(function(persona){
+                if(persona.name==="Noely"){
+                    return true;
+                }return false;
+            });*/
+            //let x=search(json,search_student.value);
+           // let send=(x === true) ? console.log("see"): console.log("nooo");
+            //console.log(recorrido);
+            //document.getElementById('out_list_student_item').innerHTML = encontrados;
+            //console.log(encontrados);
+            let search_student = document.getElementById('search_student');// capto el valor de la busqueda menu
+            let acumulador;
+            let yeah;
+        for(var n in json){
+            //for(var i; i <= search_student.lenght; i++){debugger
+                if(search_student.value==json[n].name){
+                    acumulador +=search[i];
+                    yeah += json[n].name;
+                }
+           // }
+        }
+        });
+        search = (date,text) => {
+            let arreglo = [];
+            for(var n in date){
+                let people = date[n];
+                arreglo.push(people.name);                
+            }
+            return arreglo.indexOf(text) > -1;// comparacion
+        }
+        /*Noely, Noemi
+            value[0]==jason[n].name[0]->N
+            value[1]==json.name[1]->0
+            value[2]==json.name[2]->e
 
 
-
-
+        */
+    
+}
 //...................................................Obtener courses
 let courses = _ => {
     let cohortDate=getJSON(url1);    
