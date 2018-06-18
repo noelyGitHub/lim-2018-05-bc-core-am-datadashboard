@@ -46,6 +46,7 @@ listCohort=_=>{
     connectJson(url1,(error,json) => {
         let divList = document.getElementById('cohortOne');
         for(var q in json){
+<<<<<<< HEAD
             // agregar cuando esta con elementos restringir entrada
             divList.innerHTML +=
              "<ul><li class='menuList'><span>" + json[q].id + "</span><ul><li id='" + json[q].id + "' onclick='listStudentCohort(this)'>ESTUADIANTES</li><li>CURSOS</li></ul></li></ul>";
@@ -109,6 +110,54 @@ search_home_students =_=> {
             value[1]==json.name[1]->0
             value[2]==json.name[2]->e
 
+=======
+            divList.innerHTML += "<ul><li class='menuList'><span>" + json[q].id + "</span><ul><li id='" + json[q].id + "' onclick='listStudentCohort(this)'>ESTUADIANTES</li><li>CURSOS</li></ul></li></ul>";
+            // "<div id='content-cohort'> <div >'"+json[q].id+"'</div> <div><ul><li id='"+json[q].id+"'>ESTUDIANTES</li> <li>CURSOS</li></ul> </div> </div>"
+       }
+     }); 	
+}
+
+listStudentCohort=(idCohort)=>{
+    connectJson(url3,(error,json)=>{
+        let viewList=document.getElementById("listUsersCohort");
+        let cohortSede=document.getElementById("cohortSede");
+        for(var q in json){
+                if(json[q].signupCohort==idCohort.id){
+                viewList.style.display="block";
+                cohortSede.style.display='none';
+                viewList.innerHTML+="<li id='"+json[q].name+"'>"+json[q].name+"</li>";  
+            }
+        }
+    });
+}
+search_home_students =_=> {// ELIMINAR TODOS LOS ELEMENTOS DEL SECTION PARA MOSTRAR LA IMAGEN
+    
+    connectJson(url3,(error , json) => {
+        let search_student=document.getElementById('search_student').value;
+        for(var k in json){
+            for(var i=0; i<=search_student.lenght;i++){
+                if(search_student[i] == json[k].name[i]){
+                    document.getElementById('out_list_student_item').innerHTML="<li id='"+json[k].name+"'>"+json[k].name+"</li>";  
+                    console.log();
+                }
+            }
+        }
+    });
+    search = (date,text) => {
+        let arreglo = [];
+        for(var n in date){
+            let people = date[n];
+            arreglo.push(people.name);                
+        }
+        return arreglo.indexOf(text) > -1;// comparacion
+    }
+    /*Noely, Noemi
+        value[0]==jason[n].name[0]->N
+        value[1]==json.name[1]->0
+        value[2]==json.name[2]->e
+    */   
+}
+>>>>>>> d21196f72c1421989d78e7c67b905b59878d7542
 
         */
     
