@@ -70,13 +70,8 @@ display: block;
 .menu ul li ul{
     background: #777;
     width: 100%;
-<<<<<<< HEAD
-    display: none;
-    visibility: hidden;
-=======
     /*display: none;
     visibility: hidden;*/
->>>>>>> d21196f72c1421989d78e7c67b905b59878d7542
     transition: all 0.25s;
 }
 .menu ul li ul li{
