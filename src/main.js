@@ -51,21 +51,31 @@ toCallStats=_=>{
 prueva=_=>{
     connectJson(url3,(error,jsonUsers)=>{
         connectJson(url2,(error,jsonProgress)=>{
-            //console.log(jsonProgress);
-            for(var id in jsonProgress){
-                let idProgress=Object.keys(jsonProgress);
-                //console.log(idProgress);
-                for(var k in idProgress){
-                    let n=idProgress[k].intro;
-                }
-                console.log(n);
-
-                //console.log(idProgress);
-                //console.log(jsonProgress[idProgress].intro.totalDuration);
-                
-                
-                
+            for(var i in jsonProgress){
+                for(var k in jsonUsers){
+                    idProgress=Object.keys(jsonProgress[i]);
+                    users=jsonUsers.filter(user=>user.id==idProgress);    
+                    
             }
+            console.log(users);
+            }    
+                for(var k in jsonProgress){
+                    intro=jsonProgress[k].intro;
+                    idProgress=Object.keys(jsonProgress[i]);
+                    function percent(){
+                        let percent;
+                        for(var i in intro){
+                            percent=intro.percent;
+                           // console.log(percent); 
+                        }
+                        return percent;
+                    } 
+                    function exercises(){
+
+                    } 
+                   // console.log(k+' % '+percent());   
+                }
+                       
         });
 });
 }

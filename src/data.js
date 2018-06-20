@@ -30,5 +30,6 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
         quizzes: quizzesComplit(),
        };
     usersWithStats=[stats.percent,stats.excerses,stats.reads,stats.quizzes]
-    return usersWithStats;  
+    usersWithStats=[{name:'',stats}]
+    return usersWithStats;  // objeto que contiene toda la informacion
 };
