@@ -7,10 +7,10 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
         const name=user.name;
         /* % de complititud */
         percentComplit =_=> {
-            let userPercent = [];// almaceno el nombre y percent
-            const percent = arrayCourses.map(cours => {return progress[IdsUser][cours].percent;}); 
-             userPercent.push({'name':name,'percent':percent});     
-            console.log(name+'complititud '+percent+'%');
+            let userPercent=0;// almaceno el nombre y percent
+            const percent = arrayCourses.map(cours => {return progress[IdsUser][cours].percent;});
+            userPercent = parseInt(userPercent)+parseInt(percent);     
+           // console.log(name+'complititud :'+ userPercent +'%');
             return userPercent;// retorno un array de objetos del nombre y percent            
               }
 
@@ -41,7 +41,7 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
                     });
                                     
                 });
-                 console.log('Total de ejercicio: '+x);  
+                // console.log('Total de ejercicio: '+x);  
                 //console.log(recorrerParts);
                 return x;//Total de ejercicios en 'intro'
             } 
@@ -76,7 +76,7 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
                     
                    
                 });
-                console.log('Total de completado :'+x);               
+                //console.log('Total de completado :'+x);               
                return x; // total de ejercicios completados
            }
            const percentExercises =_=> {
@@ -87,12 +87,11 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
                    percent = 0;
                }
                
-               console.log('% exercises completados :'+percent);
+               //console.log('% exercises completados :'+percent);
                return percent; // % de ejercicios resueltos
 
            }
-            
-            let objectExercises = {'total':totalExercises(),'completed':solvedExercises(),'percent':percentExercises()}
+           let objectExercises = {'total':totalExercises(),'completed':solvedExercises(),'percent':percentExercises()}
             return objectExercises;//objectExercises;*/
         }
         readsComplit=_=>{
@@ -122,7 +121,7 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
                     });
                                     
                 });
-                console.log('Total de lecturas: '+x);  
+                //console.log('Total de lecturas: '+x);  
                 //console.log(recorrerParts);
                 return x;//Total de read en 'intro'
            }
@@ -157,7 +156,7 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
                     
                 
                 });
-                console.log('Total de completado :'+x);               
+                //console.log('Total de completado :'+x);               
             return x; // total de read completados 
            }
            const percentReads=_=>{
@@ -168,7 +167,7 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
                     percent = 0;
                 }
                 
-                console.log('% lecturas completados :'+percent);
+                //console.log('% lecturas completados :'+percent);
                 return percent; // % de ejercicios resueltos
            }
         let objectReads = {'total':totalReads(),'completed':solvedReads(),'percent':percentReads()}
@@ -201,7 +200,7 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
                     });
                                     
                 });
-                console.log('Total de examen: '+x);  
+               // console.log('Total de examen: '+x);  
                 //console.log(recorrerParts);
                 return x;//Total de read en 'intro'
             }
@@ -236,7 +235,7 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
                     
                 
                 });
-                console.log('Total de completado :'+x);               
+                //console.log('Total de completado :'+x);               
                 return x; // total de examen completados 
             }
             const percentQuizes =_=> {
@@ -247,7 +246,7 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
                     percent = 0;
                 }
                 
-                console.log('% examen completados :'+percent);
+                //console.log('% examen completados :'+percent);
                 return percent; // % de ejercicios resueltos
             }  
             const scoreSum =_=> {
@@ -267,15 +266,15 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
                         
                         recorrerParts.map(part => {//recorro cada propiedades de parts
                             typeExcercises = progress[IdsUser][coursIntro].units[unit].parts[part].type;//obtendo el tipo 
-                            sumScore = progress[IdsUser][coursIntro].units[unit].parts[part].score;
-                            if(typeExcercises == 'quiz'){
-                                sum=sum+sumScore;
-                            
-                            }
+                            existScore=Object.keys(progress[IdsUser][coursIntro].units[unit].parts[part]);// MEDICIONES
+                            if(typeExcercises == 'quiz'|| existScore=='score'){
+                               sumScore = progress[IdsUser][coursIntro].units[unit].parts[part].score;
+                               sum=sum+parseInt(sumScore);
+                              }
                         });
 
                     });
-                    console.log('Suma de puntuaciones: '+sumScore);                 
+                   // console.log('Suma de puntuaciones: '+sum);                 
                 });
                  
                 //console.log(recorrerParts);
@@ -286,7 +285,7 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
                 if(totalQuizes() != 0){
                     avgScore = parseInt(scoreSum()) / parseInt(totalQuizes());
                 }
-                console.log('PROMEDIO :'+avgScore);
+                //console.log('PROMEDIO :'+avgScore);
                 return avgScore;
                 
             }          
@@ -294,6 +293,8 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
             return objectQuizz;
         }
         var stats={
+        name: name,
+        idUser: IdsUser,
         percent: percentComplit(),
         excercises:exercisesComplit(),
         reads: readsComplit(),
@@ -302,8 +303,29 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
        
        return stats; 
     });
-
-  // usersWithStats=[stats.percent,stats.excerses,stats.reads,stats.quizzes]
-    //usersWithStats=[{name:'',stats}]
+    //console.log(usersWithStats);
     return usersWithStats;  // objeto que contiene toda la informacion
 };
+
+window.sortUsers=( users , orderBy, orderDirection ) => {// Ordenar la lista de usuario
+    return null;// arreglo de usuarios ordenados
+}
+window.filterUsers=(users, search)=>{
+    return null;// arreglo usuarios que cumplan con la condicion filtrado
+}
+window.processCohortData=(options)=>{
+    var option={
+        cohort:{},// objeto lista de cohort
+        cohortData:{
+            users:[],//arreglo de usuarios miembros de cohort
+            progress:{}//data de progress de cada usuario
+        },
+        orderBy: string,//string ordenado
+        orderDirection: String, // string direccion
+        search: String, // string filtrado
+    }
+    computeUsersStats(options.cohortData.users,options.cohortData.progress);
+    sortUsers(options.users,options.orderBy,options.orderDirection);
+    filterUsers(options.users,options.search);
+    
+}

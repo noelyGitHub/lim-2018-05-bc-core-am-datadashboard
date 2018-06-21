@@ -27,7 +27,7 @@ toCallStats=_=>{
     connectJson(url2,(error,jsonProgress)=>{
         connectJson(url3,(error,jsonUsers)=>{
             connectJson(url1,(error,jsonCohort)=>{
-                let arrayIds=[];
+                /*let arrayIds=[];
                 let courses=[];
                 for(var i in jsonCohort){
                     var idCourses=Object.keys(jsonCohort[i].coursesIndex);
@@ -36,33 +36,54 @@ toCallStats=_=>{
                         arrayIds.push(x);
                     }  
                     courses=arrayIds.sort().filter((x, i, a) => !i || x != a[i-1]);// 14 idCursos obtenidos
-                    //console.log(courses); 
-                    //console.log(jsonUsers);
-                    //console.log(jsonProgress);
-                     
-                }     
-                computeUsersStats(jsonUsers,jsonProgress,courses);
-             
+                } */    
+                let courses='intro';
+                let listUser=computeUsersStats(jsonUsers,jsonProgress,courses);
+                console.log(listUser);
+                let haber=Object.keys(listUser);
+                haber.map(list=>{
+                    let totalExcercises;
+                    var completedExcercises;
+                    var percentExcercises;
+                    var completedReads;
+                    var percentReads;
+                    var totalReads;
+                    var completedQuizes;
+                    var percentQuizes;
+                    var totalQuizes;
+                        propiedadesExcercises=Object.keys(listUser[list].excercises);
+                        console.log(listUser[list].excercises);
+                        propiedadesExcercises.map(exercise=>{
+                           totalExcercises=listUser[list].excercises[exercise].total;
+                           completedExcercises=listUser[list].excercises[exercise].completed;
+                           percentExcercises=listUser[list].excercises[exercise].percent;
+                           
+                       });
+                       let propertyRead=Object.keys(listUser[list].reads);
+                       propertyRead.map(read=>{
+                            completedReads=listUser[list].reads[read].completed;
+                            percentReads=listUser[list].reads[read].percent;
+                            totalReads=listUser[list].reads[read].total;
+                        });
+                       let propertyQuizzes=Object.keys(listUser[list].quizzes);
+                       propertyQuizzes.map(quiz=>{
+                            completedQuizes=listUser[list].quizzes[quiz].completed;
+                            percentQuizes=listUser[list].quizzes[quiz].percent;
+                            totalQuizes=listUser[list].quizzes[quiz].total;
+                        });
+                        let tableList=document.getElementById('out_list_student_item');
+                        console.log(percentReads);
+                        tableList.innerHTML+="<tr><td>"+listUser[list].name+"</td><td>"+percentReads+"</td><td>"+percentExcercises+"</td><td>"+percentQuizes+"</td><td>"+listUser[list].percent+"</td></tr>"
+                    });
             });            
         });
     });
 }
-toCallStats();
-/*
-prueva=_=>{
-    connectJson(url3,(error,jsonUsers)=>{
-        connectJson(url2,(error,jsonProgress)=>{
-             
-        });
-});
-}*/
-
-/* Listar Cohort */
 listCohort=_=>{
 connectJson(url1,(error,json) => {
     let divList = document.getElementById('cohortOne');
     for(var q in json){
-        divList.innerHTML += "<ul><li class='menuList'><span>" + json[q].id + "</span><ul><li id='" + json[q].id + "' onclick='listStudentCohort(this)'>ESTUADIANTES</li><li>CURSOS</li></ul></li></ul>";
+        divList.innerHTML += "<ul><li class='menuList'><span>" + json[q].id + "</span><ul><li id='" + json[q].id + "' onclick='toCallStats()'>ESTUADIANTES</li><li>CURSOS</li></ul></li></ul>";//listStudentCohort(this)
         }
  }); 	
 }
