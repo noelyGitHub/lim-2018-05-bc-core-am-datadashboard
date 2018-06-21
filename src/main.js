@@ -36,50 +36,27 @@ toCallStats=_=>{
                         arrayIds.push(x);
                     }  
                     courses=arrayIds.sort().filter((x, i, a) => !i || x != a[i-1]);// 14 idCursos obtenidos
-                    //console.log(filter);
-                    computeUsersStats(jsonUsers,jsonProgress,courses);
-                    console.log(jsonUsers);
-                    console.log(jsonProgress);
-                    console.log(courses); 
+                    //console.log(courses); 
+                    //console.log(jsonUsers);
+                    //console.log(jsonProgress);
+                     
                 }     
-                
+                computeUsersStats(jsonUsers,jsonProgress,courses);
              
             });            
         });
     });
 }
+toCallStats();
+/*
 prueva=_=>{
     connectJson(url3,(error,jsonUsers)=>{
         connectJson(url2,(error,jsonProgress)=>{
-            for(var i in jsonProgress){
-                for(var k in jsonUsers){
-                    idProgress=Object.keys(jsonProgress[i]);
-                    users=jsonUsers.filter(user=>user.id==idProgress);    
-                    
-            }
-            console.log(users);
-            }    
-                for(var k in jsonProgress){
-                    intro=jsonProgress[k].intro;
-                    idProgress=Object.keys(jsonProgress[i]);
-                    function percent(){
-                        let percent;
-                        for(var i in intro){
-                            percent=intro.percent;
-                           // console.log(percent); 
-                        }
-                        return percent;
-                    } 
-                    function exercises(){
-
-                    } 
-                   // console.log(k+' % '+percent());   
-                }
-                       
+             
         });
 });
-}
-prueva();
+}*/
+
 /* Listar Cohort */
 listCohort=_=>{
 connectJson(url1,(error,json) => {
