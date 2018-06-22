@@ -250,13 +250,8 @@ section {
     border-left: dotted 1px #777;
     border-right: dotted 1px #777;
 }
-#listUsersCohort table tr:hover{
-    background: #c5c5c5;
-}
-#listUsersCohort table tr td{
-    padding: .3em .0em;
-    border: none;
-    border-bottom: dotted .5px #777;
+
+#listUsersCohort li{
     cursor: pointer;
 }
 
