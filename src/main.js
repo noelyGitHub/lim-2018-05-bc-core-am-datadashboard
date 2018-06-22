@@ -75,6 +75,24 @@ toCallStats = idCohort => {
         });
     });
 }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+information = (idUser)=> {
+    connectJson(url2,(error,jsonProgress) => {
+        connectJson(url3,(error,jsonUsers) => {
+            connectJson(url1,(error,jsonCohort) => {
+                let courses = 'intro';
+                let listUser= computeUsersStats(jsonUsers,jsonProgress,courses);
+                
+                Object.keys(listUser).map(list=>{ 
+                    //console.log(idUser.id+'......'+listUser[list].name);
+                    if(idUser.id==listUser[list].idUser){
+                        
+                        let viewList = document.getElementById("listUsersCohort");
+                        viewList.style.display = "none";
+=======
+>>>>>>> Estilos nav - añadiendo scroll
 prueva=_=>{
     connectJson(url3,(error,jsonUsers)=>{
         connectJson(url2,(error,jsonProgress)=>{
@@ -98,6 +116,10 @@ prueva=_=>{
                         return percent;
                     } 
                     function exercises(){
+<<<<<<< HEAD
+=======
+>>>>>>> Estilos nav - añadiendo scroll
+>>>>>>> Estilos nav - añadiendo scroll
 
                         var html_informacion = '<div class = "box-information">';
                                 html_informacion+= '<div class="wrap-box-information">';
@@ -154,7 +176,15 @@ listCohort=_=>{
 connectJson(url1,(error,json) => {
     let divList = document.getElementById('cohortOne');
     for(var q in json){
+<<<<<<< HEAD
         divList.innerHTML += "<ul><li class='menuList'><span>" + json[q].id + "</span><ul><li id='" + json[q].id + "' onclick='listStudentCohort(this)'>ESTUDIANTES</li><li>CURSOS</li></ul></li></ul>";
+=======
+<<<<<<< HEAD
+        divList.innerHTML += "<ul><li class='menuList'><span>" + json[q].id + "</span><ul><li id='" + json[q].id + "' onclick='toCallStats(this)'>ESTUADIANTES</li><li>CURSOS</li></ul></li></ul>";//listStudentCohort(this)
+=======
+        divList.innerHTML += "<ul><li class='menuList'><span>" + json[q].id + "</span><ul><li id='" + json[q].id + "' onclick='listStudentCohort(this)'>ESTUDIANTES</li><li>CURSOS</li></ul></li></ul>";
+>>>>>>> Estilos nav - añadiendo scroll
+>>>>>>> Estilos nav - añadiendo scroll
         }
  }); 	
 }
