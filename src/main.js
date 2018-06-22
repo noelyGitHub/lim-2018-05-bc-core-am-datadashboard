@@ -75,7 +75,6 @@ toCallStats = idCohort => {
         });
     });
 }
-<<<<<<< HEAD
 information = (idUser)=> {
     connectJson(url2,(error,jsonProgress) => {
         connectJson(url3,(error,jsonUsers) => {
@@ -89,31 +88,6 @@ information = (idUser)=> {
                         
                         let viewList = document.getElementById("listUsersCohort");
                         viewList.style.display = "none";
-=======
-prueva=_=>{
-    connectJson(url3,(error,jsonUsers)=>{
-        connectJson(url2,(error,jsonProgress)=>{
-            for(var i in jsonProgress){
-                for(var k in jsonUsers){
-                    idProgress=Object.keys(jsonProgress[i]);
-                    users=jsonUsers.filter(user=>user.id==idProgress);    
-                    
-            }
-           // console.log(users);
-            }    
-                for(var k in jsonProgress){
-                    intro=jsonProgress[k].intro;
-                    idProgress=Object.keys(jsonProgress[i]);
-                    function percent(){
-                        let percent;
-                        for(var i in intro){
-                            percent=intro.percent;
-                           // console.log(percent); 
-                        }
-                        return percent;
-                    } 
-                    function exercises(){
->>>>>>> Estilos nav - añadiendo scroll
 
                         var html_informacion = '<div class = "box-information">';
                                 html_informacion+= '<div class="wrap-box-information">';
@@ -170,11 +144,9 @@ listCohort=_=>{
 connectJson(url1,(error,json) => {
     let divList = document.getElementById('cohortOne');
     for(var q in json){
-<<<<<<< HEAD
         divList.innerHTML += "<ul><li class='menuList'><span>" + json[q].id + "</span><ul><li id='" + json[q].id + "' onclick='toCallStats(this)'>ESTUADIANTES</li><li>CURSOS</li></ul></li></ul>";//listStudentCohort(this)
-=======
         divList.innerHTML += "<ul><li class='menuList'><span>" + json[q].id + "</span><ul><li id='" + json[q].id + "' onclick='listStudentCohort(this)'>ESTUDIANTES</li><li>CURSOS</li></ul></li></ul>";
->>>>>>> Estilos nav - añadiendo scroll
+        divList.innerHTML += "<ul><li class='menuList'><span>" + json[q].id + "</span><ul><li id='" + json[q].id + "' onclick='listStudentCohort(this)'>ESTUDIANTES</li><li>CURSOS</li></ul></li></ul>";
         }
  }); 	
 }
