@@ -57,7 +57,7 @@ prueva=_=>{
                     users=jsonUsers.filter(user=>user.id==idProgress);    
                     
             }
-            console.log(users);
+           // console.log(users);
             }    
                 for(var k in jsonProgress){
                     intro=jsonProgress[k].intro;
@@ -85,7 +85,7 @@ listCohort=_=>{
 connectJson(url1,(error,json) => {
     let divList = document.getElementById('cohortOne');
     for(var q in json){
-        divList.innerHTML += "<ul><li class='menuList'><span>" + json[q].id + "</span><ul><li id='" + json[q].id + "' onclick='listStudentCohort(this)'>ESTUADIANTES</li><li>CURSOS</li></ul></li></ul>";
+        divList.innerHTML += "<ul><li class='menuList'><span>" + json[q].id + "</span><ul><li id='" + json[q].id + "' onclick='listStudentCohort(this)'>ESTUDIANTES</li><li>CURSOS</li></ul></li></ul>";
         }
  }); 	
 }

@@ -1,5 +1,4 @@
-
-//..........................................................................................computeUsersstats
+//.............Funcion computeUsersstats...........
 window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
     for(var userUnit in users){//para cada usuario
         let idUsers=Object.keys(process[user.id]);//
