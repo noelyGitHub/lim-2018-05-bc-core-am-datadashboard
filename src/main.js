@@ -28,7 +28,7 @@ data =_=> {
         connectJson(url3,(error,jsonUsers) => {
             connectJson(url1,(error,jsonCohort) => {
                 let courses = 'intro';
-            return computeUsersStats(jsonUsers,jsonProgress,courses);
+                return computeUsersStats(jsonUsers,jsonProgress,courses);
             });
         });
     });
@@ -144,7 +144,7 @@ listCohort=_=>{
 connectJson(url1,(error,json) => {
     let divList = document.getElementById('cohortOne');
     for(var q in json){
-        divList.innerHTML += "<ul><li class='menuList'><span>" + json[q].id + "</span><ul><li id='" + json[q].id + "' onclick='toCallStats(this)'>ESTUDIANTES</li><li>CURSOS</li></ul></li></ul>";
+        divList.innerHTML += "<ul><li class='menuList'><span>" + json[q].id + "</span><ul><li id='" + json[q].id + "' onclick='toCallStats(this)'>ESTUDIANTES</li></ul></li></ul>";
         }
  }); 	
 }
