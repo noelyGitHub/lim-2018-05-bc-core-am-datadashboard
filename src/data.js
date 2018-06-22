@@ -5,6 +5,7 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
         const IdsUser=user.id;// almaceno los ids del cohort usuario
         const arrayCourses = Object.keys(progress[IdsUser]);//Obtengo el array curso -> 'intro'
         const name=user.name;
+        const cohort=user.signupCohort;
         /* % de complititud */
         percentComplit =_=> {
             let userPercent=0;// almaceno el nombre y percent
@@ -283,7 +284,8 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
             const scoreAvg =_=> {
                 let avgScore=0;
                 if(totalQuizes() != 0){
-                    avgScore = parseInt(scoreSum()) / parseInt(totalQuizes());
+                    avgScore =Math.round(parseInt(scoreSum()) / parseInt(totalQuizes()),-1);
+                    
                 }
                 //console.log('PROMEDIO :'+avgScore);
                 return avgScore;
@@ -293,8 +295,10 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
             return objectQuizz;
         }
         var stats={
+        
         name: name,
         idUser: IdsUser,
+        cohort: cohort,
         percent: percentComplit(),
         excercises:exercisesComplit(),
         reads: readsComplit(),

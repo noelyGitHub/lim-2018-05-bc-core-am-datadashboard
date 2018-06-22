@@ -46,18 +46,36 @@
           </div>        
         </div>
         <div class="wrapper" id="listUsersCohort">
-          <h4>Lista de estudiantes</h4>       
+            <h4>Completitud General</h4>
+            <div>
+              <select id="orderBy">
+              <option>Ordenar por</option>
+              <option>Nombre</option>
+              <option>Completitud Total</option>
+              <option>Lecturas Completadas</option>
+              <option>Ejercicios Completados</option>
+              <option>Quizes Completados</option>
+              <option>Puntuacion Promedio</option>
+            </select>
+            <select id="orderDirection"> 
+              <option>ASC</option>
+              <option>DESC</option>
+            </select>
+            </div>
+            <table id="out_list_student_item" width="679" border="1">
+            <tr class="tableTitle">
+              <td>Nro</td>
+              <td>Nombre</td>
+              <td>Puntuacion</td>
+              <td>Lectura</td>
+              <td>Ejercicios</td>
+              <td>Quizes</td>
+              <td>Total</td>
+            </tr>
+          </table>       
         </div>
-        <div class="wrapper" >
-          <table>
-            <tr><td>Name</td>
-                  <td>Lectura</td>
-                  <td>Ejercicios</td>
-                  <td>Quizes</td>
-                  <td>Complititu</td>
-              </tr>
-          </table>
-          <table id="out_list_student_item" width="679" border="1"></table>          
+        <div class="wrapper" id="information">
+
         </div>
       </section>
       <footer>

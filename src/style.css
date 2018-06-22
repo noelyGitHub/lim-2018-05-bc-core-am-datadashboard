@@ -155,7 +155,7 @@ display: block;
     cursor: pointer;
 }/*........................................................section*/
 .wrapper {
-    background-image:url(../img/map-LaboratoriaSede.png);
+    /*background-image:url(../img/map-LaboratoriaSede.png);*/
     background-repeat: no-repeat;
     background-position: center;
     text-align: center;
@@ -185,31 +185,129 @@ display: block;
     transition: all 0.8s;
 }
 /*....................................................Menu cohort*/
+
 #listUsersCohort{
     display: none;
     box-shadow: #333;
 }
-#listUsersCohort h4{
-    background:#ffed00;
-    color: #fff;
-    margin: 0em 0em 0.5em;
-    padding: 1em 0em;
+#listUsersCohort h4, .info-individual{
+    color: #333;
+    padding: .5em .8em;
     font-size: 1.5em;
+    text-align: left;
+    
+}
+#listUsersCohort div, .name-information{
+    padding: .8em .8em .8em .8em;
+    text-align: left;
+    box-shadow: rgb(197, 197, 197) 0px -1px 0px 0px;
+}
+#listUsersCohort div select{
+    border-radius: .4em;
+    margin-left: 10px;
+    padding: .5em 2.4em;
     text-align: center;
-    box-shadow: rgb(197, 197, 197) 0px 3px 6px 0px;
-    border-bottom: 0.5px solid rgb(197, 197, 197);
+    outline: #ffed00;
+    border: .5px solid #ffed00;
 }
-#listUsersCohort li{
+#listUsersCohort table{
+    width: 100%;
+    border: none;
+    font-weight: 100;
+    border-left: dotted 1px #777;
+    border-right: dotted 1px #777;
+}
+#listUsersCohort table tr:hover{
+    background: #c5c5c5;
+}
+#listUsersCohort table tr td{
+    padding: .3em .0em;
+    border: none;
+    border-bottom: dotted .5px #777;
     cursor: pointer;
-    border-bottom: 1px solid#777;
-    text-align: left !important;
-    text-transform: uppercase;
-    line-height: 30px;
-    list-style: none;
 }
-#listUsersCohort li:hover{
-    background: #c5c5c5; 
+#listUsersCohort table tr .name-table{
+    text-transform: lowercase;
+    text-align: left;
+    margin-left: 10px;
 }
+#listUsersCohort table tr .import{
+    font-weight: 10; 
+
+}
+.tableTitle td{
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    background: #ffed00;
+}
+/*................................................formulario*/
+.wrap-box-information{
+    width: 100%;
+    pad: .8em .8em;
+    border: #333;
+}
+.wrap-box-information .name-information{
+    width: 100%;
+    margin-bottom: 1em; 
+    text-align: right;
+    font-size: 16px; 
+}
+.select-course{
+    border-radius: .4em;
+    margin-left: 10px;
+    padding: .5em 2.4em;
+    text-align: left;
+    outline: #ffed00;
+    border: .5px solid #ffed00;
+}
+.wrap-box-information .info-resumen{
+    width: 150px;
+    padding: .5em;
+    line-height: 2;
+    text-align: center;
+    border: .5px solid #777;
+    border-radius: .3em;
+}
+.wrap-box-information .info-resumen span{
+    margin: 0px 5px 0px 5px;
+}
+.wrap-box-information .information-courses{
+    width: 30%;
+    border: .5px solid #777;
+    float: left;
+    margin: 1em 10px
+}
+.wrap-box-information .information-courses h3{
+    width: 100%;
+    padding: .5em .5em;
+    margin-bottom: 10px;
+    border-bottom: .5px solid #777;
+
+}
+.wrap-box-information .information-courses table{
+    padding: .8em .8em;
+    width: 100%;
+    border: none;
+    font-weight: 100;
+}
+.wrap-box-information .information-courses table tr td{
+    padding: .3em .0em;
+    border: none;
+    border-bottom: dotted .5px #777;
+    cursor: pointer;
+}
+.title-fila{
+    font-weight: 10;
+}
+
+
+
+
+
+
+
+
 
 @media screen and (max-width:800px){
     .wrapper {
@@ -231,11 +329,18 @@ display: block;
     .user-profile{
         display: none;
     }
+    .wrap-box-information .information-courses{
+        width: 100%;
+        float: right;
+    }
 }
-@media screen and (max-width:550px){
+@media screen and (max-width:500px){
     .search-header-main{
         margin-left: 10%;
        }
+    .wrapper {
+        width:95%;
+     }
     .wraperLogo {
         display: none;
     }
