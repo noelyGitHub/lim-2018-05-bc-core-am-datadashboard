@@ -75,6 +75,7 @@ toCallStats = idCohort => {
         });
     });
 }
+
 information = (idUser)=> {
     connectJson(url2,(error,jsonProgress) => {
         connectJson(url3,(error,jsonUsers) => {
@@ -88,7 +89,6 @@ information = (idUser)=> {
                         
                         let viewList = document.getElementById("listUsersCohort");
                         viewList.style.display = "none";
-
                         var html_informacion = '<div class = "box-information">';
                                 html_informacion+= '<div class="wrap-box-information">';
                                 html_informacion+= '<h4 class="info-individual">Informacion Detallada</h4>'
@@ -144,7 +144,7 @@ listCohort=_=>{
 connectJson(url1,(error,json) => {
     let divList = document.getElementById('cohortOne');
     for(var q in json){
-        divList.innerHTML += "<ul><li class='menuList'><span>" + json[q].id + "</span><ul><li id='" + json[q].id + "' onclick='toCallStats(this)'>ESTUADIANTES</li><li>CURSOS</li></ul></li></ul>";//listStudentCohort(this)
+        divList.innerHTML += "<ul><li class='menuList'><span>" + json[q].id + "</span><ul><li id='" + json[q].id + "' onclick='toCallStats(this)'>ESTUDIANTES</li><li>CURSOS</li></ul></li></ul>";
         }
  }); 	
 }
@@ -176,5 +176,3 @@ connectJson(url3,(error , json) => {
    }
 });
 }
-  
-

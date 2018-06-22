@@ -1,5 +1,4 @@
-
-//..........................................................................................computeUsersstats
+//.............Funcion computeUsersstats...........
 window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
     const usersWithStats = users.map(user => { 
         const IdsUser=user.id;// almaceno los ids del cohort usuario
