@@ -66,8 +66,8 @@ label {
 }
 
 #cohortOne{
-    line-height: 50px;
-    height: 580px;
+    line-height: 60px;
+    height: 650px;
     overflow: auto;
 }
 .menuList{
@@ -130,7 +130,7 @@ display: block;
     cursor: pointer;
 }
 #listUsersCohort table tr .name-table{
-    text-transform: lowercase;
+   /* text-transform: lowercase;*/
     text-align: left;
     margin-left: 10px;
 }
@@ -281,7 +281,7 @@ section {
 }
 
 #listUsersCohort table tr .name-table{
-    text-transform: lowercase;
+   /* text-transform: lowercase;*/
     text-align: left;
     margin-left: 10px;
 }
@@ -289,10 +289,14 @@ section {
     font-weight: 10; 
 }
 .tableTitle td{
+    width: 80%;
     font-weight: bold;
     color: black;
     text-align: center;
     background: #ffed00;
+}
+#title_list_student_item{
+    display: none;
 }
 /*................................................formulario*/
 .wrap-box-information{

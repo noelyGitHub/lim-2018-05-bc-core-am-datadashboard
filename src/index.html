@@ -13,8 +13,10 @@
        <div class="navMenu">
           <input type="checkbox" id="menu-bar"/>
           <label class="icon-menu" for="menu-bar"></label>
-          <nav class="menu">
-            <div id="cohortOne">
+          <nav class="menu" id="menuCohort">
+           <!-- <div id="cohortOne">
+
+            </div>-->
           </nav>
         </div>
         <div class="wraperLogo">
@@ -23,51 +25,62 @@
         <div class="search-header-main">
           <span class="content-search">
               <input type="text" id="search_student" placeholder="BUSCAR AQUÍ " />
-              <img src="../img/searchicon.png"   onclick="search_home_students()"/>
+              <img src="../img/searchicon.png" id="imgSearch"  />
           </span>
         </div>
         <div class="user-profile">
-          <img src="../img/default_user.png" id="logo" alt="mio">
+          <img src="../img/default_user.png" alt="mio" class="provando">
         </div>
       </header>
       <section>
         <div class="wrapper" id="cohortSede">
-          <div class="headquarters">
-            <p onclick="listCohort()">SEDE - LIMA</p>
+          <div class="headquarters" id="lim" onclick="loadCohortSede(this.id)">
+            <p>SEDE - LIMA</p>
           </div>
-          <div class="headquarters">
+          <div class="headquarters" id="scl" onclick="loadCohortSede(this.id)">
             <p>SEDE - CHILE</p>
           </div>
-          <div class="headquarters">
+          <div class="headquarters" id="cdmx" onclick="loadCohortSede(this.id)">
             <p>SEDE - MEXICO</p>
           </div>
-          <div class="headquarters">
+          <div class="headquarters" id="aqp" onclick="loadCohortSede(this.id)">
             <p>SEDE - AREQUIPA</p>
           </div>          
-          <div class="headquarters">
-            <p>SEDE - SAO PAULO</p>
-          </div>        
+          <div class="headquarters" id="test" onclick="loadCohortSede(this.id)">
+            <p>SEDE - LABORATORIA</p>
+          </div>      
           
-          <div class="headquarters">
+          <div class="headquarters" id="gdl" onclick="loadCohortSede(this.id)">
             <p>SEDE - GUADALAJARA</p>
           </div>        
         </div>
         <div class="wrapper" id="listUsersCohort">
             <h4>Completitud General</h4>
-            <div>
+            <div id="manejoList">
               <select id="orderBy">
               <option>Ordenar por</option>
-              <option>Nombre</option>
-              <option>Completitud Total</option>
-              <option>Lecturas Completadas</option>
-              <option>Ejercicios Completados</option>
-              <option>Quizes Completados</option>
-              <option>Puntuacion Promedio</option>
+              <option value="name">Nombre</option>
+              <option value="percent">Completitud Total</option>
+              <option value="percentReads">Lecturas Completadas</option>
+              <option value="percentExercises">Ejercicios Completados</option>
+              <option value="percentQuizes">Quizes Completados</option>
+              <option value="promedio">Puntuacion Promedio</option>
             </select>
             <select id="orderDirection"> 
-              <option>ASC</option>
-              <option>DESC</option>
+              <option value="ASC">ASC</option>
+              <option value="DES">DESC</option>
             </select>
+            <table id="title_list_student_item" width="679" border="1">
+              <tr class="tableTitle">
+                <td>Nro</td>
+                <td>Nombre</td>
+                <td>Puntuacion</td>
+                <td>Lectura</td>
+                <td>Ejercicios</td>
+                <td>Quizes</td>
+                <td>Total</td>
+              </tr>
+            </table>
             </div>
             <table id="out_list_student_item" width="679" border="1">
             <tr class="tableTitle">
@@ -79,11 +92,13 @@
               <td>Quizes</td>
               <td>Total</td>
             </tr>
-          </table>       
+          </table> 
+           <table id="search" width="679" border="1">
+
+           </table>     
                
         </div>
         <div class="wrapper" id="information">
-
         </div>
       </section>
       <footer>

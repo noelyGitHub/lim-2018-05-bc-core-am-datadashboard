@@ -29,6 +29,9 @@ describe('data', () => {
 
       processed.forEach(user => {
         assert.ok(user.hasOwnProperty('stats'));
+        assert.isString(user.stats.name);
+        assert.isString(user.stats.idUser);
+        assert.isString(user.stats.cohort);
         assert.isNumber(user.stats.percent);
         assert.isObject(user.stats.exercises);
         assert.isObject(user.stats.quizzes);
