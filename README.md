@@ -71,114 +71,43 @@ tocará crear un _data dashboard_. Quizás sea para visualizar la data de un
 negocio de delivery de comida, o las rutas históricas de un negocio de
 transporte, o simplemente los indicadores clave de tu propio emprendimiento ;)
 
-## Objetivos de aprendizaje
+##Sprint Planing
+De acuerdo a lo planificado para este proyecto:
+![Backlog](img/2.jpeg)
 
-El objetivo principal de este proyecto es que aprendas a diseñar y construir una
-_interfaz web_ donde podamos visualizar y manipular data.
+Dado este proyecto nos enfocamos directamente en la necesidad del usuario, que actualmente son las Training Manager(TM) de Laboratoria.
+De acuerdo a los requerimientos presentados realizamos nuestro primer sketch(prototipo de baja fidelidad).
 
-Esperamos que puedas pensar en el usuario, entender cuál es la mejor manera de visualizar la data según sus necesidades, y plasmar todo eso en tu diseño
-en la web.
+![PrototypeBaja](img/4.jpeg)
+![PrototypeBaja2](img/5.jpeg)
+![PrototypeBaja3](img/6.jpeg)
 
-Además, este proyecto se debe "resolver" en parejas, por lo que un objetivo
-importante es ganar experiencia en trabajos colaborativos con entrega grupal.
+Una vez teniendo este sketch, se procedio a realizar entrevistas y solicitar feedback de parte del equipo de Laboratoria.
+Donde obtuvimos la siguiente informacion:
+* Principales usuarios: Training Manager de Laboratoria.
 
-## Tópicos a cubrir
+* El objetivo principal en relacion al producto:
+- Es el de acceder a datos globales para poder ver el rendimiento de cada alumna de Laboratoria de diferentes sedes.
 
-Tendrás que familiarizarte con conceptos como:
-_arrays_,_objects_, _dom_, _xhr_ y _visual design_.
+* La informacion mas importante a visualizarse en la interfaz :
+- Datos globales de las promociones anteriores y actuales (Cohorts).
+- Progreso de cada Alumna en base a lecturas, examenes, ejercicios por promocion.
 
-Además, reforzarás lo aprendido en el proyecto anterior: _valores, tipos,
-variables_, _control de flujo_ y _tests unitarios_.
+* Acceso a datos:
+- Se accede a estos datos a finales de cada proyecto presentado por las alumnas de Laboratoria.
 
-## Consideraciones generales
+Por ultimo nos acercamos a las usuarias directas TM, para pulir detalles, donde presentamos el sketch, para hacer el testeo a las usuarias, nos indicaron detalles a reforzar.
+De acuerdo al primer feedback realizamos  la Interfaz de Usuario.
 
-La lógica del proyecto debe estar implementada completamente en JavaScript
-(ES6), HTML y CSS. En este proyecto NO está permitido usar librerías o
-frameworks, solo [vanilla JavaScript](https://medium.com/laboratoria-how-to/vanillajs-vs-jquery-31e623bbd46e).
+![PrototypeAlta](img/ProtyAlta1.PNG)
+![PrototypeAlta2](img/ProtyAlta2.PNG)
+![PrototypeAlta3](img/ProtyAlta3.PNG)
 
-No se debe utilizar la _pseudo-variable_ `this`.
+De acuerdo al feedback constante por parte del equipo de Laboratoria y de las TM, procedimos a diseñar la interfaz de acuerdo a los requerimientos del usuario a travez de la herramienta Figma.
+(https://www.figma.com/proto/GYXuswMezoQFWHYrCFyAGSLJ/DATA-DASHBOARD?scaling=min-zoom&node-id=27%3A3)
 
-Los tests unitarios deben cubrir un mínimo del 70% de _statements_, _functions_
-y _lines_, y un mínimo del 50% de _branches_. El _boilerplate_ ya contiene el
-setup y configuración necesaria para ejecutar los tests (pruebas) usando el
-comando `npm test`.
-
-Para comenzar tendrás que hacer un _fork_ y _clonar_ este repositorio que
-contiene el _boilerplate_.
-
-El _boilerplate_ contiene una estructura de archivos como punto de partida así
-como toda la configuración de dependencias y tests de ejemplo:
-
-```text
-./
-├── .editorconfig
-├── .eslintrc
-├── .gitignore
-├── README.md
-├── data
-│   ├── cohorts
-│   │   └── lim-2018-03-pre-core-pw
-│   │       ├── progress.json
-│   │       └── users.json
-│   └── cohorts.json
-├── package.json
-├── src
-│   ├── data.js
-│   ├── index.html
-│   ├── main.js
-│   └── style.css
-└── test
-    ├── data.spec.js
-    ├── fixtures.js
-    ├── headless.js
-    └── index.html
-```
-
-La carpeta `data/` dentro del _boilerplate_ incluye un extracto de la data que
-podemos usar tanto en los tests como en la interfaz en sí.
-
-## Entregables
-
-Los criterios mínimos de aceptación para considerar que has completado este
-proyecto son:
-
-### User Experience Design
-
-#### 1) Definición del producto
-
-En el `README.md` cuéntanos cómo pensaste y te acercaste a los usuarios al
-desarrollar tu producto (Tip: entrevistas) y cuál fue tu proceso para definir
-el producto final a nivel de experiencia y de interfaz. Es importante que
-detalles:
-
-* Quiénes son los principales usuarios de producto.
-* Cuáles son los objetivos de estos usuarios en relación con el producto.
-* Cuáles son los datos más relevantes que quieren ver en la interfaz y
-  por qué. Cómo los descubriste.
-* Cuándo revisan normalmente estos datos los usuarios.
-* Cómo crees que el producto les está resolviendo sus problemas.
-* Cómo fue tu proceso de diseño.
-
-#### 2) Sketch de la solución (prototipo de baja fidelidad)
-
-Debes hacer un _sketch_ (boceto) de tu solución usando papel y lápiz, tomarle
-una foto, subirla a tu repositorio y hacer mención del _sketch_ en tu `README.md`.
-
-#### 3) Diseño de la Interfaz de Usuario (prototipo de alta fidelidad)
-
-Lo siguiente es diseñar tu Interfaz de Usuario (UI por sus siglas en inglés).
-Para eso debes aprender a utilizar alguna herramienta de diseño visual.
-Nosotros te recomendamos [Figma](https://www.figma.com/) que  es una herramienta
-que funciona en el navegador y, además, puedes crear una cuenta gratis. Sin
-embargo, eres libre de utilizar otros editores gráficos como
-Illustrator, Photoshop, PowerPoint, Keynote, etc.
-
-El diseño debe representar tu _ideal_ de solución. Digamos que es lo que
-desearías implementar si tuvieras tiempo ilimitado para hackear.
-
-Tu diseño debe seguir los fundamentos de _visual design_, como:
-contraste, alineación, jerarquía, entre otros. Tip: revisa el contenido de UX
-de la unidad de visual design.
+Exactamente se viasualiza todo el flujo del proyecto, donde se puede seleccionar un cohort de una lista de cohorts, a partir de ello se visualiza datos generales de las estudiantes de como van en todo el proceso de aprendizaje durante el Bootcamp sobre cada cohort y con mas a detalle al ingresar a visualizar informacion por cada alumna.
+Optamos por hacer uso de solo tres colores en toda la interfaz.
 
 ### Implementación de la Interfaz de Usuario (HTML/CSS/JS)
 
