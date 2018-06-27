@@ -5,7 +5,7 @@
 }
  /*---------Estilos Scrollbar --------*/
 ::-webkit-scrollbar {
-    width:4px;
+    width:6px;
     height:0px;
 }
 ::-webkit-scrollbar-track {
@@ -57,7 +57,7 @@ label {
     position: absolute;
     transform: translate(0%);
     transition: all 0.8s;
-    box-shadow: 1px 1px 11px 0px #c5c5c5;
+    /*box-shadow: 1px 1px 11px 0px #c5c5c5;*/
 }
 
 .menu ul{
@@ -67,7 +67,7 @@ label {
 
 #cohortOne{
     line-height: 50px;
-    height: 800px;
+    height: 580px;
     overflow: auto;
 }
 .menuList{
@@ -120,6 +120,31 @@ display: block;
     display: block;
     transition: all 0.25s;
 }
+#listUsersCohort table tr:hover{
+    background: #c5c5c5;
+}
+#listUsersCohort table tr td{
+    padding: .3em .0em;
+    border: none;
+    border-bottom: dotted .5px #777;
+    cursor: pointer;
+}
+#listUsersCohort table tr .name-table{
+    text-transform: lowercase;
+    text-align: left;
+    margin-left: 10px;
+}
+#listUsersCohort table tr .import{
+    font-weight: 10; 
+
+}
+.tableTitle td{
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    background: #ffed00;
+}
+
 
 /*....................................otro*/
 .wraperLogo {
@@ -182,7 +207,7 @@ display: block;
     cursor: pointer;
 }
 section {
-  background-image:url(../img/map-LaboratoriaSede.png);
+  /*background-image:url(../img/map-LaboratoriaSede.png);*/
    background-repeat: no-repeat;
    background-position: center;
 }
@@ -197,7 +222,7 @@ section {
 
 .headquarters {
     display:inline-block;
-    padding: 20px;
+    padding: 4em 4em;
     margin: 20px;
     background: #ededed;
     border-radius: 10px;
@@ -304,7 +329,7 @@ section {
     width: 30%;
     border: .5px solid #777;
     float: left;
-    margin: 1em 10px;
+    margin: 1em 10px
 }
 .wrap-box-information .information-courses h3{
     width: 100%;
