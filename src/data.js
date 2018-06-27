@@ -373,12 +373,16 @@ window.filterUsers=(users, search)=>{
 }
 window.processCohortData=options=>{
     //Nuevo arreglo de usuarios ordenado y filtrado con la propiedad stats añadida (ver computeUsersStats).
-    let estudiantes = computeUsersStats(options.cohortData.users,options.cohortData.progress);
+    courses='intro';
+    let estudiantes = computeUsersStats(options.cohortData.users,options.cohortData.progress,courses);
+    
     estudiantes = sortUsers(estudiantes,options.orderBy,options.orderDirection);
-    if(search != null){
+    console.log(estudiantes);
+    if(options.search != ''){
         estudiantes = filterUsers(estudiantes,options.search);
     }else{
-        alert("no ingreso el name del user");
+        estudiantes = sortUsers(estudiantes,options.orderBy,options.orderDirection);
     }
+   
     return estudiantes;    
 }

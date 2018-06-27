@@ -58,45 +58,32 @@ const connectJson = (url,callback) => {
     xmlhttp.send();   
 };
 //...................................................Obtener courses para computeUsersStats()
-var option = {
-    cohort:cohort,
+let options = {
+    cohort:null,
     cohortData:{
-        users:jsonUsers,
-        progress:jsonProgress,
+        users: null,
+        progress: null,
     },
-    orderBy: orderBy,
-    orderDirection: orderDirection,
-    search: search,
+    orderBy: 'name',
+    orderDirection: 'ASC',
+    search: "",
 }
-const data =(cohorts,orderBy,orderDirection,search)=> {
+const data =_=> {
     connectJson(url2,(error,jsonProgress) => {
         connectJson(url3,(error,jsonUsers) => {
             connectJson(url1,(error,jsonCohort) => {
-                let cohort=jsonCohort.filter(function(el){
-                const sedeJSON=el.id;
-                return sedeJSON.toLowerCase().indexOf(cohorts.toLowerCase()) > -1;
-                }); 
-                var option = {
-                    cohort:cohort,
-                    cohortData:{
-                        users:jsonUsers,
-                        progress:jsonProgress,
-                    },
-                    orderBy: orderBy,
-                    orderDirection: orderDirection,
-                    search: search,
-                }
-                processCohortData(options);//arreglo de usuarios ordenado y filtrado            
+                options.cohortData.users=jsonUsers;
+                options.cohortData.progress=jsonProgress;
+                let listUser = processCohortData(options);
+                console.log(listUser);          
             });
         });
     });
 }
+data();
 
 /*Tabla de informacion div out_list_student_item*/
 toCallStats = idCohort => {
-    connectJson(url2,(error,jsonProgress) => {
-        connectJson(url3,(error,jsonUsers) => {
-            connectJson(url1,(error,jsonCohort) => {
         /*let arrayIds=[];
                 let courses=[];
                 for(var i in jsonCohort){
@@ -107,30 +94,16 @@ toCallStats = idCohort => {
                     }  
                     courses=arrayIds.sort().filter((x, i, a) => !i || x != a[i-1]);// 14 idCursos obtenidos
             } 
-        */   
-                let courses = 'intro';
-                let listUser = computeUsersStats(jsonUsers,jsonProgress,courses);// instancio al object
+        */      let courses = 'intro';
+                //let listUser = computeUsersStats(jsonUsers,jsonProgress,courses);// instancio al object
                 document.getElementById("cohortSede").style.display = 'none';
                 document.getElementById("listUsersCohort").style.display = "block";
                 document.getElementById('title_list_student_item').style.display='none';
                 let tableList = document.getElementById('out_list_student_item');
                 let num = 0;
-                
-                 /* 
-                //.....................................................obtengo el objeto
-                let date;
-                const objectUsers=_=>{
-                    for (let index in dataArray){
-                            console.log(dataArray.stats.name)
-                            Object.keys(dataArray[index]).map(item=>{
-                                date = dataArray[index];
-                            });
-                    } 
-                    return date;
-                }  var listUser=objectUsers();
-                //........................................................fin obtener data
-               */
-                
+                options.cohort=idCohort;
+                let listUser = processCohortData(options);
+
                 Object.keys(listUser).map(list=>{                    
                     let information=listUser[list];
                     if(idCohort.id == listUser[list].cohort){
@@ -160,10 +133,7 @@ toCallStats = idCohort => {
                             "</td></tr>"
                     } 
                     });
-                });                         
-                                   
-        });
-    });
+                
 }
 /*Informacion por cada estudiante div information*/
 information = (idUser)=> {                       
@@ -213,15 +183,18 @@ information = (idUser)=> {
 }
 /*Ordenar estudiante div out_list_student_item*/
 orderUsers = (orderBy, orderDirection)=>{
-    connectJson(url2,(error,jsonProgress) => {
-        connectJson(url3,(error,jsonUsers) => {
-            connectJson(url1,(error,jsonCohort) => {
                 let courses = 'intro';
-                let date= computeUsersStats(jsonUsers,jsonProgress,courses);
+                //let date= computeUsersStats(jsonUsers,jsonProgress,courses);
                 let tableList = document.getElementById('out_list_student_item');
                 let num=0;
                 tableList.innerHTML=" ";
-                let order = sortUsers(date ,orderBy, orderDirection );
+                //let order = sortUsers(date ,orderBy, orderDirection );
+
+                options.orderBy = orderBy;
+                options.orderDirection = orderDirection;
+                let order = processCohortData(options);
+
+                //let listUser = processCohortData(options);
                 order.map(date => {
                     num++;
                     tableList.innerHTML += "<tr id='" + date.id +
@@ -248,22 +221,15 @@ orderUsers = (orderBy, orderDirection)=>{
                         "</td><td class='import'>"+ date.percent+" % "+
                         "</td></tr>"
                 });
-                
-            });
-        });
-    });  
+ 
 }
 /*BUscar estudiante div search*/
-search_home_students =(ids)=> {
-    connectJson(url2,(error,jsonProgress) => {
-        connectJson(url3,(error,jsonUsers) => {
-            connectJson(url1,(error,jsonCohort) => {
+search_home_students =(string)=> {
                 let num = 0; 
                 let search = document.getElementById('search');
                 let courses = 'intro';
-                let dateBuscar = computeUsersStats(jsonUsers,jsonProgress,courses);
-                console.log(typeof(dateBuscar));
-                let listUser = filterUsers(dateBuscar,ids);//.................................................................llame a FilterUsers
+                options.search=string;
+                let listUser = processCohortData(options);
                 search.innerHTML = "";
                     for(var list in listUser){
                         num++;
@@ -293,12 +259,7 @@ search_home_students =(ids)=> {
                         "</td></tr>"
                 
                     }   
-                               
-                              
-            });
-        });
-    });  
-    
+            
 }
 /*Listar cohort por sede */
 loadCohortSede = ids =>{
@@ -307,12 +268,12 @@ loadCohortSede = ids =>{
         let div=document.createElement('div');//creo un elemnto div
         div.setAttribute('id','cohortOne')// le asigno un atributo
         menu.appendChild(div);// lo asigno al padre
-
+       
         let divList = document.getElementById('cohortOne');
         let sede=json.filter(function(el){
             const sedeJSON=el.id;
             return sedeJSON.toLowerCase().indexOf(ids.toLowerCase()) > -1;
-        });        
+        });
         if(divList.innerHTML == ""){
         for(var q in sede){
                 divList.innerHTML += "<ul id='contentCohort'><li class='menuList'><span id='" + sede[q].id + "' onclick='toCallStats(this)'>" + sede[q].id + "</span></li></ul>";
