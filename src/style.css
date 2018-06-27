@@ -5,14 +5,14 @@
 }
  /*---------Estilos Scrollbar --------*/
 ::-webkit-scrollbar {
-    width:6px;
+    width:10px;
     height:0px;
 }
 ::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px gray;
 }
 ::-webkit-scrollbar-thumb {
-    background: #ffed00; 
+    background: #8a8e93; 
 } 
  
 /* Estilos header */
@@ -54,7 +54,6 @@ label {
 .menu {
     width: 370px;
     list-style: none;
-    position: absolute;
     transform: translate(0%);
     transition: all 0.8s;
     /*box-shadow: 1px 1px 11px 0px #c5c5c5;*/
@@ -66,7 +65,7 @@ label {
 }
 
 #cohortOne{
-    line-height: 60px;
+    line-height: 50px;
     height: 650px;
     overflow: auto;
 }
@@ -76,20 +75,20 @@ label {
     cursor: pointer;
     text-transform: uppercase;
     text-align: left;
-    font-size: 12px;
+    font-size: 13px;
+    font-weight: 100;
+    border-bottom: .4px solid #4a4646;
 }
 
 .menuList span{
 width: 100%;
-padding: 0em .5em 0em 2em;
+padding: 0em .5em 0em 1em;
 display: block;
 }
 
 .menu ul li ul{
-    background: #777;
+    background: rgb(224, 178, 178);
     width: 100%;
-    /*display: none;
-    visibility: hidden;*/
     transition: all 0.25s;
 }
 
@@ -241,7 +240,14 @@ section {
     transform: translate(0%);
     transition: all 0.8s;
 }
-
+.icon-left-open{
+    background: #777;
+    color: #ffed00;
+    padding: .5em .5em;
+}
+.icon-left-open:hover {
+    cursor: pointer;
+}
 /*................Menu cohort..............*/
 #listUsersCohort{
     display: none;
@@ -263,7 +269,7 @@ section {
 #listUsersCohort div select{
     border-radius: .4em;
     margin-left: 10px;
-    padding: .5em 2.4em;
+    padding: .5em 1em;
     text-align: center;
     outline: #ffed00;
     border: .5px solid #ffed00;
@@ -289,7 +295,6 @@ section {
     font-weight: 10; 
 }
 .tableTitle td{
-    width: 80%;
     font-weight: bold;
     color: black;
     text-align: center;
@@ -305,8 +310,7 @@ section {
     border: #333;
 }
 .wrap-box-information .name-information{
-    width: 100%;
-    margin-bottom: 1em; 
+    width: 100%; 
     text-align: right;
     font-size: 16px; 
 }
@@ -314,24 +318,28 @@ section {
     border-radius: .4em;
     margin-left: 10px;
     padding: .5em 2.4em;
-    text-align: left;
+    float: left;
     outline: #ffed00;
     border: .5px solid #ffed00;
 }
 .wrap-box-information .info-resumen{
-    width: 150px;
     padding: .5em;
     line-height: 2;
     text-align: center;
-    border: .5px solid #777;
-    border-radius: .3em;
+    font-weight: 100;
+    margin-left: 65%;
+    font-weight: bold;
 }
-.wrap-box-information .info-resumen span{
-    margin: 0px 5px 0px 5px;
+.wrap-box-information .info-resumen p{
+    margin: 0px 10px 0px 0px;
+    float: left;
+}
+.wrap-box-information .info-resumen p span{
+    padding: 0em .5em;
 }
 .wrap-box-information .information-courses{
     width: 30%;
-    border: .5px solid #777;
+    box-shadow: 0px -1px 5px 0px #9E9E9E;
     float: left;
     margin: 1em 10px
 }
@@ -339,7 +347,7 @@ section {
     width: 100%;
     padding: .5em .5em;
     margin-bottom: 10px;
-    border-bottom: .5px solid #777;
+    background: #FFEB3B;
 
 }
 .wrap-box-information .information-courses table{
@@ -360,10 +368,11 @@ section {
 @media screen and (max-width:800px){
     .wrapper {
        width:80%;
-    }
-    
+    }    
     .headquarters {
         width: 100%;
+        margin: 0px;
+        margin-top: 20px;
     }
     
     label {
@@ -386,6 +395,9 @@ section {
 }
 
 @media screen and (max-width:550px){
+    .wrapper {
+        width:90%;
+     } 
     .navMenu{
         width: 12%;
     }
@@ -404,5 +416,12 @@ section {
     .content-search{ 
         width: 90%;
     }
+    #listUsersCohort table tr td{
+        font-size: 12px;
+    }
+    #listUsersCohort table{
+       font-weight: 200px; 
+    }
+    
 }
 

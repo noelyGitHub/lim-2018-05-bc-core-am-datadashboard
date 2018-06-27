@@ -1,10 +1,11 @@
 let orderDirection=document.getElementById('orderDirection');
 let search_student=document.getElementById('search_student');
 let cohortSede=document.getElementById("cohortSede");
-let listStudent=document.getElementById("listUsersCohort");
+let listStudent=document.getElementById("listUsersCohort");//div contenedor mayor
 let table=document.getElementById('out_list_student_item');
 let imgSearch=document.getElementById('imgSearch');
-
+let search=document.getElementById('search');
+let informationUser=document.getElementById('information');
 window.onload=function(){
     orderDirection.addEventListener('change',() => {
         //cohortSede.style.display = 'none';
@@ -20,6 +21,18 @@ window.onload=function(){
         cohortSede.style.display = 'none';
         listStudent.style.display = "block";
         search_home_students(search_student.value);
+    });
+    document.getElementById('back-cohort').addEventListener('click',()=>{
+        cohortSede.style.display='block';
+        listStudent.style.display = "none";
+        table.style.display='none';
+    });
+    document.getElementById('back-list').addEventListener('click',()=>{
+        cohortSede.style.display='none';
+        listStudent.style.display = "block";
+        table.style.display='block';
+        search.style.display='block';
+        informationUser.style.display="none";
     });
 }
 let url1='../data/cohorts.json';
@@ -45,24 +58,46 @@ const connectJson = (url,callback) => {
     xmlhttp.send();   
 };
 //...................................................Obtener courses para computeUsersStats()
-const data =_=> {
+var option = {
+    cohort:cohort,
+    cohortData:{
+        users:jsonUsers,
+        progress:jsonProgress,
+    },
+    orderBy: orderBy,
+    orderDirection: orderDirection,
+    search: search,
+}
+const data =(cohorts,orderBy,orderDirection,search)=> {
     connectJson(url2,(error,jsonProgress) => {
         connectJson(url3,(error,jsonUsers) => {
             connectJson(url1,(error,jsonCohort) => {
-                let courses = 'intro';
-                const date=Object.assign({},computeUsersStats(jsonUsers,jsonProgress,courses));
-                //console.log(date);
-                return date;                
+                let cohort=jsonCohort.filter(function(el){
+                const sedeJSON=el.id;
+                return sedeJSON.toLowerCase().indexOf(cohorts.toLowerCase()) > -1;
+                }); 
+                var option = {
+                    cohort:cohort,
+                    cohortData:{
+                        users:jsonUsers,
+                        progress:jsonProgress,
+                    },
+                    orderBy: orderBy,
+                    orderDirection: orderDirection,
+                    search: search,
+                }
+                processCohortData(options);//arreglo de usuarios ordenado y filtrado            
             });
         });
     });
 }
-/*Tabla de informacion */
+
+/*Tabla de informacion div out_list_student_item*/
 toCallStats = idCohort => {
     connectJson(url2,(error,jsonProgress) => {
         connectJson(url3,(error,jsonUsers) => {
             connectJson(url1,(error,jsonCohort) => {
-            /*let arrayIds=[];
+        /*let arrayIds=[];
                 let courses=[];
                 for(var i in jsonCohort){
                     var idCourses=Object.keys(jsonCohort[i].coursesIndex);
@@ -71,17 +106,33 @@ toCallStats = idCohort => {
                         arrayIds.push(x);
                     }  
                     courses=arrayIds.sort().filter((x, i, a) => !i || x != a[i-1]);// 14 idCursos obtenidos
-            } */   
+            } 
+        */   
                 let courses = 'intro';
                 let listUser = computeUsersStats(jsonUsers,jsonProgress,courses);// instancio al object
                 document.getElementById("cohortSede").style.display = 'none';
                 document.getElementById("listUsersCohort").style.display = "block";
                 document.getElementById('title_list_student_item').style.display='none';
                 let tableList = document.getElementById('out_list_student_item');
-                let num = 0;                        
+                let num = 0;
+                
+                 /* 
+                //.....................................................obtengo el objeto
+                let date;
+                const objectUsers=_=>{
+                    for (let index in dataArray){
+                            console.log(dataArray.stats.name)
+                            Object.keys(dataArray[index]).map(item=>{
+                                date = dataArray[index];
+                            });
+                    } 
+                    return date;
+                }  var listUser=objectUsers();
+                //........................................................fin obtener data
+               */
+                
                 Object.keys(listUser).map(list=>{                    
                     let information=listUser[list];
-                    
                     if(idCohort.id == listUser[list].cohort){
                         num++;                                
                         tableList.innerHTML += "<tr id='" + listUser[list].idUser +
@@ -114,17 +165,17 @@ toCallStats = idCohort => {
         });
     });
 }
-/*Informacion por cada estudiante */
+/*Informacion por cada estudiante div information*/
 information = (idUser)=> {                       
                         document.getElementById("listUsersCohort").style.display = "none";
                         var html_informacion = '<div class = "box-information">';
                                 html_informacion+= '<div class="wrap-box-information">';
-                                html_informacion+= '<h4 class="info-individual">Informacion Detallada</h4>'
+                                html_informacion+= '<h4 class="info-individual"><span class="icon-left-open" id="back-list"></span>Informacion Detallada</h4>'
                                     html_informacion+= '<p class="name-information"><span >'+idUser.dataset.name+'</span></p>';
                                     html_informacion+= '<select class="select-course"><option>'+idUser.dataset.course+'</option></select>'
                                     html_informacion+= '<div class=info-resumen>'
-                                        html_informacion+= '<p><span">Porcentaje</span>'+idUser.dataset.percent+'</p>'
-                                        html_informacion+= '<p><span">Puntaje</span>'+idUser.dataset.quizScoreSum+'</p>'
+                                        html_informacion+= '<p><span>Porcentaje:</span>'+idUser.dataset.percent+' %</p>'
+                                        html_informacion+= '<p><span>Puntaje:</span>'+idUser.dataset.quizScoreSum+' pts</p>'
                                     html_informacion+='</div>'
                                     html_informacion+='<div class="information-courses">';
                                         html_informacion+='<h3>Ejercicios</h3>'
@@ -132,7 +183,7 @@ information = (idUser)=> {
                                             html_informacion+='<tr class="title-fila"><td>Item</td><td>Valor</td></tr>'
                                             html_informacion+='<tr><td>Total de Ejercicios</td><td>'+idUser.dataset.exTotal+'</td></tr>'
                                             html_informacion+= '<tr><td>Ejercicios Completados</td><td>'+idUser.dataset.exCompleted+'</td></tr>'
-                                            html_informacion+= 'tr><td>Avance</td><td>'+idUser.dataset.exPercent+'</td></tr>'
+                                            html_informacion+= '<tr><td>Avance</td><td>'+idUser.dataset.exPercent+' %</td></tr>'
                                         html_informacion+='</table>'
                                     html_informacion+='</div>';
                                     html_informacion+='<div class="information-courses">';
@@ -141,7 +192,7 @@ information = (idUser)=> {
                                             html_informacion+= '<tr class="title-fila"><td>Item</td><td>Valor</td></tr>'
                                             html_informacion+= '<tr><td>Numero de lecturas</td><td>'+idUser.dataset.readTotal;+'</td></tr>'
                                             html_informacion+= '<tr><td>Ejercicios Completados</td><td>'+idUser.dataset.readCompleted+'</td></tr>'
-                                            html_informacion+= 'tr><td>Avance</td><td>'+idUser.dataset.readPercent+'</td></tr>'
+                                            html_informacion+= '<tr><td>Avance</td><td>'+idUser.dataset.readPercent+'% </td></tr>'
                                         html_informacion+= '</table>'
                                     html_informacion+='</div>';
                                     html_informacion+='<div class="information-courses">';
@@ -151,8 +202,8 @@ information = (idUser)=> {
                                             html_informacion+= '<tr><td>Numero de examenes</td><td>'+idUser.dataset.quizTotal;+'</td></tr>'
                                             html_informacion+= '<tr><td>Examenes Completados</td><td>'+idUser.dataset.quizCompleted+'</td></tr>'
                                             html_informacion+= '<tr><td>Puntaje</td><td>'+idUser.dataset.quizScoreSum+'</td></tr>'
-                                            html_informacion+= 'tr><td>Promedio</td><td>'+idUser.dataset.quizScoreAvg+'</td></tr>'
-                                            html_informacion+= 'tr><td>Avance</td><td>'+idUser.dataset.quizPercent+' %</td></tr>'
+                                            html_informacion+= '<tr><td>Promedio</td><td>'+idUser.dataset.quizScoreAvg+'</td></tr>'
+                                            html_informacion+= '<tr><td>Avance</td><td>'+idUser.dataset.quizPercent+' %</td></tr>'
                                         html_informacion+= '</table>'
                                     html_informacion+='</div>';
                                 html_informacion+='</div>';
@@ -160,7 +211,7 @@ information = (idUser)=> {
                         document.getElementById('out_list_student_item').style.display='none';
                         document.getElementById('information').innerHTML=html_informacion;
 }
-/*Ordenar estudiante*/
+/*Ordenar estudiante div out_list_student_item*/
 orderUsers = (orderBy, orderDirection)=>{
     connectJson(url2,(error,jsonProgress) => {
         connectJson(url3,(error,jsonUsers) => {
@@ -202,7 +253,7 @@ orderUsers = (orderBy, orderDirection)=>{
         });
     });  
 }
-/*BUscar estudiante */
+/*BUscar estudiante div search*/
 search_home_students =(ids)=> {
     connectJson(url2,(error,jsonProgress) => {
         connectJson(url3,(error,jsonUsers) => {
@@ -211,11 +262,8 @@ search_home_students =(ids)=> {
                 let search = document.getElementById('search');
                 let courses = 'intro';
                 let dateBuscar = computeUsersStats(jsonUsers,jsonProgress,courses);
+                console.log(typeof(dateBuscar));
                 let listUser = filterUsers(dateBuscar,ids);//.................................................................llame a FilterUsers
-                /*let listUser=dateBuscar.filter(item=>{
-                    const sedeJSON=item.name;
-                    return sedeJSON.toLowerCase().indexOf(ids.toLowerCase()) > -1;
-                });*/
                 search.innerHTML = "";
                     for(var list in listUser){
                         num++;
@@ -253,7 +301,7 @@ search_home_students =(ids)=> {
     
 }
 /*Listar cohort por sede */
-loadCohortSede = (ids) =>{
+loadCohortSede = ids =>{
     connectJson(url1,(error,json) => {
         let menu=document.getElementById("menuCohort");
         let div=document.createElement('div');//creo un elemnto div
@@ -267,7 +315,7 @@ loadCohortSede = (ids) =>{
         });        
         if(divList.innerHTML == ""){
         for(var q in sede){
-                divList.innerHTML += "<ul id='contentCohort'><li class='menuList'><span>" + sede[q].id + "</span><ul><li id='" + sede[q].id + "' onclick='toCallStats(this)'>ESTUDIANTES</li></ul></li></ul>";
+                divList.innerHTML += "<ul id='contentCohort'><li class='menuList'><span id='" + sede[q].id + "' onclick='toCallStats(this)'>" + sede[q].id + "</span></li></ul>";
            }
         }else{
             divList.parentNode.removeChild(divList);
@@ -275,3 +323,4 @@ loadCohortSede = (ids) =>{
     });
     
 }
+
