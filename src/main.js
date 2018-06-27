@@ -202,6 +202,7 @@ orderUsers = (orderBy, orderDirection)=>{
         });
     });  
 }
+
 /*BUscar estudiante */
 search_home_students =(ids)=> {
     connectJson(url2,(error,jsonProgress) => {
@@ -250,7 +251,15 @@ search_home_students =(ids)=> {
             });
         });
     });  
-    
+}
+//document.getElementById().addEventListener('click',toCallStats());
+/*listCohort=_=>{
+connectJson(url1,(error,json) => {
+    let divList = document.getElementById('cohortOne');
+    for(var q in json){
+        divList.innerHTML += "<ul><li class='menuList'><span>" + json[q].id + "</span><ul><li id='" + json[q].id + "' onclick='toCallStats(this)'>ESTUDIANTES</li></ul></li></ul>";
+        }
+ }); 	
 }
 /*Listar cohort por sede */
 loadCohortSede = (ids) =>{
