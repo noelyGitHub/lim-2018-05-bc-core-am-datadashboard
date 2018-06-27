@@ -68,23 +68,11 @@ let options = {
     orderDirection: 'ASC',
     search: "",
 }
-const data =_=> {
+const data =_=> {// Funcion que inicializa las funciones asignando los datos del json
     connectJson(url2,(error,jsonProgress) => {
         connectJson(url3,(error,jsonUsers) => {
             connectJson(url1,(error,jsonCohort) => {
-                options.cohortData.users=jsonUsers;
-                options.cohortData.progress=jsonProgress;
-                let listUser = processCohortData(options);
-                console.log(listUser);          
-            });
-        });
-    });
-}
-data();
-
-/*Tabla de informacion div out_list_student_item*/
-toCallStats = idCohort => {
-        /*let arrayIds=[];
+            /*let arrayIds=[];
                 let courses=[];
                 for(var i in jsonCohort){
                     var idCourses=Object.keys(jsonCohort[i].coursesIndex);
@@ -94,14 +82,25 @@ toCallStats = idCohort => {
                     }  
                     courses=arrayIds.sort().filter((x, i, a) => !i || x != a[i-1]);// 14 idCursos obtenidos
             } 
-        */      let courses = 'intro';
-                //let listUser = computeUsersStats(jsonUsers,jsonProgress,courses);// instancio al object
+            */
+                options.cohortData.users=jsonUsers;
+                options.cohortData.progress=jsonProgress;
+                let listUser = processCohortData(options);
+            });
+        });
+    });
+}
+data();
+
+/*Tabla de informacion div out_list_student_item*/
+toCallStats = idCohort => {// Funcion que me permite listar con valores por defecto
+                let courses = 'intro';
                 document.getElementById("cohortSede").style.display = 'none';
                 document.getElementById("listUsersCohort").style.display = "block";
                 document.getElementById('title_list_student_item').style.display='none';
                 let tableList = document.getElementById('out_list_student_item');
                 let num = 0;
-                options.cohort=idCohort;
+                options.cohort=idCohort.id;
                 let listUser = processCohortData(options);
 
                 Object.keys(listUser).map(list=>{                    
@@ -136,7 +135,7 @@ toCallStats = idCohort => {
                 
 }
 /*Informacion por cada estudiante div information*/
-information = (idUser)=> {                       
+information = (idUser)=> {// Funcion que muestra la informacion detallada por usuario                 
                         document.getElementById("listUsersCohort").style.display = "none";
                         var html_informacion = '<div class = "box-information">';
                                 html_informacion+= '<div class="wrap-box-information">';
@@ -182,21 +181,18 @@ information = (idUser)=> {
                         document.getElementById('information').innerHTML=html_informacion;
 }
 /*Ordenar estudiante div out_list_student_item*/
-orderUsers = (orderBy, orderDirection)=>{
+orderUsers = (orderBy, orderDirection)=>{// Funcion que muestra la lista ordenada
                 let courses = 'intro';
-                //let date= computeUsersStats(jsonUsers,jsonProgress,courses);
+                let num = 0;
                 let tableList = document.getElementById('out_list_student_item');
-                let num=0;
                 tableList.innerHTML=" ";
-                //let order = sortUsers(date ,orderBy, orderDirection );
-
                 options.orderBy = orderBy;
                 options.orderDirection = orderDirection;
                 let order = processCohortData(options);
-
-                //let listUser = processCohortData(options);
+                const orderListaDeCohort=options.cohort;
                 order.map(date => {
-                    num++;
+                    if(orderListaDeCohort == date.cohort){
+                    num++;                    
                     tableList.innerHTML += "<tr id='" + date.id +
                         "' onclick='information(this)' data-name='"+date.name+
                         "' data-course='"+courses+
@@ -220,11 +216,12 @@ orderUsers = (orderBy, orderDirection)=>{
                         "</td><td>"+ date.quizzes.percent+" % "+
                         "</td><td class='import'>"+ date.percent+" % "+
                         "</td></tr>"
+                    }
                 });
  
 }
 /*BUscar estudiante div search*/
-search_home_students =(string)=> {
+search_home_students =(string)=> {// La funcion busca la informacion por nombre
                 let num = 0; 
                 let search = document.getElementById('search');
                 let courses = 'intro';
@@ -262,7 +259,7 @@ search_home_students =(string)=> {
             
 }
 /*Listar cohort por sede */
-loadCohortSede = ids =>{
+loadCohortSede = ids =>{// Selecciona lista de cohort
     connectJson(url1,(error,json) => {
         let menu=document.getElementById("menuCohort");
         let div=document.createElement('div');//creo un elemnto div

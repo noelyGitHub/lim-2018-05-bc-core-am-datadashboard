@@ -46,10 +46,10 @@ describe('data', () => {
       );
 
       it('debería tener propiedad exercises con valor {total: 2, completed: 0, percent: 0}', () => {
-        assert.deepEqual(processed[0].exercises, {
+        assert.deepEqual(processed[0].excercises, {
           total: 2,
           completed: 1,
-          percent: 54,
+          percent: 50,
         });
       });
 

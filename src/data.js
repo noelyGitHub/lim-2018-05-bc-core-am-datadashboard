@@ -87,7 +87,7 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
                return percent; // % de ejercicios resueltos
             }
             let objectExercises = {'total':totalExercises(),'completed':solvedExercises(),'percent':percentExercises()}
-            return objectExercises;//objectExercises;
+            return objectExercises;
         }
         readsComplit=_=>{
             const totalReads=_=>{
@@ -299,11 +299,9 @@ window.sortUsers=( users , orderBy, orderDirection ) => {// Ordenar la lista de 
         } 
         return date;
      } */
-    var dateObject=users;//objectUsers();
-    //.....................................................fin obtener data
     if(orderBy == 'name'){
         if(orderDirection === 'ASC'){
-                order = dateObject.sort((a,b)=>{
+                order = users.sort((a,b)=>{
                 if(a.name > b.name){
                     return 1;
                 }
@@ -314,7 +312,7 @@ window.sortUsers=( users , orderBy, orderDirection ) => {// Ordenar la lista de 
             });                     
         }
         if(orderDirection === 'DES'){  
-                order = dateObject.sort((a,b) => {
+                order = users.sort((a,b) => {
                 if(a.name < b.name){
                     return 1;
                 }
@@ -326,7 +324,7 @@ window.sortUsers=( users , orderBy, orderDirection ) => {// Ordenar la lista de 
         }
     }else{
         if(orderDirection === 'ASC'){
-            order = dateObject.sort((a,b) => {
+            order = users.sort((a,b) => {
                 switch (orderBy){
                     case 'percent': return a.percent - b.percent; break;
                     case 'percentExercises': return a.excercises.percent - b.excercises.percent; break;
@@ -338,7 +336,7 @@ window.sortUsers=( users , orderBy, orderDirection ) => {// Ordenar la lista de 
             });  
         }
         if(orderDirection === 'DES'){
-            order = dateObject.sort((a,b) => {
+            order = users.sort((a,b) => {
                 switch (orderBy){
                     case 'percent': return b.percent - a.percent; break;
                     case 'percentExercises': return b.excercises.percent - a.excercises.percent; break;
@@ -354,28 +352,16 @@ window.sortUsers=( users , orderBy, orderDirection ) => {// Ordenar la lista de 
 
 }
 window.filterUsers=(users, search)=>{
-    /*let date;  
-        const objectUsers=_=>{
-        for (let index in users){
-                Object.keys(users[index]).map(item=>{
-                    date = users[index];
-                });
-        } 
-        return date;
-        }
-   */ 
-   var dateObject=users;//objectUsers();
-   let student=users.filter(item=>{
+    var dateObject=users;//objectUsers();
+    let student=users.filter(item=>{
              const searchName=item.name;
              return searchName.toLowerCase().indexOf(search.toLowerCase()) > -1;
-    });    
+    }); 
     return student;
 }
 window.processCohortData=options=>{
-    //Nuevo arreglo de usuarios ordenado y filtrado con la propiedad stats añadida (ver computeUsersStats).
     courses='intro';
     let estudiantes = computeUsersStats(options.cohortData.users,options.cohortData.progress,courses);
-    
     estudiantes = sortUsers(estudiantes,options.orderBy,options.orderDirection);
     console.log(estudiantes);
     if(options.search != ''){
