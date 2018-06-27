@@ -82,8 +82,8 @@ De acuerdo a los requerimientos presentados realizamos nuestro primer sketch(pro
 
 ![PrototypeBaja](img/4.jpeg)
 ![PrototypeBaja2](img/5.jpeg)
-![PrototypeBaja3](img/6-1.jpeg)
-![PrototypeBaja4](img/6-2.jpeg)
+![PrototypeBaja3](img/6-1.png)
+![PrototypeBaja4](img/6-2.png)
 
 Una vez teniendo este sketch:
 1. Se procedio a realizar entrevistas
@@ -95,15 +95,15 @@ Donde obtuvimos la siguiente informacion:
 
 * El objetivo principal en relacion al producto:
 
-+ Es el de acceder a datos globales para poder ver el rendimiento de cada alumna de Laboratoria de diferentes sedes.
+  + Es el de acceder a datos globales para poder ver el rendimiento de cada alumna de Laboratoria de diferentes sedes.
 
 * La informacion mas importante a visualizarse en la interfaz :
 
-+ Datos globales de las promociones anteriores y actuales (Cohorts).
-+ Progreso de cada Alumna en base a lecturas, examenes, ejercicios por promocion.
+  + Datos globales de las promociones anteriores y actuales (Cohorts : mortar_board : ).
+  + Progreso de cada Alumna en base a lecturas, examenes, ejercicios por promocion.
 
 * Acceso a datos:
-+ Se accede a estos datos a finales de cada proyecto presentado por las alumnas de Laboratoria.
+  + Se accede a estos datos a finales de cada proyecto presentado por las alumnas de Laboratoria.
 
 Por ultimo nos acercamos a las usuarias directas Training Managers (TMs), para pulir detalles, donde presentamos el sketch de baja fidelidad, para hacer el testeo a las usuarias, nos indicaron detalles a reforzar.
 De acuerdo al primer feedback realizamos  la Interfaz de Usuario.
@@ -113,7 +113,7 @@ De acuerdo al primer feedback realizamos  la Interfaz de Usuario.
 ![PrototypeAlta3](img/ProtyAlta3.PNG)
 
 De acuerdo al feedback constante por parte del equipo de Laboratoria y de las Training Managers (TMs), procedimos a diseñar la interfaz de acuerdo a los requerimientos del usuario a travez de la herramienta Figma.
-![Figma](img/FigmaExample.avi)
+![Figma](img/EjemploFigma.avi)
 https://www.figma.com/proto/GYXuswMezoQFWHYrCFyAGSLJ/DATA-DASHBOARD?scaling=min-zoom&node-id=27%3A3
 
 Exactamente se visualiza todo el flujo del proyecto, donde se puede seleccionar un cohort de una lista de cohorts, a partir de ello se visualiza datos generales de las estudiantes de como van en todo el proceso de aprendizaje durante el Bootcamp sobre cada cohort y con mas a detalle al ingresar a visualizar informacion por cada alumna.
