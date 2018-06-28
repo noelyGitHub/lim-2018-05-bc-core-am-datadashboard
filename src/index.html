@@ -13,10 +13,9 @@
        <div class="navMenu">
           <input type="checkbox" id="menu-bar"/>
           <label class="icon-menu" for="menu-bar"></label>
-          <nav class="menu" id="menuCohort">
-           <!-- <div id="cohortOne">
-
-            </div>-->
+          <nav class="menu">
+            <div id="cohortOne">
+              </div>
           </nav>
         </div>
         <div class="wraperLogo">
@@ -24,8 +23,8 @@
         </div>
         <div class="search-header-main">
           <span class="content-search">
-              <input type="text" id="search_student" placeholder="BUSCAR AQUÍ " />
-              <img src="../img/searchicon.png" id="imgSearch"  />
+            <input type="text" id="search_student" placeholder="BUSCAR AQUÍ " />
+              <img src="../img/searchicon.png"   onclick="search_home_students()"/>
           </span>
         </div>
         <div class="user-profile">
@@ -35,7 +34,7 @@
       <section>
         <div class="wrapper" id="cohortSede">
           <div class="headquarters" id="lim" onclick="loadCohortSede(this.id)">
-            <p>SEDE - LIMA</p>
+            <p onclick="filterCohortSede()">SEDE - LIMA</p>
           </div>
           <div class="headquarters" id="scl" onclick="loadCohortSede(this.id)">
             <p>SEDE - CHILE</p>
