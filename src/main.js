@@ -8,13 +8,11 @@ let search=document.getElementById('search');
 let informationUser=document.getElementById('information');
 window.onload=function(){
     orderDirection.addEventListener('change',() => {
-        //cohortSede.style.display = 'none';
         listStudent.style.display = "block";
         const orderBy = document.getElementById('orderBy');
-        orderDirection.style.color="red";
+        search.style.display='none;'
+        orderDirection.style.color="green";
         orderUsers(orderBy.value,orderDirection.value);
-       //orderUsers('percent','ASC');
-       // 
     });
     imgSearch.addEventListener('click',() =>{// muestro en div table search
         table.style.display='none';
@@ -66,9 +64,9 @@ let options = {
     },
     orderBy: 'name',
     orderDirection: 'ASC',
-    search: "",
+    search: '',
 }
-const data =_=> {// Funcion que inicializa las funciones asignando los datos del json
+const data =_=> {// Funcion que inicializa las funciones asignando con los datos del json
     connectJson(url2,(error,jsonProgress) => {
         connectJson(url3,(error,jsonUsers) => {
             connectJson(url1,(error,jsonCohort) => {
@@ -82,16 +80,16 @@ const data =_=> {// Funcion que inicializa las funciones asignando los datos del
                     }  
                     courses=arrayIds.sort().filter((x, i, a) => !i || x != a[i-1]);// 14 idCursos obtenidos
             } 
-            */
-                options.cohortData.users=jsonUsers;
+            */  options.cohortData.users=jsonUsers;
                 options.cohortData.progress=jsonProgress;
+                //const a=computeUsersStats(computeUsersStats(options.cohortData.users,options.cohortData.progress,['intro']));
+                //console.log(computeUsersStats(jsonUsers,jsonProgress,'intro'));
                 let listUser = processCohortData(options);
             });
         });
     });
 }
 data();
-
 /*Tabla de informacion div out_list_student_item*/
 toCallStats = idCohort => {// Funcion que me permite listar con valores por defecto
                 let courses = 'intro';
@@ -102,123 +100,109 @@ toCallStats = idCohort => {// Funcion que me permite listar con valores por defe
                 let num = 0;
                 options.cohort=idCohort.id;
                 let listUser = processCohortData(options);
-
-                Object.keys(listUser).map(list=>{                    
-                    let information=listUser[list];
-                    if(idCohort.id == listUser[list].cohort){
-                        num++;                                
-                        tableList.innerHTML += "<tr id='" + listUser[list].idUser +
-                            "' onclick='information(this)' data-name='"+listUser[list].name+
-                            "' data-course='"+courses+
-                            "' data-percent='"+listUser[list].percent+
-                            "' data-ex-total='"+listUser[list].excercises.total+
-                            "' data-ex-completed='"+listUser[list].excercises.completed+
-                            "' data-ex-percent='"+listUser[list].excercises.percent+
-                            "' data-read-total='"+listUser[list].reads.total+
-                            "' data-read-completed='"+listUser[list].reads.completed+
-                            "' data-read-percent='"+listUser[list].reads.percent+
-                            "' data-quiz-total='"+listUser[list].quizzes.total+
-                            "' data-quiz-completed='"+listUser[list].quizzes.completed+
-                            "' data-quiz-score-avg='"+listUser[list].quizzes.scoreAvg+
-                            "' data-quiz-score-sum= '"+listUser[list].quizzes.scoreSum+
-                            "' data-quiz-percent='"+listUser[list].quizzes.percent+
-                            "'><td>" + num +
-                            "</td><td class='name-table'>"+ listUser[list].name+
-                            "</td><td class='import'>"+ listUser[list].quizzes.scoreSum+
-                            "</td><td>"+ listUser[list].reads.percent+" % "+
-                            "</td><td>"+ listUser[list].excercises.percent+" % "+
-                            "</td><td>"+ listUser[list].quizzes.percent+" % "+
-                            "</td><td class='import'>"+ listUser[list].percent+" % "+
-                            "</td></tr>"
+                search.innerHTML="";
+                Object.keys(listUser).forEach(list=>{                    
+                    let information=listUser[list];//
+                    if(idCohort.id == listUser[list].stats.cohort){
+                        num++;
+                        document.getElementById('title_list_student_item').style.display='block';
+                        search.innerHTML += "<tr id='" + listUser[list].stats.idUser +
+                        "' onclick='information(this)' data-name='"+listUser[list].stats.name+
+                        "' data-course='"+courses+
+                        "'><td>" + num +
+                        "</td><td class='name-table'>"+ listUser[list].stats.name+
+                        "</td><td class='import'>"+ listUser[list].stats.quizzes.scoreAvg+
+                        "</td><td>"+ listUser[list].stats.reads.percent+" % "+
+                        "</td><td>"+ listUser[list].stats.excercises.percent+" % "+
+                        "</td><td>"+ listUser[list].stats.quizzes.percent+" % "+
+                        "</td><td class='import'>"+ listUser[list].stats.percent+" % "+
+                        "</td></tr>"
                     } 
-                    });
+                });
                 
 }
 /*Informacion por cada estudiante div information*/
-information = (idUser)=> {// Funcion que muestra la informacion detallada por usuario                 
-                        document.getElementById("listUsersCohort").style.display = "none";
-                        var html_informacion = '<div class = "box-information">';
-                                html_informacion+= '<div class="wrap-box-information">';
-                                html_informacion+= '<h4 class="info-individual"><span class="icon-left-open" id="back-list"></span>Informacion Detallada</h4>'
-                                    html_informacion+= '<p class="name-information"><span >'+idUser.dataset.name+'</span></p>';
-                                    html_informacion+= '<select class="select-course"><option>'+idUser.dataset.course+'</option></select>'
-                                    html_informacion+= '<div class=info-resumen>'
-                                        html_informacion+= '<p><span>Porcentaje:</span>'+idUser.dataset.percent+' %</p>'
-                                        html_informacion+= '<p><span>Puntaje:</span>'+idUser.dataset.quizScoreSum+' pts</p>'
-                                    html_informacion+='</div>'
-                                    html_informacion+='<div class="information-courses">';
-                                        html_informacion+='<h3>Ejercicios</h3>'
-                                        html_informacion+='<table>'
-                                            html_informacion+='<tr class="title-fila"><td>Item</td><td>Valor</td></tr>'
-                                            html_informacion+='<tr><td>Total de Ejercicios</td><td>'+idUser.dataset.exTotal+'</td></tr>'
-                                            html_informacion+= '<tr><td>Ejercicios Completados</td><td>'+idUser.dataset.exCompleted+'</td></tr>'
-                                            html_informacion+= '<tr><td>Avance</td><td>'+idUser.dataset.exPercent+' %</td></tr>'
-                                        html_informacion+='</table>'
-                                    html_informacion+='</div>';
-                                    html_informacion+='<div class="information-courses">';
-                                        html_informacion+= '<h3>Lecturas</h3>'
-                                        html_informacion+= '<table>'
-                                            html_informacion+= '<tr class="title-fila"><td>Item</td><td>Valor</td></tr>'
-                                            html_informacion+= '<tr><td>Numero de lecturas</td><td>'+idUser.dataset.readTotal;+'</td></tr>'
-                                            html_informacion+= '<tr><td>Ejercicios Completados</td><td>'+idUser.dataset.readCompleted+'</td></tr>'
-                                            html_informacion+= '<tr><td>Avance</td><td>'+idUser.dataset.readPercent+'% </td></tr>'
-                                        html_informacion+= '</table>'
-                                    html_informacion+='</div>';
-                                    html_informacion+='<div class="information-courses">';
-                                        html_informacion+= '<h3>Examen</h3>'
-                                        html_informacion+= '<table>'
-                                            html_informacion+= '<tr class="title-fila"><td>Item</td><td>Valor</td></tr>'
-                                            html_informacion+= '<tr><td>Numero de examenes</td><td>'+idUser.dataset.quizTotal;+'</td></tr>'
-                                            html_informacion+= '<tr><td>Examenes Completados</td><td>'+idUser.dataset.quizCompleted+'</td></tr>'
-                                            html_informacion+= '<tr><td>Puntaje</td><td>'+idUser.dataset.quizScoreSum+'</td></tr>'
-                                            html_informacion+= '<tr><td>Promedio</td><td>'+idUser.dataset.quizScoreAvg+'</td></tr>'
-                                            html_informacion+= '<tr><td>Avance</td><td>'+idUser.dataset.quizPercent+' %</td></tr>'
-                                        html_informacion+= '</table>'
+information = (idUser)=> {debugger// Funcion que muestra la informacion detallada por usuario  
+                    const listUser = processCohortData(options);  // llamo a mis datos
+                    console.log(idUser);
+                    const searchId=listUser.map(list=>{ // Busco al usuario con el id
+                        if(idUser.id == list.stats.idUser){
+                            return list;// retorna array con un solo objeto valido
+                        }
+                    });//[undefined,{},undefined]
+                    const filterObjectValidate=searchId.filter(x=>{if(x!=undefined){return x;}});// filtro las posiciones undefined
+                    filterObjectValidate.forEach(list=>{// recorro solo por unica vez :( por que ya esta filtrado 
+                            document.getElementById("listUsersCohort").style.display = "none";
+                            var html_informacion = '<div class = "box-information">';
+                                    html_informacion+= '<div class="wrap-box-information">';
+                                    html_informacion+= '<h4 class="info-individual"><span class="icon-left-open" id="back-list"></span>Informacion Detallada</h4>'
+                                        html_informacion+= '<p class="name-information"><span >'+list.stats.name+'</span></p>';// data ser atributo del elemento que evio la informacion
+                                        html_informacion+= '<select class="select-course"><option>'+idUser.dataset.course+'</option></select>'
+                                        html_informacion+= '<div class=info-resumen>'
+                                            html_informacion+= '<p><span>Porcentaje:</span>'+list.stats.percent+' %</p>'
+                                            html_informacion+= '<p><span>Puntaje:</span>'+list.stats.quizzes.scoreSum+' pts</p>'
+                                        html_informacion+='</div>'
+                                        html_informacion+='<div class="information-courses">';
+                                            html_informacion+='<h3>Ejercicios</h3>'
+                                            html_informacion+='<table>'
+                                                html_informacion+='<tr class="title-fila"><td>Item</td><td>Valor</td></tr>'
+                                                html_informacion+='<tr><td>Total de Ejercicios</td><td>'+list.stats.excercises.total+'</td></tr>'
+                                                html_informacion+= '<tr><td>Ejercicios Completados</td><td>'+list.stats.excercises.completed+'</td></tr>'
+                                                html_informacion+= '<tr><td>Avance</td><td>'+list.stats.excercises.percent+' %</td></tr>'
+                                            html_informacion+='</table>'
+                                        html_informacion+='</div>';
+                                        html_informacion+='<div class="information-courses">';
+                                            html_informacion+= '<h3>Lecturas</h3>'
+                                            html_informacion+= '<table>'
+                                                html_informacion+= '<tr class="title-fila"><td>Item</td><td>Valor</td></tr>'
+                                                html_informacion+= '<tr><td>Numero de lecturas</td><td>'+list.stats.reads.total;+'</td></tr>'
+                                                html_informacion+= '<tr><td>Ejercicios Completados</td><td>'+list.stats.reads.completed+'</td></tr>'
+                                                html_informacion+= '<tr><td>Avance</td><td>'+list.stats.reads.percent+'% </td></tr>'
+                                            html_informacion+= '</table>'
+                                        html_informacion+='</div>';
+                                        html_informacion+='<div class="information-courses">';
+                                            html_informacion+= '<h3>Examen</h3>'
+                                            html_informacion+= '<table>'
+                                                html_informacion+= '<tr class="title-fila"><td>Item</td><td>Valor</td></tr>'
+                                                html_informacion+= '<tr><td>Numero de examenes</td><td>'+list.stats.quizzes.total;+'</td></tr>'
+                                                html_informacion+= '<tr><td>Examenes Completados</td><td>'+list.stats.quizzes.completed+'</td></tr>'
+                                                html_informacion+= '<tr><td>Puntaje</td><td>'+list.stats.quizzes.scoreSum+'</td></tr>'
+                                                html_informacion+= '<tr><td>Promedio</td><td>'+list.stats.quizzes.scoreAvg+'</td></tr>'
+                                                html_informacion+= '<tr><td>Avance</td><td>'+list.stats.quizzes.percent+' %</td></tr>'
+                                            html_informacion+= '</table>'
+                                        html_informacion+='</div>';
                                     html_informacion+='</div>';
                                 html_informacion+='</div>';
-                            html_informacion+='</div>';
-                        document.getElementById('out_list_student_item').style.display='none';
-                        document.getElementById('information').innerHTML=html_informacion;
+                            document.getElementById('out_list_student_item').style.display='none';
+                            document.getElementById('information').innerHTML=html_informacion;
+                        });    
 }
 /*Ordenar estudiante div out_list_student_item*/
 orderUsers = (orderBy, orderDirection)=>{// Funcion que muestra la lista ordenada
-                let courses = 'intro';
-                let num = 0;
-                let tableList = document.getElementById('out_list_student_item');
-                tableList.innerHTML=" ";
-                options.orderBy = orderBy;
-                options.orderDirection = orderDirection;
-                let order = processCohortData(options);
-                const orderListaDeCohort=options.cohort;
-                order.map(date => {
-                    if(orderListaDeCohort == date.cohort){
-                    num++;                    
-                    tableList.innerHTML += "<tr id='" + date.id +
-                        "' onclick='information(this)' data-name='"+date.name+
+        let tableList =document.getElementById('search');
+        let courses = 'intro';
+        let num = 0;
+        options.orderBy = orderBy;
+        options.orderDirection = orderDirection;
+        let order = processCohortData(options);
+        const orderListaDeCohort = options.cohort;
+        tableList.innerHTML = "";
+        order.forEach(date => {//forEach recorre el array original y no crea otro como el bendito map
+            if(orderListaDeCohort == date.stats.cohort){
+                num++;                    
+                tableList.innerHTML += "<tr id='" + date.stats.idUser +
+                    "' onclick='information(this)' data-name='"+date.stats.name+
                         "' data-course='"+courses+
-                        "' data-percent='"+date.percent+
-                        "' data-ex-total='"+date.excercises.total+
-                        "' data-ex-completed='"+date.excercises.completed+
-                        "' data-ex-percent='"+date.excercises.percent+
-                        "' data-read-total='"+date.reads.total+
-                        "' data-read-completed='"+date.reads.completed+
-                        "' data-read-percent='"+date.reads.percent+
-                        "' data-quiz-total='"+date.quizzes.total+
-                        "' data-quiz-completed='"+date.quizzes.completed+
-                        "' data-quiz-score-avg='"+date.quizzes.scoreAvg+
-                        "' data-quiz-score-sum= '"+date.quizzes.scoreSum+
-                        "' data-quiz-percent='"+date.quizzes.percent+
                         "'><td>" + num +
-                        "</td><td class='name-table'>"+ date.name+
-                        "</td><td class='import'>"+ date.quizzes.scoreSum+
-                        "</td><td>"+ date.reads.percent+" % "+
-                        "</td><td>"+ date.excercises.percent+" % "+
-                        "</td><td>"+ date.quizzes.percent+" % "+
-                        "</td><td class='import'>"+ date.percent+" % "+
-                        "</td></tr>"
+                        " </td><td class='name-table'>"+ date.stats.name+
+                        " </td><td class='import'>"+ date.stats.quizzes.scoreAvg+
+                        " </td><td>"+ date.stats.reads.percent+" % "+
+                        " </td><td>"+ date.stats.excercises.percent+" % "+
+                        " </td><td>"+ date.stats.quizzes.percent+" % "+
+                        " </td><td class='import'>"+ date.stats.percent+" % "+
+                        " </td></tr>"
                     }
                 });
- 
 }
 /*BUscar estudiante div search*/
 search_home_students =(string)=> {// La funcion busca la informacion por nombre
@@ -228,31 +212,20 @@ search_home_students =(string)=> {// La funcion busca la informacion por nombre
                 options.search=string;
                 let listUser = processCohortData(options);
                 search.innerHTML = "";
-                    for(var list in listUser){
+                let stats = Object.keys(listUser);
+                for(var list in listUser){
                         num++;
                         document.getElementById('title_list_student_item').style.display='block';
-                        search.innerHTML += "<tr id='" + listUser[list].idUser +
-                        "' onclick='information(this)' data-name='"+listUser[list].name+
+                        search.innerHTML += "<tr id='" + listUser[list].stats.idUser +
+                        "' onclick='information(this)' data-name='"+listUser[list].stats.name+
                         "' data-course='"+courses+
-                        "' data-percent='"+listUser[list].percent+
-                        "' data-ex-total='"+listUser[list].excercises.total+
-                        "' data-ex-completed='"+listUser[list].excercises.completed+
-                        "' data-ex-percent='"+listUser[list].excercises.percent+
-                        "' data-read-total='"+listUser[list].reads.total+
-                        "' data-read-completed='"+listUser[list].reads.completed+
-                        "' data-read-percent='"+listUser[list].reads.percent+
-                        "' data-quiz-total='"+listUser[list].quizzes.total+
-                        "' data-quiz-completed='"+listUser[list].quizzes.completed+
-                        "' data-quiz-score-avg='"+listUser[list].quizzes.scoreAvg+
-                        "' data-quiz-score-sum= '"+listUser[list].quizzes.scoreSum+
-                        "' data-quiz-percent='"+listUser[list].quizzes.percent+
                         "'><td>" + num +
-                        "</td><td class='name-table'>"+ listUser[list].name+
-                        "</td><td class='import'>"+ listUser[list].quizzes.scoreSum+
-                        "</td><td>"+ listUser[list].reads.percent+" % "+
-                        "</td><td>"+ listUser[list].excercises.percent+" % "+
-                        "</td><td>"+ listUser[list].quizzes.percent+" % "+
-                        "</td><td class='import'>"+ listUser[list].percent+" % "+
+                        "</td><td class='name-table'>"+ listUser[list].stats.name+
+                        "</td><td class='import'>"+ listUser[list].stats.quizzes.scoreAvg+
+                        "</td><td>"+ listUser[list].stats.reads.percent+" % "+
+                        "</td><td>"+ listUser[list].stats.excercises.percent+" % "+
+                        "</td><td>"+ listUser[list].stats.quizzes.percent+" % "+
+                        "</td><td class='import'>"+ listUser[list].stats.percent+" % "+
                         "</td></tr>"
                 
                     }   
