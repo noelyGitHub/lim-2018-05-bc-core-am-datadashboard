@@ -152,24 +152,25 @@ describe('data', () => {
     const cohort = fixtures.cohorts.find(item => item.id === 'lim-2018-03-pre-core-pw');
     const courses = Object.keys(cohort.coursesIndex);
     const { users, progress } = fixtures;
-    const options = {
-      cohort:cohort,
-      cohortData:{
-          users: users,
-          progress: progress,
-      },
-      orderBy: 'name',
-      orderDirection: 'ASC',
-      search: "Noely",
-  }
-
-    const process=processCohortData(options);
+    //processCohortData({cohort:cohort,cohortData:{users: users,progress: progress,},orderBy:'name', orderDirection:'ASC',search:'Noely'})
+    //const process=processCohortData(options);
     it('debería retornar arreglo de usuarios con propiedad stats y aplicar sort y filter',() => {
+      const process= processCohortData({cohort:cohort,cohortData:{users: users,progress: progress,},orderBy:'name', orderDirection:'ASC',search:'Noely'})
       process.forEach(user => {
         assert.ok(user.hasOwnProperty('stats'));
         assert.equal(user.stats.name,'NOELY');
       });
     });
+      it('debería retornar arreglo de usuarios con propiedad stats y aplicar sort',() => {
+        const processSort= processCohortData({cohort:cohort,cohortData:{users: users,progress: progress},orderBy:'name', orderDirection:'ASC',search:''})
+        processSort.forEach(user => {
+          assert.ok(user.hasOwnProperty('stats'));
+          });
+          assert.deepEqual(processSort[0].stats.name, 'ADRIANA VIZCARRA PAITÁN');
+          assert.deepEqual(processSort[processSort.length-1].stats.name, 'ZURISADAI ROSAS ARAMBURÚ');
+          
+      
+      });
 
   });
 

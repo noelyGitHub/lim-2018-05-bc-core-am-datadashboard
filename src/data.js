@@ -1,20 +1,18 @@
 window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
         const usersWithStats = users.map(user => { 
-        const IdsUser=user.id;// almaceno los ids del cohort usuario
-        //console.log(progress);
-        const arrayCourses = Object.keys(progress[IdsUser]);//Obtengo el id de estudiantes
-        const name=user.name;
-        const cohort=user.signupCohort;                
+        const IdsUser = user.id;// almaceno los ids del cohort usuario
+        const arrayOfIdUsers = Object.keys(progress[IdsUser]);//Obtengo el id de estudiantes
         percentComplit =_=> {
-            let userPercent=0;// almaceno el nombre y percent
-            const percent = arrayCourses.map(cours => {return progress[IdsUser][cours].percent;});
+            let userPercent = 0;
+            const percent = arrayOfIdUsers.map(cours => {return progress[IdsUser][cours].percent;});
                 if(percent != 0){
-                    userPercent = parseInt(userPercent)+parseInt(percent); //para que no sea array
+                    userPercent = parseInt(userPercent)+parseInt(percent); // Hay % vacios que resultan NAN con esto los convierto a Num
                 }else{
                     userPercent=0;
                 }   
-                return userPercent;// retorno un array de objetos del nombre y percent            
+                return userPercent;           
         }
+        
         exercisesComplit =_=> {
             const totalExercises =_=> { 
                 let units;// arrays de object units
@@ -22,17 +20,17 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
                 let parts;//array de object parts
                 let recorrerParts;// array lista de propiedades de object parts
                 let typeExcercises;//propiedad de la lista de propiedades del object parts
-                let x=[];
-                arrayCourses.map(coursIntro => {// por cada ids -> recorro intro
-                    units = progress[IdsUser][coursIntro].units;//llego al objeto unidades
+                let x = [];
+                arrayOfIdUsers.map(coursIntro => {// recorro cada objeto INTRO del IdUSER
+                    units = progress[IdsUser][coursIntro].units;// obtento el objeto UNITS del object INTRO
                     propiedadUnits = Object.keys(units);// propiedad de los unit / son tres partes
                     
-                    propiedadUnits.map(unit => {// recorro cada propiedada del  units
-                        parts = progress[IdsUser][coursIntro].units[unit].parts;//llego a parts// cursos especificos
+                    propiedadUnits.map(unit => {// Recorro cada propiedad del obj UNITS
+                        parts = progress[IdsUser][coursIntro].units[unit].parts;//y obtengo la propiedad PARTS de la propiedad UNIT
                         recorrerParts = Object.keys(parts);// lista propiedad de parts
                         
-                        recorrerParts.map(part => {//recorro cada propiedades de parts
-                            typeExcercises = progress[IdsUser][coursIntro].units[unit].parts[part].type;//obtendo el tipo 
+                        recorrerParts.map(part => {//recorro cada propiedad del ahora obj PARTS
+                            typeExcercises = progress[IdsUser][coursIntro].units[unit].parts[part].type;// y obtengo la propiedad type
                             if(typeExcercises == 'practice' || recorrerParts == '06-exercises' ){
                                 x++;
                             }
@@ -42,9 +40,7 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
                     });
                                     
                 });
-                // console.log('Total de ejercicio: '+x);  
-                //console.log(recorrerParts);
-                return x;//Total de ejercicios en 'intro'
+                return x;
             } 
             const solvedExercises =_=>{
                 let units;// arrays de object units
@@ -52,16 +48,16 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
                 let parts;//array de object parts
                 let recorrerParts;// array lista de propiedades de object parts
                 let x = 0;
-                arrayCourses.map(coursIntro => {// por cada ids -> recorro intro
-                    units = progress[IdsUser][coursIntro].units;//llego al objeto unidades
-                    propiedadUnits = Object.keys(units);// propiedad de los unit / son tres partes
+                arrayOfIdUsers.map(coursIntro => {
+                    units = progress[IdsUser][coursIntro].units;
+                    propiedadUnits = Object.keys(units);
                     
-                    propiedadUnits.map(unit => {// recorro cada propiedada del  units
-                        parts = progress[IdsUser][coursIntro].units[unit].parts;//llego a parts// cursos especificos
-                        recorrerParts = Object.keys(parts);// lista propiedad de parts
+                    propiedadUnits.map(unit => {
+                        parts = progress[IdsUser][coursIntro].units[unit].parts;
+                        recorrerParts = Object.keys(parts);
                         
-                        recorrerParts.map(part => {//recorro cada propiedades de parts
-                            type = progress[IdsUser][coursIntro].units[unit].parts[part].type;//obtendo el tipo 
+                        recorrerParts.map(part => {
+                            type = progress[IdsUser][coursIntro].units[unit].parts[part].type; 
                             completed = progress[IdsUser][coursIntro].units[unit].parts[part].completed;
                             if(type == 'practice' || recorrerParts == '06-exercises' ){                               
                                 if(completed==1){
@@ -71,9 +67,8 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
                         });
                     });                   
                    
-                });
-                //console.log('Total de completado :'+x);               
-               return x; // total de ejercicios completados
+                });              
+               return x; 
             }
             const percentExercises =_=> {
                let percent = 0;
@@ -82,9 +77,9 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
                }else{
                    percent = 0;
                }
-               //console.log('% exercises completados :'+percent);
-               return percent; // % de ejercicios resueltos
+                return percent;
             }
+
             let objectExercises = {'total':totalExercises(),'completed':solvedExercises(),'percent':percentExercises()}
             return objectExercises;
         }
@@ -96,42 +91,40 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
                 let recorrerParts;
                 let typeExcercises;
                 let x=[];
-                arrayCourses.map(coursIntro => {// por cada ids -> recorro intro
-                    units = progress[IdsUser][coursIntro].units;//llego al objeto unidades
-                    propiedadUnits = Object.keys(units);// propiedad de los unit / son tres partes
+                arrayOfIdUsers.map(coursIntro => {
+                    units = progress[IdsUser][coursIntro].units;
+                    propiedadUnits = Object.keys(units);
                     
-                    propiedadUnits.map(unit => {// recorro cada propiedada del  units
-                        parts = progress[IdsUser][coursIntro].units[unit].parts;//llego a parts// cursos especificos
-                        recorrerParts = Object.keys(parts);// lista propiedad de parts
+                    propiedadUnits.map(unit => {
+                        parts = progress[IdsUser][coursIntro].units[unit].parts;
+                        recorrerParts = Object.keys(parts);
                         
-                        recorrerParts.map(part => {//recorro cada propiedades de parts
-                            typeExcercises = progress[IdsUser][coursIntro].units[unit].parts[part].type;//obtendo el tipo 
+                        recorrerParts.map(part => {
+                            typeExcercises = progress[IdsUser][coursIntro].units[unit].parts[part].type;
                             if(typeExcercises == 'read'){
                                 x++;
                             }                            
                         });
                     });                                    
                 });
-                //console.log('Total de lecturas: '+x);  
-                //console.log(recorrerParts);
-                return x;//Total de read en 'intro'
+                return x;
             }
             const solvedReads =_=>{
-                let units;// arrays de object units
-                let propiedadUnits//array lista propiedad del object units
-                let parts;//array de object parts
-                let recorrerParts;// array lista de propiedades de object parts
-                let typeExcercises;//propiedad de la lista de propiedades del object parts
+                let units;
+                let propiedadUnits;
+                let parts;
+                let recorrerParts;
+                let typeExcercises;
                 let x=0;
-                arrayCourses.map(coursIntro => {// por cada ids -> recorro intro
-                    units = progress[IdsUser][coursIntro].units;//llego al objeto unidades
-                    propiedadUnits = Object.keys(units);// propiedad de los unit / son tres partes
+                arrayOfIdUsers.map(coursIntro => {
+                    units = progress[IdsUser][coursIntro].units;
+                    propiedadUnits = Object.keys(units);
                     
-                    propiedadUnits.map(unit => {// recorro cada propiedada del  units
-                        parts = progress[IdsUser][coursIntro].units[unit].parts;//llego a parts// cursos especificos
-                        recorrerParts = Object.keys(parts);// lista propiedad de parts
+                    propiedadUnits.map(unit => {
+                        parts = progress[IdsUser][coursIntro].units[unit].parts;
+                        recorrerParts = Object.keys(parts);
                         
-                        recorrerParts.map(part => {//recorro cada propiedades de parts
+                        recorrerParts.map(part => {
                             type = progress[IdsUser][coursIntro].units[unit].parts[part].type;//obtendo el tipo 
                             completed = progress[IdsUser][coursIntro].units[unit].parts[part].completed;
                             if(type == 'read'){                               
@@ -147,8 +140,8 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
                     
                 
                 });
-                //console.log('Total de completado :'+x);               
-             return x; // total de read completados 
+                             
+             return x; 
             }
             const percentReads =_=>{
                 let percent = 0;
@@ -157,7 +150,7 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
                 }else{
                     percent = 0;
                 }
-                //console.log('% lecturas completados :'+percent);
+                
                 return percent; // % de ejercicios resueltos
             }
             let objectReads = {'total':totalReads(),'completed':solvedReads(),'percent':percentReads()}
@@ -171,42 +164,41 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
                 let recorrerParts;
                 let typeExcercises;
                 let x=[];
-                arrayCourses.map(coursIntro => {// por cada ids -> recorro intro
-                    units = progress[IdsUser][coursIntro].units;//llego al objeto unidades
-                    propiedadUnits = Object.keys(units);// propiedad de los unit / son tres partes
+                arrayOfIdUsers.map(coursIntro => {
+                    units = progress[IdsUser][coursIntro].units;
+                    propiedadUnits = Object.keys(units);
                     
-                    propiedadUnits.map(unit => {// recorro cada propiedada del  units
-                        parts = progress[IdsUser][coursIntro].units[unit].parts;//llego a parts// cursos especificos
-                        recorrerParts = Object.keys(parts);// lista propiedad de parts
+                    propiedadUnits.map(unit => {
+                        parts = progress[IdsUser][coursIntro].units[unit].parts;
+                        recorrerParts = Object.keys(parts);
                         
-                        recorrerParts.map(part => {//recorro cada propiedades de parts
-                            typeExcercises = progress[IdsUser][coursIntro].units[unit].parts[part].type;//obtendo el tipo 
+                        recorrerParts.map(part => {
+                            typeExcercises = progress[IdsUser][coursIntro].units[unit].parts[part].type;
                             if(typeExcercises == 'quiz'){
                                 x++;
                             }                            
                         });
                     });                     
                 });
-                //console.log(recorrerParts);
-                return x;//Total de read en 'intro'
+                return x;
             }
             const solvedQuizes =_=> {
-                let units;// arrays de object units
-                let propiedadUnits//array lista propiedad del object units
-                let parts;//array de object parts
-                let recorrerParts;// array lista de propiedades de object parts
-                let typeExcercises;//propiedad de la lista de propiedades del object parts
+                let units;
+                let propiedadUnits;
+                let parts;
+                let recorrerParts;
+                let typeExcercises;
                 let x=0;
-                arrayCourses.map(coursIntro => {// por cada ids -> recorro intro
-                    units = progress[IdsUser][coursIntro].units;//llego al objeto unidades
-                    propiedadUnits = Object.keys(units);// propiedad de los unit / son tres partes
+                arrayOfIdUsers.map(coursIntro => {
+                    units = progress[IdsUser][coursIntro].units;
+                    propiedadUnits = Object.keys(units);
                     
-                    propiedadUnits.map(unit => {// recorro cada propiedada del  units
-                        parts = progress[IdsUser][coursIntro].units[unit].parts;//llego a parts// cursos especificos
-                        recorrerParts = Object.keys(parts);// lista propiedad de parts
+                    propiedadUnits.map(unit => {
+                        parts = progress[IdsUser][coursIntro].units[unit].parts;
+                        recorrerParts = Object.keys(parts);
                         
-                        recorrerParts.map(part => {//recorro cada propiedades de parts
-                            type = progress[IdsUser][coursIntro].units[unit].parts[part].type;//obtendo el tipo 
+                        recorrerParts.map(part => {
+                            type = progress[IdsUser][coursIntro].units[unit].parts[part].type;
                             completed = progress[IdsUser][coursIntro].units[unit].parts[part].completed;
                             if(type == 'quiz'){                               
                                 if(completed==1){
@@ -216,9 +208,8 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
                         });
                     });                   
                 
-                });
-                //console.log('Total de completado :'+x);               
-                return x; // total de examen completados 
+                });          
+                return x; 
             }
             const percentQuizes =_=> {
                 let percent = 0;
@@ -227,9 +218,7 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
                 }else{
                     percent = 0;
                 }
-                
-                //console.log('% examen completados :'+percent);
-                return percent; // % de ejercicios resueltos
+                 return percent; 
             }  
             const scoreSum =_=> {
                 let units;
@@ -238,17 +227,17 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
                 let recorrerParts;
                 let typeExcercises;
                 let sum=0;
-                arrayCourses.map(coursIntro => {// por cada ids -> recorro intro
-                    units = progress[IdsUser][coursIntro].units;//llego al objeto unidades
-                    propiedadUnits = Object.keys(units);// propiedad de los unit / son tres partes
+                arrayOfIdUsers.map(coursIntro => {
+                    units = progress[IdsUser][coursIntro].units;
+                    propiedadUnits = Object.keys(units);
                     
-                    propiedadUnits.map(unit => {// recorro cada propiedada del  units
-                        parts = progress[IdsUser][coursIntro].units[unit].parts;//llego a parts// cursos especificos
-                        recorrerParts = Object.keys(parts);// lista propiedad de parts
+                    propiedadUnits.map(unit => {
+                        parts = progress[IdsUser][coursIntro].units[unit].parts;
+                        recorrerParts = Object.keys(parts);
                         
-                        recorrerParts.map(part => {//recorro cada propiedades de parts
-                            typeExcercises = progress[IdsUser][coursIntro].units[unit].parts[part].type;//obtendo el tipo 
-                            existScore=progress[IdsUser][coursIntro].units[unit].parts[part].score;// MEDICIONES
+                        recorrerParts.map(part => {
+                            typeExcercises = progress[IdsUser][coursIntro].units[unit].parts[part].type; 
+                            existScore=progress[IdsUser][coursIntro].units[unit].parts[part].score;
                             
                             if(typeExcercises == 'quiz' && existScore !=undefined){
                                      sumScore = progress[IdsUser][coursIntro].units[unit].parts[part].score;
@@ -274,16 +263,15 @@ window.computeUsersStats=(users,progress,courses) => {// creara lista usuarios
             return objectQuizz;
         }
         return  {stats:{
-                    name: name.toUpperCase(),
+                    name: user.name.toUpperCase(),
                     idUser: IdsUser,
-                    cohort: cohort,
+                    cohort: user.signupCohort,
                     percent: percentComplit(),
                     excercises:exercisesComplit(),
                     reads: readsComplit(),
                     quizzes: quizzesComplit(),
                 }};         
     });
-    console.log(usersWithStats);
     return  usersWithStats;
 };
 window.sortUsers=( users , orderBy, orderDirection ) => {// Ordenar la lista de usuario
@@ -352,13 +340,13 @@ window.filterUsers=(users, search)=>{
 window.processCohortData=options=>{
     courses='intro';
     let estudiantes = computeUsersStats(options.cohortData.users,options.cohortData.progress,courses);
-    //console.log(estudiantes);
     estudiantes = sortUsers(estudiantes,options.orderBy,options.orderDirection);
-    if(options.search != ''){
-        estudiantes = filterUsers(estudiantes,options.search);
-    }else{
-        estudiantes = sortUsers(estudiantes,options.orderBy,options.orderDirection);
-    }  
+        if(options.search != ''){
+            estudiantes = filterUsers(estudiantes,options.search);
+            }else{
+                estudiantes = sortUsers(estudiantes,options.orderBy,options.orderDirection);
+            }  
+    
     return estudiantes;    
 }
 

@@ -85,6 +85,7 @@ const data =_=> {// Funcion que inicializa las funciones asignando con los datos
                 //const a=computeUsersStats(computeUsersStats(options.cohortData.users,options.cohortData.progress,['intro']));
                 //console.log(computeUsersStats(jsonUsers,jsonProgress,'intro'));
                 let listUser = processCohortData(options);
+                //console.log(listUser);
             });
         });
     });
@@ -122,7 +123,7 @@ toCallStats = idCohort => {// Funcion que me permite listar con valores por defe
                 
 }
 /*Informacion por cada estudiante div information*/
-information = (idUser)=> {debugger// Funcion que muestra la informacion detallada por usuario  
+information = (idUser)=> {// Funcion que muestra la informacion detallada por usuario  
                     const listUser = processCohortData(options);  // llamo a mis datos
                     console.log(idUser);
                     const searchId=listUser.map(list=>{ // Busco al usuario con el id
