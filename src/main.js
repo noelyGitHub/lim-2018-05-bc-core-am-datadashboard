@@ -1,41 +1,48 @@
-let orderDirection=document.getElementById('orderDirection');
-let search_student=document.getElementById('search_student');
-let cohortSede=document.getElementById("cohortSede");
-let listStudent=document.getElementById("listUsersCohort");//div contenedor mayor
-let table=document.getElementById('out_list_student_item');
-let imgSearch=document.getElementById('imgSearch');
-let search=document.getElementById('search');
-let informationUser=document.getElementById('information');
-window.onload=function(){
-    orderDirection.addEventListener('change',() => {
-        listStudent.style.display = "block";
-        const orderBy = document.getElementById('orderBy');
-        search.style.display='none;'
-        orderDirection.style.color="green";
-        orderUsers(orderBy.value,orderDirection.value);
-    });
-    imgSearch.addEventListener('click',() =>{// muestro en div table search
-        table.style.display='none';
-        cohortSede.style.display = 'none';
-        listStudent.style.display = "block";
-        search_home_students(search_student.value);
-    });
-    document.getElementById('back-cohort').addEventListener('click',()=>{
-        cohortSede.style.display='block';
-        listStudent.style.display = "none";
-        table.style.display='none';
-    });
-    document.getElementById('back-list').addEventListener('click',()=>{
-        cohortSede.style.display='none';
-        listStudent.style.display = "block";
-        table.style.display='block';
-        search.style.display='block';
-        informationUser.style.display="none";
-    });
-}
 let url1='../data/cohorts.json';
 let url2='../data/cohorts/lim-2018-03-pre-core-pw/progress.json';
 let url3='../data/cohorts/lim-2018-03-pre-core-pw/users.json';
+
+let orderDirectionHTML=document.getElementById('orderDirection');
+let search_student=document.getElementById('search_student');
+let cohortSedeHTML=document.getElementById("cohortSede");
+let listStudentHTML=document.getElementById("listUsersCohort");//div contenedor mayor
+let imgSearchHTML=document.getElementById('imgSearch');
+let searchHTML=document.getElementById('search');
+let informationUserHTML=document.getElementById('information');
+
+window.onload=function(){
+    document.getElementById('wraperLogo').onclick=home;
+    orderDirectionHTML.addEventListener('change',() => {
+        cohortSedeHTML.style.display='none';
+        listStudentHTML.style.display = "block";
+        searchHTML.style.display='block;'
+        orderDirectionHTML.style.color="green";
+        informationUserHTML.style.display='none';
+        const orderBy = document.getElementById('orderBy');
+        orderUsers(orderBy.value,orderDirectionHTML.value);
+    });
+    imgSearchHTML.addEventListener('click',() =>{// muestro en div table search
+        
+        cohortSedeHTML.style.display = 'none';
+        listStudentHTML.style.display = "block";
+        informationUserHTML.style.display='none';        
+        search_home_students(search_student.value);
+    });
+    document.getElementById('back-cohort').addEventListener('click',()=>{
+        cohortSedeHTML.style.display='block';
+        listStudentHTML.style.display = "none";
+       
+        location.reload();
+    });
+    document.getElementById('back-list').addEventListener('click',()=>{
+        cohortSedeHTML.style.display='none';
+        listStudentHTML.style.display = "block";
+        
+        searchHTML.style.display='block';
+        informationUserHTML.style.display="none";
+    });
+   
+}
 const connectJson = (url,callback) => {
     let xmlhttp = new XMLHttpRequest(); 
     let dateJson;
@@ -84,30 +91,35 @@ const data =_=> {// Funcion que inicializa las funciones asignando con los datos
                 options.cohortData.progress=jsonProgress;
                 //const a=computeUsersStats(computeUsersStats(options.cohortData.users,options.cohortData.progress,['intro']));
                 //console.log(computeUsersStats(jsonUsers,jsonProgress,'intro'));
-                let listUser = processCohortData(options);
+                processCohortData(options);
                 //console.log(listUser);
             });
         });
     });
 }
+home =_=> {
+    cohortSedeHTML.style.display='block';
+    informationUserHTML.style.display='none';
+    listStudentHTML.style.display='none';
+    location.reload();//recarga la pagina
+}
 data();
 /*Tabla de informacion div out_list_student_item*/
 toCallStats = idCohort => {// Funcion que me permite listar con valores por defecto
                 let courses = 'intro';
-                document.getElementById("cohortSede").style.display = 'none';
-                document.getElementById("listUsersCohort").style.display = "block";
-                document.getElementById('title_list_student_item').style.display='none';
-                let tableList = document.getElementById('out_list_student_item');
+                cohortSedeHTML.style.display = 'none';
+                listStudentHTML.style.display = "block";
+                informationUserHTML.style.display='none';
                 let num = 0;
                 options.cohort=idCohort.id;
                 let listUser = processCohortData(options);
-                search.innerHTML="";
+                searchHTML.innerHTML="";
+                searchHTML.innerHTML += "<tr class='tableTitle'><td>Nro</td><td>Nombre</td><td>Promedio</td><td>Lectura</td><td>Ejercicios</td><td>Quizes</td><td>Total</td></tr>"
                 Object.keys(listUser).forEach(list=>{                    
                     let information=listUser[list];//
                     if(idCohort.id == listUser[list].stats.cohort){
                         num++;
-                        document.getElementById('title_list_student_item').style.display='block';
-                        search.innerHTML += "<tr id='" + listUser[list].stats.idUser +
+                        searchHTML.innerHTML += "<tr id='" + listUser[list].stats.idUser +
                         "' onclick='information(this)' data-name='"+listUser[list].stats.name+
                         "' data-course='"+courses+
                         "'><td>" + num +
@@ -125,7 +137,6 @@ toCallStats = idCohort => {// Funcion que me permite listar con valores por defe
 /*Informacion por cada estudiante div information*/
 information = (idUser)=> {// Funcion que muestra la informacion detallada por usuario  
                     const listUser = processCohortData(options);  // llamo a mis datos
-                    console.log(idUser);
                     const searchId=listUser.map(list=>{ // Busco al usuario con el id
                         if(idUser.id == list.stats.idUser){
                             return list;// retorna array con un solo objeto valido
@@ -133,11 +144,9 @@ information = (idUser)=> {// Funcion que muestra la informacion detallada por us
                     });//[undefined,{},undefined]
                     const filterObjectValidate=searchId.filter(x=>{if(x!=undefined){return x;}});// filtro las posiciones undefined
                     filterObjectValidate.forEach(list=>{// recorro solo por unica vez :( por que ya esta filtrado 
-                            document.getElementById("listUsersCohort").style.display = "none";
-                            var html_informacion = '<div class = "box-information">';
+                          var html_informacion = '<div class = "box-information">';
                                     html_informacion+= '<div class="wrap-box-information">';
-                                    html_informacion+= '<h4 class="info-individual"><span class="icon-left-open" id="back-list"></span>Informacion Detallada</h4>'
-                                        html_informacion+= '<p class="name-information"><span >'+list.stats.name+'</span></p>';// data ser atributo del elemento que evio la informacion
+                                     html_informacion+= '<p class="name-information"><span >'+list.stats.name+'</span></p>';// data ser atributo del elemento que evio la informacion
                                         html_informacion+= '<select class="select-course"><option>'+idUser.dataset.course+'</option></select>'
                                         html_informacion+= '<div class=info-resumen>'
                                             html_informacion+= '<p><span>Porcentaje:</span>'+list.stats.percent+' %</p>'
@@ -174,24 +183,27 @@ information = (idUser)=> {// Funcion que muestra la informacion detallada por us
                                         html_informacion+='</div>';
                                     html_informacion+='</div>';
                                 html_informacion+='</div>';
-                            document.getElementById('out_list_student_item').style.display='none';
-                            document.getElementById('information').innerHTML=html_informacion;
+                                /*interfaz HTML */
+                                cohortSedeHTML.style.display='none';
+                                informationUserHTML.style.display='block';
+                                listStudentHTML.style.display='none';
+                                document.getElementById('informationDetallada').innerHTML=html_informacion;
                         });    
 }
 /*Ordenar estudiante div out_list_student_item*/
 orderUsers = (orderBy, orderDirection)=>{// Funcion que muestra la lista ordenada
-        let tableList =document.getElementById('search');
         let courses = 'intro';
         let num = 0;
         options.orderBy = orderBy;
         options.orderDirection = orderDirection;
         let order = processCohortData(options);
         const orderListaDeCohort = options.cohort;
-        tableList.innerHTML = "";
+        searchHTML.innerHTML = "";
+        searchHTML.innerHTML += "<tr class='tableTitle'><td>Nro</td><td>Nombre</td><td>Promedio</td><td>Lectura</td><td>Ejercicios</td><td>Quizes</td><td>Total</td></tr>"
         order.forEach(date => {//forEach recorre el array original y no crea otro como el bendito map
             if(orderListaDeCohort == date.stats.cohort){
                 num++;                    
-                tableList.innerHTML += "<tr id='" + date.stats.idUser +
+                searchHTML.innerHTML += "<tr id='" + date.stats.idUser +
                     "' onclick='information(this)' data-name='"+date.stats.name+
                         "' data-course='"+courses+
                         "'><td>" + num +
@@ -208,16 +220,16 @@ orderUsers = (orderBy, orderDirection)=>{// Funcion que muestra la lista ordenad
 /*BUscar estudiante div search*/
 search_home_students =(string)=> {// La funcion busca la informacion por nombre
                 let num = 0; 
-                let search = document.getElementById('search');
                 let courses = 'intro';
                 options.search=string;
                 let listUser = processCohortData(options);
-                search.innerHTML = "";
+                searchHTML.innerHTML = "";
                 let stats = Object.keys(listUser);
+                searchHTML.innerHTML += "<tr class='tableTitle'><td>Nro</td><td>Nombre</td><td>Promedio</td><td>Lectura</td><td>Ejercicios</td><td>Quizes</td><td>Total</td></tr>";
                 for(var list in listUser){
                         num++;
                         document.getElementById('title_list_student_item').style.display='block';
-                        search.innerHTML += "<tr id='" + listUser[list].stats.idUser +
+                        searchHTML.innerHTML += "<tr id='" + listUser[list].stats.idUser +
                         "' onclick='information(this)' data-name='"+listUser[list].stats.name+
                         "' data-course='"+courses+
                         "'><td>" + num +

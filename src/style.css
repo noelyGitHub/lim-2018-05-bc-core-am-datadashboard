@@ -65,7 +65,7 @@ label {
 }
 
 #cohortOne{
-    line-height: 50px;
+    line-height: 60px;
     height: 650px;
     overflow: auto;
 }
@@ -114,9 +114,8 @@ display: block;
     transition: all 0.25s;
 }
 
-.menuList span:checked ~ .menu ul li ul {
-    visibility: visible;
-    display: block;
+.menuList span:checked ~ .menu {
+     transform: translate(100%);
     transition: all 0.25s;
 }
 #listUsersCohort table tr:hover{
@@ -151,6 +150,7 @@ display: block;
     max-width: 40%;
     max-height: 90%;
     text-align: center;
+    cursor: pointer;
 }
 
 .wraperLogo img {
@@ -304,6 +304,9 @@ section {
     display: none;
 }
 /*................................................formulario*/
+#information{
+    display: none;
+}
 .wrap-box-information{
     width: 100%;
     pad: .8em .8em;
