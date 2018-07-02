@@ -13,64 +13,46 @@
        <div class="navMenu">
           <input type="checkbox" id="menu-bar"/>
           <label class="icon-menu" for="menu-bar"></label>
-          <nav class="menu" id="menuCohort">
-            <div id="cohortOne">
-              </div>
-          </nav>
+          <nav class="menu" id="menuCohort"></nav>
         </div>
         <div class="wraperLogo" id="wraperLogo">
         <img src="../img/Laboratoria_CMYK_logo-11.png" id="logo"/>
         </div>
         <div class="search-header-main">
           <span class="content-search">
-            <input type="text" id="search_student" placeholder="BUSCAR AQUÍ " />
-              <img src="../img/searchicon.png" id="imgSearch"/>
+              <input type="text" id="search_student" placeholder="BUSCAR AQUÍ " />
+              <img src="../img/searchicon.png" id="imgSearch"  />
           </span>
         </div>
         <div class="user-profile">
-          <img src="../img/default_user.png" alt="mio">
+          <img src="../img/default_user.png" alt="mio" class="provando">
         </div>
       </header>
       <section>
-        <div class="wrapper" id="cohortSede">
-          <div class="headquarters" id="lim" onclick="loadCohortSede(this.id)">
-              <img src="../img/Lima.jpg" class="imagehover"/>
-              <div class="middle">
-                  <div class="text">SEDE - LIMA</div>
+        <div id="contenedor">
+            <div class="wrapper" id="cohortSede">
+              <div class="headquarters" id="lim" onclick="loadCohortSede(this.id)">
+                <p>SEDE - LIMA</p>
               </div>
-          </div>
-          <div class="headquarters" id="scl" onclick="loadCohortSede(this.id)">
-              <img src="../img/santiago-de-chile_19305-7.jpg" class="imagehover"/>
-              <div class="middle">
-                  <div class="text">SEDE - CHILE</div>
+              <div class="headquarters" id="scl" onclick="loadCohortSede(this.id)">
+                <p>SEDE - CHILE</p>
               </div>
-          </div>
-          <div class="headquarters" id="cdmx" onclick="loadCohortSede(this.id)">
-              <img src="../img/CiudadMexico.jpg" class="imagehover"/>
-              <div class="middle">
-              <div class="text">SEDE - MEXICO</div>
+              <div class="headquarters" id="cdmx" onclick="loadCohortSede(this.id)">
+                <p>SEDE - MEXICO</p>
               </div>
-          </div>
-          <div class="headquarters" id="aqp" onclick="loadCohortSede(this.id)">
-              <img src="../img/Lima2.jpg" class="imagehover"/>
-              <div class="middle">
-                  <div class="text">SEDE - AREQUIPA</div>
-              </div>
-          </div>          
-          <div class="headquarters" id="test" onclick="loadCohortSede(this.id)">
-              <img src="../img/map-LaboratoriaSede.png" class="imagehover"/>
-              <div class="middle">
-                  <div class="text">SEDE - LABORATORIA</div>
-              </div>
-          </div>      
-          
-          <div class="headquarters" id="gdl" onclick="loadCohortSede(this.id)">
-              <img src="../img/guadalajara.jpg" class="imagehover"/>
-              <div class="middle">
-                  <div class="text">SEDE - GUADALAJARA</div>
-              </div>
-          </div>        
+              <div class="headquarters" id="aqp" onclick="loadCohortSede(this.id)">
+                <p>SEDE - AREQUIPA</p>
+              </div>          
+              <div class="headquarters" id="test" onclick="loadCohortSede(this.id)">
+                <p>SEDE - LABORATORIA</p>
+              </div>      
+              
+              <div class="headquarters" id="gdl" onclick="loadCohortSede(this.id)">
+                <p>SEDE - GUADALAJARA</p>
+              </div>        
+            </div>
         </div>
+        
         <div class="wrapper" id="listUsersCohort">
             <h4><span class="icon-left-open" id="back-cohort"></span>Completitud General</h4>
             <div id="manejoList">

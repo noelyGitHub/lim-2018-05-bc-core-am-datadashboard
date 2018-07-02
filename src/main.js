@@ -36,8 +36,7 @@ window.onload=function(){
     });
     document.getElementById('back-list').addEventListener('click',()=>{
         cohortSedeHTML.style.display='none';
-        listStudentHTML.style.display = "block";
-        
+        listStudentHTML.style.display = "block";        
         searchHTML.style.display='block';
         informationUserHTML.style.display="none";
     });
@@ -268,24 +267,4 @@ loadCohortSede = ids =>{// Selecciona lista de cohort
     
 }
 
-
-/* filterCohortSede =(ids) => {
-    connectJson(url1,(error,json) => {
-        let sede;
-        let arraySede=[];
-        id="lim";
-        sede=json.filter(function(el) {
-            const sedeJson=el.id;
-            arraySede.push(sedeJson);
-            const c=arraySede;
-            return sedeJson.toLowerCase().indexOf(id.toLocaleLowerCase())>-1;
-        });
-        console.log(sede);
-        for (var q in sede) {
-            let divList = document.getElementById('cohortOne');
-            divList.innerHTML +="<ul><li class='menuList'><span>" + sede[q].id + "</span><ul><li id='" + sede[q].id + "' onclick='toCallStats(this)'>ESTUDIANTES</li></ul></li></ul>";
-            console.log(sede[q].id);
-        }
-    })
-} */
 
