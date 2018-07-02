@@ -3,7 +3,19 @@
     font-family: segoe UI;
     box-sizing: border-box;
 }
-/* Estilos del header */
+ /*---------Estilos Scrollbar --------*/
+::-webkit-scrollbar {
+    width:10px;
+    height:0px;
+}
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px gray;
+}
+::-webkit-scrollbar-thumb {
+    background: #8a8e93; 
+} 
+ 
+/* Estilos header */
 header{
     background: #333;
     height: 70px;
@@ -11,6 +23,7 @@ header{
     width: 100%;
     text-align: center;
     box-shadow: 0px 2px 10px 0px #c5c5c5;
+    position:fixed; 
 }
 
 header div {
@@ -37,66 +50,130 @@ label {
     color: white;
     max-height:100%;
 }
-
+/*........................................menu*/
 .menu {
+    width: 370px;
     list-style: none;
-    position: absolute;
-    transform: translate(-100%);
+    transform: translate(0%);
     transition: all 0.8s;
-    box-shadow: 1px 1px 11px 0px #c5c5c5;
+    /*box-shadow: 1px 1px 11px 0px #c5c5c5;*/
 }
 
-.menu ul {
-    background: #333;
+.menu ul{
     margin: 0;
-    padding: 0;
-    border-bottom: 1px solid #3d39397d;
+    padding: 0px;
+}
+
+#cohortOne{
+    line-height: 60px;
+    height: 650px;
+    overflow: auto;
+}
+.menuList{
+    background: #333;
     color: #fff;
     cursor: pointer;
     text-transform: uppercase;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 100;
+    border-bottom: .4px solid #4a4646;
 }
 
-.menu ul a{
-    text-decoration: none;
-    display: block;
-    padding: 20px;
-    color: white;
+.menuList span{
+width: 100%;
+padding: 0em .5em 0em 1em;
+display: block;
 }
 
-.menu ul:hover {
-     border-left:8px solid #ffed00;
+.menu ul li ul{
+    background: rgb(224, 178, 178);
+    width: 100%;
+    transition: all 0.25s;
+}
+
+.menu ul li ul li{
+    list-style: none;
+    text-align: center;
+    padding: 0px !important;
+}
+
+.menuList span:hover {
+    border-left:8px solid #ffed00;
     transition: border 0.2s;
 }
 
-#menu-bar:checked ~ .menu {
-    transform: translate(0%);
-    transition: all 0.8s;
+.menu ul li ul li:hover {
+    background: #c5c5c5;
+    border-left:none;
 }
 
+#menu-bar:checked ~ .menu {
+    width: 370px;
+    transform: translate(-100%);
+    transition: all 0.25s;
+}
+
+.menuList span:checked ~ .menu {
+     transform: translate(100%);
+    transition: all 0.25s;
+}
+#listUsersCohort table tr:hover{
+    background: #c5c5c5;
+}
+#listUsersCohort table tr td{
+    padding: .3em .0em;
+    border: none;
+    border-bottom: dotted .5px #777;
+    cursor: pointer;
+}
+#listUsersCohort table tr .name-table{
+   /* text-transform: lowercase;*/
+    text-align: left;
+    margin-left: 10px;
+}
+#listUsersCohort table tr .import{
+    font-weight: 10; 
+
+}
+.tableTitle td{
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    background: #ffed00;
+}
+
+
+/*....................................otro*/
 .wraperLogo {
     margin:7px 30px;
     max-width: 40%;
     max-height: 90%;
     text-align: center;
+    cursor: pointer;
 }
+
 .wraperLogo img {
     width: 60px;
     height: 55px;
 }
 
 .search-header-main{
-    width: 50%;
+    width:50%;
     max-height: 100%;
     margin-left: 10%;
-   }
+}
+
 .search-header-main .content-search{
     border-radius: 8px;
     background: white;
 }
+
 .content-search{ 
     display: inline-flex;
     width: 80%;
 }
+
 .content-search input{
     width: 100%;
     background: white;
@@ -108,6 +185,7 @@ label {
     font-size: 14px;
     border-radius: .4em;
 }
+
 .content-search img{
     height: 40px;
     color: #777;
@@ -115,9 +193,11 @@ label {
     cursor: pointer;
     border-radius: .4em;
 }
+
 .user-profile{
     float: right;
-    margin-right: 7%;
+    margin-right: 4%;
+    height: inherit;
 }
 .user-profile img{
     width: 50px;
@@ -125,10 +205,15 @@ label {
     margin: 18% 0%;
     cursor: pointer;
 }
+section {
+  
+   background-repeat: no-repeat;
+   background-position: center;
+   width: 100%;
+}
+
 .wrapper {
-    background-image:url(../img/map-LaboratoriaSede.png);
-    background-repeat: no-repeat;
-    background-position: center;
+    padding-top: 70px;
     text-align: center;
     height: 80%;
     width:60%;
@@ -136,79 +221,225 @@ label {
 }
 
 .headquarters {
+    width: 300px;
     display:inline-block;
-    padding: 20px;
+    padding: 5em 4em;
     margin: 20px;
-    background: rgba(3,3,3,0.2);
+    background: rgba(0,0,0,0.1);
     border-radius: 10px;
     cursor: pointer;
+    font-weight: 500;
 }
+
 .headquarters:hover{
-    background: rgba(173, 173, 133, 0);
-    box-shadow: 2px 1px 10px 0px rgb(3, 3, 3,.2);
-    -webkit-transition: all .8s ease-in-out;
-    -o-transition: all .8s ease-in-out;
-    transition: all .8s ease-in-out;
-    
+    color: #fff;
+    background: rgba(255, 0, 158, 1);
+    box-shadow: 2px 1px 10px 0px rgb(3, 3, 3,0.2);
+    -webkit-transition: all .50s ease-in-out;
+    -o-transition: all .50s ease-in-out;
+    transition: all .50s ease-in-out;
 }
-#headquarters:checked ~ .menu {
+
+#cohortOne:checked ~ .menu {
     transform: translate(0%);
     transition: all 0.8s;
 }
+.icon-left-open{
+   
+    color: #ffed00;
+    padding: .5em .5em;
+}
+.icon-left-open:hover {
+    border-radius: 100%;
+    background: #777;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: all .50s ease-in-out;
+}
+/*................Menu cohort..............*/
 #listUsersCohort{
     display: none;
-}
-#listUsersCohort{
     box-shadow: #333;
 }
-#listUsersCohort h4{
-    background:#ffed00;
-    color: #fff;
-    margin: 0em 0em 0.5em;
+
+#listUsersCohort h4, .info-individual{
+    color: #333;
     padding: 1em 0em;
     font-size: 1.5em;
+    text-align: left;
+    
+}
+#listUsersCohort div, .name-information{
+    padding: .8em .8em .8em .8em;
+    text-align: left;
+    box-shadow: rgb(197, 197, 197) 0px -1px 0px 0px;
+}
+#listUsersCohort div select{
+    border-radius: .4em;
+    margin-left: 10px;
+    padding: .5em 1em;
     text-align: center;
-    box-shadow: rgb(197, 197, 197) 0px 3px 6px 0px;
-    border-bottom: 0.5px solid rgb(197, 197, 197);
+    outline: #ffed00;
+    border: .5px solid #ffed00;
 }
-#listUsersCohort ul{
-    cursor: pointer;
-    border-bottom: 1px solid#777;
-    text-align: left !important;
-    text-transform: uppercase;
-    line-height: 30px;
-}
-#listUsersCohort ul:hover{
-    background: #c5c5c5; 
+#listUsersCohort table{
+    width: 100%;
+    border: none;
+    font-weight: 100;
+    border-left: dotted 1px #777;
+    border-right: dotted 1px #777;
 }
 
+#listUsersCohort li{
+    cursor: pointer;
+}
+
+#listUsersCohort table tr .name-table{
+   /* text-transform: lowercase;*/
+    text-align: left;
+    margin-left: 10px;
+}
+#listUsersCohort table tr .import{
+    font-weight: 10; 
+}
+.tableTitle td{
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    background: #ffed00;
+}
+#title_list_student_item{
+    display: none;
+}
+/*................................................formulario*/
+#information{
+    display: none;
+}
+.wrap-box-information{
+    width: 100%;
+    pad: .8em .8em;
+    border: #333;
+}
+.wrap-box-information .name-information{
+    width: 100%; 
+    text-align: right;
+    font-size: 16px; 
+}
+.select-course{
+    border-radius: .4em;
+    margin-left: 10px;
+    padding: .5em 2.4em;
+    float: left;
+    outline: #ffed00;
+    border: .5px solid #ffed00;
+}
+.wrap-box-information .info-resumen{
+    padding: .5em;
+    line-height: 2;
+    text-align: center;
+    font-weight: 100;
+    margin-left: 65%;
+    font-weight: bold;
+}
+.wrap-box-information .info-resumen p{
+    margin: 0px 10px 0px 0px;
+    float: left;
+}
+.wrap-box-information .info-resumen p span{
+    padding: 0em .5em;
+}
+.wrap-box-information .information-courses{
+    width: 30%;
+    box-shadow: 0px -1px 5px 0px #9E9E9E;
+    float: left;
+    margin: 1em 10px
+}
+.wrap-box-information .information-courses h3{
+    width: 100%;
+    padding: .5em .5em;
+    margin-bottom: 10px;
+    background: #FFEB3B;
+
+}
+.wrap-box-information .information-courses table{
+    padding: .8em .8em;
+    width: 100%;
+    border: none;
+    font-weight: 100;
+}
+.wrap-box-information .information-courses table tr td{
+    padding: .3em .0em;
+    border: none;
+    border-bottom: dotted .5px #777;
+    cursor: pointer;
+}
+.title-fila{
+    font-weight: 10;
+}
 @media screen and (max-width:800px){
     .wrapper {
        width:80%;
-    }
-    
+    }    
     .headquarters {
         width: 100%;
+        margin: 0px;
+        margin-top: 20px;
     }
     
     label {
         width: 50px;
     }
+
     .search-header-main{
-        width: 70%;
+        width: 60%;
         max-height: 100%;
         margin-left: 0%;
-       }
+    }
+
     .user-profile{
         display: none;
     }
-}
-@media screen and (max-width:550px){
-    .search-header-main{
-        margin-left: 10%;
-       }
-    .wraperLogo {
-        display: none;
+    .wrap-box-information .information-courses{
+        width: 100%;
+        float: right;
     }
+}
+
+@media screen and (max-width:550px){
+    .wrapper {
+        width:90%;
+     } 
+    .navMenu{
+        width: 12%;
+    }
+    
+    .search-header-main{
+        width: 54%;
+    }
+    
+    .wraperLogo {
+        margin:5px;
+        max-width: 40%;
+        max-height: 90%;
+        text-align: center;
+    }
+    
+    .content-search{ 
+        width: 90%;
+    }
+    #listUsersCohort table tr td{
+        font-size: 12px;
+    }
+    #listUsersCohort table{
+       font-weight: 200px; 
+    }
+    .wrap-box-information .info-resumen {
+       text-align: center;
+       margin-left: 45%;
+    }
+    
+}
+#contenedor{
+    width: 100%;
 }
 
