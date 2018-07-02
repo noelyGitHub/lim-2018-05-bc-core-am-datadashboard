@@ -23,7 +23,7 @@ header{
     width: 100%;
     text-align: center;
     box-shadow: 0px 2px 10px 0px #c5c5c5;
-    position:fixed; 
+    position:fixed;
 }
 
 header div {
@@ -156,6 +156,7 @@ display: block;
 .wraperLogo img {
     width: 60px;
     height: 55px;
+    cursor: pointer;
 }
 
 .search-header-main{
@@ -205,6 +206,7 @@ display: block;
     margin: 18% 0%;
     cursor: pointer;
 }
+
 section {
   /*background-image:url(../img/map-LaboratoriaSede.png);*/
    background-repeat: no-repeat;
@@ -214,26 +216,72 @@ section {
 .wrapper {
     padding-top: 70px;
     text-align: center;
-    height: 80%;
+    height: 60%;
     width:60%;
     margin: auto;
+    padding-top: 80px;
 }
 
 .headquarters {
-    display:inline-block;
+    width: 45%;
+    display:inline-flex;
+    position: relative;
+    cursor: pointer;
+   /* 
     padding: 4em 4em;
-    margin: 20px;
-    background: #ededed;
+    margin: 10px;
+    background: #FAEC00;
     border-radius: 10px;
     cursor: pointer;
+    text-align: center;
+    position:relative;*/
+}
+.headquarters img {
+    height: 300px;
+    margin: auto;
+
+}
+.imagehover {
+  display: block;
+  width: 100%;
 }
 
-.headquarters:hover{
+.middle {
+   position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color:rgb(255,206,0);
+}
+
+/*.headquarters:hover{
     background: rgba(173, 173, 133, 0);
     box-shadow: 2px 1px 10px 0px rgb(3, 3, 3,0.2);
     -webkit-transition: all .8s ease-in-out;
     -o-transition: all .8s ease-in-out;
     transition: all .8s ease-in-out;
+}*/
+
+
+.headquarters:hover .middle {
+    opacity: 0.9;
+}
+
+.text {
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
 }
 
 #cohortOne:checked ~ .menu {
@@ -391,6 +439,10 @@ section {
     .wrap-box-information .information-courses{
         width: 100%;
         float: right;
+    }
+
+    .headquarters img {
+        height: 350px;
     }
 }
 

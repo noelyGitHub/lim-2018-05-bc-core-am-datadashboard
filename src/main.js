@@ -27,12 +27,17 @@ window.onload=function(){
         listStudent.style.display = "none";
         table.style.display='none';
     });
-    document.getElementById('back-list').addEventListener('click',()=>{
+    /* document.getElementById('back-list').addEventListener('click',()=>{
         cohortSede.style.display='none';
         listStudent.style.display = "block";
         table.style.display='block';
         search.style.display='block';
         informationUser.style.display="none";
+    }); */
+    document.getElementById('logo').addEventListener('click',()=>{
+        cohortSede.style.display='block';
+        listUsersCohort.style.display = "none";
+        table.style.display='none';
     });
 }
 let url1='../data/cohorts.json';
@@ -140,43 +145,43 @@ information = (idUser)=> {// Funcion que muestra la informacion detallada por us
                         var html_informacion = '<div class = "box-information">';
                                 html_informacion+= '<div class="wrap-box-information">';
                                 html_informacion+= '<h4 class="info-individual">Informacion Detallada</h4>'
-                                    html_informacion+= '<p class="name-information"><span >'+listUser[list].name.toUpperCase()+'</span></p>';
-                                    html_informacion+= '<select class="select-course"><option>'+courses+'</option></select>'
+                                    html_informacion+= '<p class="name-information"><span >'+idUser.dataset.name+'</span></p>';
+                                    html_informacion+= '<select class="select-course"><option>'+idUser.dataset.course+'</option></select>'
                                     html_informacion+= '<div class=info-resumen>'
-                                        html_informacion+= '<p><span">Porcentaje: </span>'+listUser[list].percent+'</p>'
-                                        html_informacion+= '<p><span">Puntaje: </span>'+listUser[list].quizzes.scoreSum+'</p>'
+                                        html_informacion+= '<p><span">Porcentaje: </span>'+idUser.dataset.percent+'</p>'
+                                        html_informacion+= '<p><span">Puntaje: </span>'+idUser.dataset.scoreSum+'</p>'
                                     html_informacion+='</div>'
                                     html_informacion+='<div class="information-courses">';
                                         html_informacion+='<h3>Ejercicios</h3>'
                                         html_informacion+='<table>'
                                             html_informacion+='<tr class="title-fila"><td>Item</td><td>Valor</td></tr>'
-                                            html_informacion+='<tr><td>Total de Ejercicios</td><td>'+listUser[list].excercises.total+'</td></tr>'
-                                            html_informacion+= '<tr><td>Ejercicios Completados</td><td>'+listUser[list].excercises.completed+'</td></tr>'
-                                            html_informacion+= '<tr><td>Avance</td><td>'+listUser[list].excercises.percent+ " %" + '</td></tr>'
-                                        html_informacion+='</table>'
+                                            html_informacion+='<tr><td>Total de Ejercicios</td><td>'+idUser.dataset.extotal+'</td></tr>'
+                                            html_informacion+= '<tr><td>Ejercicios Completados</td><td>'+idUser.dataset.excompleted+'</td></tr>'
+                                            html_informacion+= '<tr><td>Avance</td><td>'+idUser.dataset.expercent+ " %" + '</td></tr>'
+                                            html_informacion+='</table>'
+                                            html_informacion+='</div>';
+                                            html_informacion+='<div class="information-courses">';
+                                                html_informacion+= '<h3>Lecturas</h3>'
+                                                html_informacion+= '<table>'
+                                                    html_informacion+= '<tr class="title-fila"><td>Item</td><td>Valor</td></tr>'
+                                                    html_informacion+= '<tr><td>Numero de lecturas</td><td>'+idUser.dataset.readTotal;+'</td></tr>'
+                                                    html_informacion+= '<tr><td>Ejercicios Completados</td><td>'+idUser.dataset.readCompleted+'</td></tr>'
+                                                    html_informacion+= '<tr><td>Avance</td><td>'+idUser.dataset.readPercent+'% </td></tr>'
+                                                html_informacion+= '</table>'
+                                            html_informacion+='</div>';
+                                            html_informacion+='<div class="information-courses">';
+                                                html_informacion+= '<h3>Examen</h3>'
+                                                html_informacion+= '<table>'
+                                                    html_informacion+= '<tr class="title-fila"><td>Item</td><td>Valor</td></tr>'
+                                                    html_informacion+= '<tr><td>Numero de examenes</td><td>'+idUser.dataset.quizTotal;+'</td></tr>'
+                                                    html_informacion+= '<tr><td>Examenes Completados</td><td>'+idUser.dataset.quizCompleted+'</td></tr>'
+                                                    html_informacion+= '<tr><td>Puntaje</td><td>'+idUser.dataset.quizScoreSum+'</td></tr>'
+                                                    html_informacion+= '<tr><td>Promedio</td><td>'+idUser.dataset.quizScoreAvg+'</td></tr>'
+                                                    html_informacion+= '<tr><td>Avance</td><td>'+idUser.dataset.quizPercent+' %</td></tr>'
+                                                html_informacion+= '</table>'
+                                            html_informacion+='</div>';
+                                        html_informacion+='</div>';
                                     html_informacion+='</div>';
-                                    html_informacion+='<div class="information-courses">';
-                                        html_informacion+= '<h3>Lecturas</h3>'
-                                        html_informacion+= '<table>'
-                                            html_informacion+= '<tr class="title-fila"><td>Item</td><td>Valor</td></tr>'
-                                            html_informacion+= '<tr><td>Numero de lecturas</td><td>'+listUser[list].reads.total;+'</td></tr>'
-                                            html_informacion+= '<tr><td>Ejercicios Completados</td><td>'+listUser[list].reads.completed+'</td></tr>'
-                                            html_informacion+= '<tr><td>Avance</td><td>'+listUser[list].reads.percent+  " %" + '</td></tr>'
-                                        html_informacion+= '</table>'
-                                    html_informacion+='</div>';
-                                    html_informacion+='<div class="information-courses">';
-                                        html_informacion+= '<h3>Examen</h3>'
-                                        html_informacion+= '<table>'
-                                            html_informacion+= '<tr class="title-fila"><td>Item</td><td>Valor</td></tr>'
-                                            html_informacion+= '<tr><td>Numero de examenes</td><td>'+listUser[list].quizzes.total;+'</td></tr>'
-                                            html_informacion+= '<tr><td>Examenes Completados</td><td>'+listUser[list].quizzes.completed+'</td></tr>'
-                                            html_informacion+= '<tr><td>Puntaje</td><td>'+listUser[list].quizzes.scoreSum+'</td></tr>'
-                                            html_informacion+= '<tr><td>Promedio</td><td>'+listUser[list].quizzes.scoreAvg+'</td></tr>'
-                                            html_informacion+= '<tr><td>Avance</td><td>'+listUser[list].quizzes.percent+  " %" + '</td></tr>'
-                                        html_informacion+= '</table>'
-                                    html_informacion+='</div>';
-                                html_informacion+='</div>';
-                            html_informacion+='</div>';
                         document.getElementById('out_list_student_item').style.display='none';
                         document.getElementById('information').innerHTML=html_informacion;
 }
@@ -198,7 +203,7 @@ orderUsers = (orderBy, orderDirection)=>{// Funcion que muestra la lista ordenad
                         "' data-course='"+courses+
                         "' data-percent='"+date.percent+
                         "' data-ex-total='"+date.excercises.total+
-                        "' data-ex-completed='"+date.excercises.completed+
+                        "' data-ex-completed='"+date.excercises.completed+  
                         "' data-ex-percent='"+date.excercises.percent+
                         "' data-read-total='"+date.reads.total+
                         "' data-read-completed='"+date.reads.completed+
@@ -299,7 +304,7 @@ loadCohortSede = ids =>{// Selecciona lista de cohort
     
 }
 
-filterCohortSede =(ids) => {
+/* filterCohortSede =(ids) => {
     connectJson(url1,(error,json) => {
         let sede;
         let arraySede=[];
@@ -317,19 +322,5 @@ filterCohortSede =(ids) => {
             console.log(sede[q].id);
         }
     })
-}
+} */
 
-/*BUscar estudiante */
-search_home_students =_=> {// ELIMINAR TODOS LOS ELEMENTOS DEL SECTION PARA MOSTRAR LA IMAGEN
-connectJson(url3,(error , json) => {
-   let user=document.getElementById('search_student');
-   let listUser=document.getElementById('out_list_student_item');
-   for(var i in json){
-        if(json[i].name === user.value){
-            cohortSede.style.display='none';
-            listUser.innerHTML+="<tr id="+json[i].id+"><td>"+json[i].name+"</td><td>"+json[i].role+"</td><td>"+json[i].signupCohort+"</td></tr>"
-        console.log(json[i].name);
-        }
-   }
-});
-}

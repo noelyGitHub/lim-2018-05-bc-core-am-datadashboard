@@ -6,7 +6,9 @@
 <font id="fontello" horiz-adv-x="1000" >
 <font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
 <missing-glyph horiz-adv-x="1000" />
-<glyph glyph-name="menu" unicode="&#xe800;" d="M834 90q42 0 73-30t31-75q0-42-30-73t-74-31l-730 0q-44 0-74 31t-30 73q0 44 31 75t73 30l730 0z m0 364q44 0 74-31t30-73-30-73-74-30l-730 0q-44 0-74 30t-30 73 30 73 74 31l730 0z m0 365q44 0 74-31t30-73q0-43-31-74t-73-31l-730 0q-43 0-73 31t-31 74q0 43 30 73t74 31l730 0z" horiz-adv-x="938" />
+<glyph glyph-name="left-open" unicode="&#xe800;" d="M654 682l-297-296 297-297q10-10 10-25t-10-25l-93-93q-11-10-25-10t-25 10l-414 415q-11 10-11 25t11 25l414 414q10 11 25 11t25-11l93-93q10-10 10-25t-10-25z" horiz-adv-x="714.3" />
+
+<glyph glyph-name="menu" unicode="&#xf0c9;" d="M857 100v-71q0-15-10-25t-26-11h-785q-15 0-25 11t-11 25v71q0 15 11 25t25 11h785q15 0 26-11t10-25z m0 286v-72q0-14-10-25t-26-10h-785q-15 0-25 10t-11 25v72q0 14 11 25t25 10h785q15 0 26-10t10-25z m0 285v-71q0-14-10-25t-26-11h-785q-15 0-25 11t-11 25v71q0 15 11 26t25 10h785q15 0 26-10t10-26z" horiz-adv-x="857.1" />
 </font>
 </defs>
 </svg>
