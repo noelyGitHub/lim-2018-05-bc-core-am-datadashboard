@@ -53,6 +53,7 @@ label {
     border-bottom: 1px solid #3d39397d;
     color: #fff;
     cursor: pointer;
+    text-transform: uppercase;
 }
 
 .menu ul a{
@@ -63,7 +64,7 @@ label {
 }
 
 .menu ul:hover {
-     border-left:8px solid #ffc107;
+     border-left:8px solid #ffed00;
     transition: border 0.2s;
 }
 
@@ -150,9 +151,35 @@ label {
     transition: all .8s ease-in-out;
     
 }
-#cohortOne:checked ~ .menu {
+#headquarters:checked ~ .menu {
     transform: translate(0%);
     transition: all 0.8s;
+}
+#listUsersCohort{
+    display: none;
+}
+#listUsersCohort{
+    box-shadow: #333;
+}
+#listUsersCohort h4{
+    background:#ffed00;
+    color: #fff;
+    margin: 0em 0em 0.5em;
+    padding: 1em 0em;
+    font-size: 1.5em;
+    text-align: center;
+    box-shadow: rgb(197, 197, 197) 0px 3px 6px 0px;
+    border-bottom: 0.5px solid rgb(197, 197, 197);
+}
+#listUsersCohort ul{
+    cursor: pointer;
+    border-bottom: 1px solid#777;
+    text-align: left !important;
+    text-transform: uppercase;
+    line-height: 30px;
+}
+#listUsersCohort ul:hover{
+    background: #c5c5c5; 
 }
 
 @media screen and (max-width:800px){
@@ -172,6 +199,9 @@ label {
         max-height: 100%;
         margin-left: 0%;
        }
+    .user-profile{
+        display: none;
+    }
 }
 @media screen and (max-width:550px){
     .search-header-main{

@@ -1,5 +1,5 @@
     let url1='../data/cohorts.json';
-    let url2='..data/cohorts/lim-2018-03-pre-core-pw/progress.json';
+    let url2='../data/cohorts/lim-2018-03-pre-core-pw/progress.json';
     let url3='../data/cohorts/lim-2018-03-pre-core-pw/users.json';
 
 const connectJson=(url,callback)=>{
@@ -36,7 +36,7 @@ let cohorts=_=>{
 }
 cohorts();
 //...................................................obtener users 
-let users =_=> {
+let users=_=>{
     return getJSON(url3);
 }
 //...................................................Obtener Progress
@@ -48,20 +48,33 @@ listCohort=_=>{
     connectJson(url1,(error,json) => {
         let divList=document.getElementById('cohortOne');
         for(var q in json){
-            divList.innerHTML+="<ul>"+json[q].id+"</ul>";
+            // agregar cuando esta con elementos restringir entrada
+            divList.innerHTML+="<ul id='"+json[q].id+"'onclick=listStudentCohort()>"+json[q].id+"</ul>";
         }
         console.log(json);
-		
-             
-    });    
-	
+     }); 	
+}
+listStudentCohort=()=>{
+    connectJson(url3,(error,json)=>{
+        let viewList=document.getElementById("listUsersCohort");
+        let cohortSede=document.getElementById("cohortSede");
+        for(var q in json){
+            if(json[q].signupCohort=="lim-2018-03-pre-core-pw"){
+                viewList.style.display="block";
+                cohortSede.style.display="none";
+                viewList.innerHTML+="<ul id='"+json[q].name+"'>"+json[q].name+"</ul>";  
+            }else{
+            }
+        }
+        console.log(json);
+    });
 }
 
 
 
 
 //...................................................Obtener courses
-let courses =_ => {
+let courses = _ => {
     let cohortDate=getJSON(url1);    
     let arrayIds=[];
     for(var i in cohortDate){// recorro todo el objeto cohor
@@ -73,7 +86,7 @@ let courses =_ => {
      }
 }
 //..........................................................................................computeUsersstats
-var computeUsersStats = (users,progress,courses) => {// creara lista usuarios
+var computeUsersStats=(users,progress,courses) => {// creara lista usuarios
 
     let stats={
         percent: 0.8,//% de completitudgeneral --> stats
