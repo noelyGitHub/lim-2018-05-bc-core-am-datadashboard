@@ -310,10 +310,7 @@ section {
 #title_list_student_item{
     display: none;
 }
-#search h3{
-    color: rgba(255, 0, 158, 1);
-    font-weight: 500;
-}
+
 /*................................................formulario*/
 #information{
     display: none;

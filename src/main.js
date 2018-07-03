@@ -127,8 +127,6 @@ toCallStats = idCohort => {// Funcion que me permite listar con valores por defe
                         "</td><td>"+ listUser[list].stats.quizzes.percent+" % "+
                         "</td><td class='import'>"+ listUser[list].stats.percent+" % "+
                         "</td></tr>"
-                    }else{
-                        searchHTML.innerHTML='<h3>Aún no existen datos en '+(idCohort.id).toUpperCase()+'</h3>'
                     }
                 });
                 
