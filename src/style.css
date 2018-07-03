@@ -295,7 +295,6 @@ section {
 }
 
 #listUsersCohort table tr .name-table{
-   /* text-transform: lowercase;*/
     text-align: left;
     margin-left: 10px;
 }
@@ -310,6 +309,10 @@ section {
 }
 #title_list_student_item{
     display: none;
+}
+#search h3{
+    color: rgba(255, 0, 158, 1);
+    font-weight: 500;
 }
 /*................................................formulario*/
 #information{
@@ -412,7 +415,9 @@ section {
     .navMenu{
         width: 12%;
     }
-    
+    #cohortOne {
+        height: 550px;
+    }
     .search-header-main{
         width: 54%;
     }

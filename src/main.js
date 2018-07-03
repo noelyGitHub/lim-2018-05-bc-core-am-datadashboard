@@ -5,11 +5,11 @@ let url3='../data/cohorts/lim-2018-03-pre-core-pw/users.json';
 let orderDirectionHTML=document.getElementById('orderDirection');
 let search_student=document.getElementById('search_student');
 let cohortSedeHTML=document.getElementById("cohortSede");
-let listStudentHTML=document.getElementById("listUsersCohort");//div contenedor mayor
+let listStudentHTML=document.getElementById("listUsersCohort");
 let imgSearchHTML=document.getElementById('imgSearch');
 let searchHTML=document.getElementById('search');
 let informationUserHTML=document.getElementById('information');
-
+/*............................................Inicia controlde eventos */
 window.onload=function(){
     document.getElementById('wraperLogo').onclick=home;
     orderDirectionHTML.addEventListener('change',() => {
@@ -42,6 +42,13 @@ window.onload=function(){
     });
    
 }
+home =_=> {
+    cohortSedeHTML.style.display='block';
+    informationUserHTML.style.display='none';
+    listStudentHTML.style.display='none';
+    location.reload();//recarga la pagina
+}
+/*.........................................................termina control de eventos */
 const connectJson = (url,callback) => {
     let xmlhttp = new XMLHttpRequest(); 
     let dateJson;
@@ -88,31 +95,22 @@ const data =_=> {// Funcion que inicializa las funciones asignando con los datos
             } 
             */  options.cohortData.users=jsonUsers;
                 options.cohortData.progress=jsonProgress;
-                //const a=computeUsersStats(computeUsersStats(options.cohortData.users,options.cohortData.progress,['intro']));
-                //console.log(computeUsersStats(jsonUsers,jsonProgress,'intro'));
                 processCohortData(options);
-                //console.log(listUser);
             });
         });
     });
 }
-home =_=> {
-    cohortSedeHTML.style.display='block';
-    informationUserHTML.style.display='none';
-    listStudentHTML.style.display='none';
-    location.reload();//recarga la pagina
-}
 data();
 /*Tabla de informacion div out_list_student_item*/
 toCallStats = idCohort => {// Funcion que me permite listar con valores por defecto
-                let courses = 'intro';
+                const courses = 'intro';
                 cohortSedeHTML.style.display = 'none';
                 listStudentHTML.style.display = "block";
                 informationUserHTML.style.display='none';
                 let num = 0;
                 options.cohort=idCohort.id;
-                let listUser = processCohortData(options);
-                searchHTML.innerHTML="";
+                const listUser = processCohortData(options);
+                searchHTML.innerHTML='';
                 searchHTML.innerHTML += "<tr class='tableTitle'><td>Nro</td><td>Nombre</td><td>Promedio</td><td>Lectura</td><td>Ejercicios</td><td>Quizes</td><td>Total</td></tr>"
                 Object.keys(listUser).forEach(list=>{                    
                     let information=listUser[list];//
@@ -129,7 +127,9 @@ toCallStats = idCohort => {// Funcion que me permite listar con valores por defe
                         "</td><td>"+ listUser[list].stats.quizzes.percent+" % "+
                         "</td><td class='import'>"+ listUser[list].stats.percent+" % "+
                         "</td></tr>"
-                    } 
+                    }else{
+                        searchHTML.innerHTML='<h3>Aún no existen datos en '+(idCohort.id).toUpperCase()+'</h3>'
+                    }
                 });
                 
 }
@@ -189,13 +189,13 @@ information = (idUser)=> {// Funcion que muestra la informacion detallada por us
                                 document.getElementById('informationDetallada').innerHTML=html_informacion;
                         });    
 }
-/*Ordenar estudiante div out_list_student_item*/
+/*Ordenar estudiante div search*/
 orderUsers = (orderBy, orderDirection)=>{// Funcion que muestra la lista ordenada
-        let courses = 'intro';
+        const courses = 'intro';
         let num = 0;
         options.orderBy = orderBy;
         options.orderDirection = orderDirection;
-        let order = processCohortData(options);
+        const order = processCohortData(options);
         const orderListaDeCohort = options.cohort;
         searchHTML.innerHTML = "";
         searchHTML.innerHTML += "<tr class='tableTitle'><td>Nro</td><td>Nombre</td><td>Promedio</td><td>Lectura</td><td>Ejercicios</td><td>Quizes</td><td>Total</td></tr>"
@@ -219,15 +219,13 @@ orderUsers = (orderBy, orderDirection)=>{// Funcion que muestra la lista ordenad
 /*BUscar estudiante div search*/
 search_home_students =(string)=> {// La funcion busca la informacion por nombre
                 let num = 0; 
-                let courses = 'intro';
+                const courses = 'intro';
                 options.search=string;
-                let listUser = processCohortData(options);
-                searchHTML.innerHTML = "";
-                let stats = Object.keys(listUser);
+                const listUser = processCohortData(options);
+                searchHTML.innerHTML = '';
                 searchHTML.innerHTML += "<tr class='tableTitle'><td>Nro</td><td>Nombre</td><td>Promedio</td><td>Lectura</td><td>Ejercicios</td><td>Quizes</td><td>Total</td></tr>";
                 for(var list in listUser){
                         num++;
-                        document.getElementById('title_list_student_item').style.display='block';
                         searchHTML.innerHTML += "<tr id='" + listUser[list].stats.idUser +
                         "' onclick='information(this)' data-name='"+listUser[list].stats.name+
                         "' data-course='"+courses+
@@ -245,24 +243,17 @@ search_home_students =(string)=> {// La funcion busca la informacion por nombre
 }
 /*Listar cohort por sede */
 loadCohortSede = ids =>{// Selecciona lista de cohort
-    connectJson(url1,(error,json) => {
-        let menu=document.getElementById("menuCohort");
-        let div=document.createElement('div');//creo un elemnto div
-        div.setAttribute('id','cohortOne')// le asigno un atributo
-        menu.appendChild(div);// lo asigno al padre
-       
-        let divList = document.getElementById('cohortOne');
-        let sede=json.filter(function(el){
-            const sedeJSON=el.id;
+    connectJson(url1, (error,json) => {
+        const divList = document.getElementById('cohortOne');
+        document.getElementById('view-menu').style.display = 'block'
+        divList.innerHTML = '';
+        let sede = json.filter(program => {
+            const sedeJSON = program.id;
             return sedeJSON.toLowerCase().indexOf(ids.toLowerCase()) > -1;
-        });
-        if(divList.innerHTML == ""){
-        for(var q in sede){
+            });
+            for(var q in sede){
                 divList.innerHTML += "<ul id='contentCohort'><li class='menuList'><span id='" + sede[q].id + "' onclick='toCallStats(this)'>" + sede[q].id + "</span></li></ul>";
            }
-        }else{
-            divList.parentNode.removeChild(divList);
-        }
     });
     
 }

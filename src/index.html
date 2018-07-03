@@ -12,20 +12,22 @@
       <header>
        <div class="navMenu">
           <input type="checkbox" id="menu-bar"/>
-          <label class="icon-menu" for="menu-bar"></label>
-          <nav class="menu" id="menuCohort"></nav>
+          <label class="icon-menu" for="menu-bar" id="view-menu"></label>
+          <nav class="menu" id="menuCohort">
+            <div id = "cohortOne"></div>
+          </nav>
         </div>
         <div class="wraperLogo" id="wraperLogo">
-        <img src="../img/Laboratoria_CMYK_logo-11.png" id="logo"/>
+        <img src="../img/Laboratoria_CMYK_logo-11.png" id="logo" alt="logo laboratoria"/>
         </div>
         <div class="search-header-main">
           <span class="content-search">
               <input type="text" id="search_student" placeholder="BUSCAR AQUÍ " />
-              <img src="../img/searchicon.png" id="imgSearch"  />
+              <img src="../img/searchicon.png" id="imgSearch" alt="search"/>
           </span>
         </div>
         <div class="user-profile">
-          <img src="../img/default_user.png" alt="mio" class="provando">
+          <img src="../img/default_user.png" alt="user-profile" class="provando">
         </div>
       </header>
       <section>
@@ -63,34 +65,21 @@
               <option value="percentReads">Lecturas Completadas</option>
               <option value="percentExercises">Ejercicios Completados</option>
               <option value="percentQuizes">Quizes Completados</option>
-              <option value="promedio">Puntuacion Promedio</option>
+              <option value="promedio">Puntuación Promedio</option>
             </select>
             <select id="orderDirection"> 
               <option>Orden</option>
               <option value="ASC">ASC</option>
               <option value="DES">DESC</option>
             </select>
-            <table id="title_list_student_item" width="679" border="1">
-              
-              <!--<tr class="tableTitle">
-                <td>Nro</td>
-                <td>Nombre</td>
-                <td>Puntuacion</td>
-                <td>Lectura</td>
-                <td>Ejercicios</td>
-                <td>Quizes</td>
-                <td>Total</td>
-              </tr>-->
-            </table>
             </div>
-           
            <table id="search">
            </table>     
                
         </div>
         <div class="wrapper" id="information">
-           <h4 class="info-individual" id="back-list"><span class="icon-left-open"></span>Informacion Detallada</h4>
-             <div id="informationDetallada"></div>                       
+            <h4 class="info-individual" id="back-list"><span class="icon-left-open"></span>Informacion Detallada</h4>
+            <div id="informationDetallada"></div>                       
         </div>
       </section>
       <footer>

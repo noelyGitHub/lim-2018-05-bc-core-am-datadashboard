@@ -150,7 +150,7 @@ describe('data', () => {
 
   describe('processCohortData({ cohortData, orderBy, orderDirection, filterBy })', () => {
     const cohort = fixtures.cohorts.find(item => item.id === 'lim-2018-03-pre-core-pw');
-    const courses = Object.keys(cohort.coursesIndex);
+    //const courses = Object.keys(cohort.coursesIndex);
     const { users, progress } = fixtures;
     //processCohortData({cohort:cohort,cohortData:{users: users,progress: progress,},orderBy:'name', orderDirection:'ASC',search:'Noely'})
     //const process=processCohortData(options);

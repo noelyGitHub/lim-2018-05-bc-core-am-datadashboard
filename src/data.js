@@ -304,11 +304,11 @@ window.sortUsers=( users , orderBy, orderDirection ) => {// Ordenar la lista de 
         if(orderDirection === 'ASC'){
             order = users.sort( (a,b) => {
                 switch (orderBy){
-                    case 'percent': return a.stats.percent - b.stats.percent; break;
-                    case 'percentExercises': return a.stats.excercises.percent - b.stats.excercises.percent; break;
-                    case 'percentReads': return a.stats.reads.percent - b.stats.reads.percent; break;
-                    case 'percentQuizes': return a.stats.quizzes.percent - b.stats.quizzes.percent; break;
-                    case 'promedio': return a.stats.quizzes.scoreAvg - b.stats.quizzes.scoreAvg; break;
+                    case 'percent': return a.stats.percent - b.stats.percent;
+                    case 'percentExercises': return a.stats.excercises.percent - b.stats.excercises.percent; 
+                    case 'percentReads': return a.stats.reads.percent - b.stats.reads.percent; 
+                    case 'percentQuizes': return a.stats.quizzes.percent - b.stats.quizzes.percent; 
+                    case 'promedio': return a.stats.quizzes.scoreAvg - b.stats.quizzes.scoreAvg;
                 }
                              
             });   
@@ -316,11 +316,11 @@ window.sortUsers=( users , orderBy, orderDirection ) => {// Ordenar la lista de 
         if(orderDirection === 'DES'){
             order = users.sort((a,b) => {                
                 switch (orderBy){
-                    case 'percent': return b.stats.percent - a.stats.percent; break;
-                    case 'percentExercises': return b.stats.excercises.percent - a.stats.excercises.percent; break;
-                    case 'percentReads': return b.stats.reads.percent - a.stats.reads.percent; break;
-                    case 'percentQuizes': return b.stats.quizzes.percent - a.stats.quizzes.percent; break;
-                    case 'promedio': return b.stats.quizzes.scoreAvg - a.stats.quizzes.scoreAvg; break;
+                    case 'percent': return b.stats.percent - a.stats.percent; 
+                    case 'percentExercises': return b.stats.excercises.percent - a.stats.excercises.percent; 
+                    case 'percentReads': return b.stats.reads.percent - a.stats.reads.percent; 
+                    case 'percentQuizes': return b.stats.quizzes.percent - a.stats.quizzes.percent; 
+                    case 'promedio': return b.stats.quizzes.scoreAvg - a.stats.quizzes.scoreAvg; 
                 }
                              
             }); 
@@ -338,7 +338,7 @@ window.filterUsers=(users, search)=>{
     return student;
 }
 window.processCohortData=options=>{
-    courses='intro';
+    let courses='intro';
     let estudiantes = computeUsersStats(options.cohortData.users,options.cohortData.progress,courses);
     estudiantes = sortUsers(estudiantes,options.orderBy,options.orderDirection);
         if(options.search != ''){
